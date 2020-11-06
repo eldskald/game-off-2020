@@ -1,0 +1,13 @@
+[gd_scene format=2]
+
+[node name="SuperShotParticles" type="CPUParticles2D"]
+emitting = false
+amount = 32
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 1.0
+local_coords = false
+spread = 60.0
+gravity = Vector2( 0, 100 )
+initial_velocity = 150.0
+initial_velocity_random = 1.0
