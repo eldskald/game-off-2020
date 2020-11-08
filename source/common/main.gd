@@ -12,11 +12,9 @@ func _ready():
 
 
 
-
-
-
 func start():
 	pass
+
 
 
 ### Dealing with directional inputs in a more applicable way ##############################
