@@ -4,7 +4,6 @@ extends PlayerState
 
 func initialize():
 	bunny.stop()
-	machine.clear_stack()
 	camera.drag_margin_top = 0.05
 
 func exit(next_state):

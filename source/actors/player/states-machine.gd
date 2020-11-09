@@ -1,5 +1,7 @@
 extends Node2D
 
+# The array must list them in the order they appear on the player's
+# states enum, otherwise it won't work.
 export (String, "Movement", "Gun") var machine_type
 export (Array, Script) var states
 
@@ -9,23 +11,23 @@ var first_on_list_state: Dictionary = {
 	"Gun": Player.READY_STATE
 }
 
-# You must put them in the order they appear on the player's enum,
-# otherwise it won't work.
-onready var stack: Array = []
+var state_number
 
 
 
 func change_state(new_state: int, special: bool = false):
+	
 	# Dealing with the old state
-	stack.pop_front()
-	var old_state = get_children()[0]
-	old_state.exit(new_state)
-	old_state.queue_free()
+	var old_state = state_number
+	var old_state_node = get_children()[0]
+	old_state_node.exit(new_state)
+	old_state_node.queue_free()
 	
 	# Dealing with the new state
-	stack.push_front(new_state)
-	var state = Node.new()
+	state_number = new_state
+	var state = PlayerState.new()
 	state.script = states[new_state - first_on_list_state[machine_type]] # Remember their order!
+	state.previous_state = old_state
 	add_child(state)
 	
 	# In case you want to change some specific parameters in the
@@ -39,24 +41,16 @@ func change_state(new_state: int, special: bool = false):
 
 
 func start_machine(starting_state: int):
-	stack.push_front(starting_state)
-	var state = Node.new()
+	state_number = starting_state
+	var state = PlayerState.new()
 	state.script = states[starting_state - first_on_list_state[machine_type]]
+	state.previous_state = starting_state
 	add_child(state)
 	state.initialize()
 
 
 
-func get_previous_state():
-	if stack.size() > 1:
-		return stack[1]
-	else:
-		return null
-
-
-
-func clear_stack():
-	while stack.size() > 1:
-		stack.pop_back()
+func get_state_node():
+	return get_children()[0]
 
 

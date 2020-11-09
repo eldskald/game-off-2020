@@ -1,19 +1,21 @@
 extends Node
 class_name PlayerState
 
+var previous_state
+
 onready var main: Main = get_tree().get_nodes_in_group("main")[0]
 onready var machine = get_parent()
 
 onready var player: Player = get_parent().get_parent()
 onready var animation_player: AnimationPlayer = player.get_node("AnimationPlayer")
 onready var sprite: Sprite = player.get_node("Sprite")
-onready var gun: Sprite = sprite.get_node("ArmSprite")
+onready var gun: Sprite = sprite.get_node("GunSprite")
 onready var muzzle: Node2D = gun.get_node("Muzzle")
 onready var camera: Camera2D = player.get_node("Camera")
 
 onready var coyote: Timer = player.get_node("CoyoteJumpTimer")
 onready var bunny: Timer = player.get_node("BunnyJumpTimer")
-onready var cooldown_timer: Timer = player.get_node("ShotCooldown")
+onready var charge: Timer = player.get_node("ChargeTimer")
 
 
 

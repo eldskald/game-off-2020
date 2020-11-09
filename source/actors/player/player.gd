@@ -3,28 +3,24 @@ class_name Player
 
 onready var main: Main = get_tree().get_nodes_in_group("main")[0]
 
-export (float, 0, 500)  var speed
+export (float, 0, 500) var speed
 export (float, 0, 2000) var acceleration
 export (float, 0, 2000) var friction
 export (float, 0, 2000) var gravity
-export (float, 0, 256)  var jump_height
+export (float, 0, 256) var jump_height
 
+export (PackedScene) var light_shot
+export (PackedScene) var heavy_shot
+export (PackedScene) var rocket_shot
+
+
+
+### PHYSICS ##############################################################
 onready var velocity: Vector2 = Vector2.ZERO
-onready var facing: float = 1.0
 onready var jump_force: float = sqrt(2*gravity*jump_height)
 onready var falling_speed: float = jump_force
+onready var facing: float = 1.0
 
-
-
-func _ready():
-	$MovementStatesMachine.start_machine(GROUNDED_STATE)
-
-func _physics_process(delta):
-	velocity = move_and_slide(velocity, Vector2.UP)
-
-
-
-### MOVEMENT #############################################################
 func horizontal_movement(delta, factor: float = 1.0):
 	# Because of the many different possible combinations of where the
 	# player is accelerating towards, where the current velocity points,
@@ -61,30 +57,69 @@ func vertical_movement(delta, factor: float = 1.0):
 
 
 
+### GUNNING ##############################################################
+onready var aiming: Vector2 = Vector2.RIGHT
+onready var muzzle: Node2D = $Sprite/GunSprite/Muzzle
+
+func spawn_light_shot():
+	var shot = light_shot.instance()
+	shot.direction = aiming
+	shot.position = get_parent().to_local(muzzle.global_position)
+	shot.position += aiming*8
+	get_parent().add_child(shot)
+
+func spawn_heavy_shot():
+	var shot = heavy_shot.instance()
+	shot.direction = aiming
+	shot.position = get_parent().to_local(muzzle.global_position)
+	shot.position += aiming*12
+	get_parent().add_child(shot)
+##########################################################################
+
+
+
 ### STATES MACHINES ######################################################
 enum {GROUNDED_STATE, AIRBORNE_STATE, JUMPING_STATE, WALL_GRABBING_STATE,
 	  WALL_JUMPING_STATE, STUNNED_STATE, FLOATING_STATE, ROCKETING_STATE}
 
-func get_movement_state():
-	return $MovementStatesMachine.stack[0]
+onready var movement_machine = $MovementStatesMachine
+
+func get_movement_state() -> int:
+	return movement_machine.state_number
 
 func change_movement_state(new_state: int, special: bool = false):
 	if special:
-		return $MovementStatesMachine.change_state(new_state, true)
+		return movement_machine.change_state(new_state, true)
 	else:
-		$MovementStatesMachine.change_state(new_state)
+		movement_machine.change_state(new_state)
 
-enum {READY_STATE, CHARGING_STATE, CHARGED_STATE, SHOOTING_UP, SHOOTING_LEFT,
-	  SHOOTING_DOWN, SHOOTING_RIGHT, SUCKING_STATE, HOLDING_STATE, UNUSABLE_STATE}
+func get_movement_state_node():
+	return movement_machine.get_state_node()
 
-func get_gun_state():
-	return $GunStatesMachine.stack[0]
+enum {READY_STATE, CHARGING_STATE, CHARGED_STATE, SHOOTING_STATE,
+	  SUCKING_STATE, HOLDING_STATE, UNUSABLE_STATE}
+
+onready var gun_machine = $GunStatesMachine
+
+func get_gun_state() -> int:
+	return gun_machine.state_number
 
 func change_gun_state(new_state: int, special: bool = false):
 	if special:
-		return $GunStatesMachine.change_state(new_state, true)
+		return gun_machine.change_state(new_state, true)
 	else:
-		$GunStatesMachine.change_state(new_state)
+		gun_machine.change_state(new_state)
+
+func get_gun_state_node():
+	return gun_machine.get_state_node()
 ##########################################################################
+
+
+
+func _ready():
+	movement_machine.start_machine(GROUNDED_STATE)
+
+func _physics_process(delta):
+	velocity = move_and_slide(velocity, Vector2.UP)
 
 

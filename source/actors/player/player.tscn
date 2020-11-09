@@ -1,13 +1,31 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://assets/textures/player-char.png" type="Texture" id=1]
 [ext_resource path="res://assets/textures/arm-gun.png" type="Texture" id=2]
 [ext_resource path="res://actors/player/player.gd" type="Script" id=3]
 [ext_resource path="res://actors/player/states-machine.gd" type="Script" id=4]
-[ext_resource path="res://actors/player/sprite.gd" type="Script" id=5]
+[ext_resource path="res://actors/player/player-sprite.gd" type="Script" id=5]
 [ext_resource path="res://actors/player/movement-states/grounded-state.gd" type="Script" id=6]
 [ext_resource path="res://actors/player/movement-states/jumping-state.gd" type="Script" id=7]
 [ext_resource path="res://actors/player/movement-states/airborne-state.gd" type="Script" id=8]
+[ext_resource path="res://actors/player/gun-sprite.gd" type="Script" id=9]
+[ext_resource path="res://actors/player/particles/light-shot-particles.tscn" type="PackedScene" id=10]
+[ext_resource path="res://actors/player/particles/heavy-shot-particles.tscn" type="PackedScene" id=11]
+[ext_resource path="res://actors/player/flash.shader" type="Shader" id=12]
+[ext_resource path="res://actors/shots/heavy-shot.tscn" type="PackedScene" id=13]
+[ext_resource path="res://actors/shots/light-shot.tscn" type="PackedScene" id=14]
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = ExtResource( 12 )
+shader_param/yellow = Color( 0.941176, 0.909804, 0.458824, 1 )
+shader_param/flash_yellow = 0.0
+shader_param/flash_invisible = 0.0
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = ExtResource( 12 )
+shader_param/yellow = Color( 0.941176, 0.909804, 0.458824, 1 )
+shader_param/flash_yellow = 0.0
+shader_param/flash_invisible = 0.0
 
 [sub_resource type="Animation" id=1]
 resource_name = "airborne"
@@ -26,7 +44,7 @@ tracks/0/keys = {
 "values": [ 3 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite/ArmSprite:position")
+tracks/1/path = NodePath("Sprite/GunSprite:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -54,7 +72,7 @@ tracks/0/keys = {
 "values": [ 13 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite/ArmSprite:position")
+tracks/1/path = NodePath("Sprite/GunSprite:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -83,7 +101,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 1, 0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite/ArmSprite:position")
+tracks/1/path = NodePath("Sprite/GunSprite:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -111,7 +129,7 @@ tracks/0/keys = {
 "values": [ 12 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite/ArmSprite:position")
+tracks/1/path = NodePath("Sprite/GunSprite:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -125,6 +143,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=5]
 resource_name = "running"
+length = 0.8
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -133,19 +152,19 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3, 0.4, 0.5, 0.6, 0.8, 0.9, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 11, 4, 5, 6, 7, 8, 9, 10, 11 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite/ArmSprite:position")
+tracks/1/path = NodePath("Sprite/GunSprite:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.4, 0.6, 0.9 ),
+"times": PoolRealArray( 0, 0.1, 0.3, 0.5, 0.7 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ Vector2( 1, -2 ), Vector2( 1, -3 ), Vector2( 1, -2 ), Vector2( 1, -3 ), Vector2( 1, -2 ) ]
@@ -166,7 +185,7 @@ tracks/0/keys = {
 "values": [ 15 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite/ArmSprite:position")
+tracks/1/path = NodePath("Sprite/GunSprite:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -194,7 +213,7 @@ tracks/0/keys = {
 "values": [ 14 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite/ArmSprite:position")
+tracks/1/path = NodePath("Sprite/GunSprite:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -212,12 +231,15 @@ extents = Vector2( 3, 11 )
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
 ]]
+z_index = 10
 script = ExtResource( 3 )
 speed = 100.0
-acceleration = 300.0
-friction = 900.0
+acceleration = 400.0
+friction = 1200.0
 gravity = 900.0
-jump_height = 72.0
+jump_height = 76.0
+light_shot = ExtResource( 14 )
+heavy_shot = ExtResource( 13 )
 
 [node name="Camera" type="Camera2D" parent="."]
 current = true
@@ -225,27 +247,37 @@ limit_smoothed = true
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 smoothing_enabled = true
+smoothing_speed = 10.0
 drag_margin_left = 0.05
 drag_margin_top = 0.05
 drag_margin_right = 0.05
 drag_margin_bottom = 0.05
 
 [node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 9 )
 texture = ExtResource( 1 )
 vframes = 4
 hframes = 4
 script = ExtResource( 5 )
 
-[node name="ArmSprite" type="Sprite" parent="Sprite"]
+[node name="GunSprite" type="Sprite" parent="Sprite"]
+material = SubResource( 10 )
 position = Vector2( 0, -2 )
 texture = ExtResource( 2 )
 vframes = 2
 hframes = 3
+script = ExtResource( 9 )
+light_shot_particles = ExtResource( 10 )
+heavy_shot_particles = ExtResource( 11 )
 
-[node name="Muzzle" type="Node2D" parent="Sprite/ArmSprite"]
+[node name="Muzzle" type="Node2D" parent="Sprite/GunSprite"]
 position = Vector2( 9, 2 )
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="SuckParticles" type="CPUParticles2D" parent="Sprite/ArmSprite/Muzzle"]
+[node name="SuckParticles" type="CPUParticles2D" parent="Sprite/GunSprite/Muzzle"]
+z_index = 1
 emitting = false
 amount = 4
 lifetime = 0.5
@@ -255,7 +287,8 @@ emission_colors = PoolColorArray(  )
 gravity = Vector2( 0, 0 )
 radial_accel = -100.0
 
-[node name="ChargingParticles" type="CPUParticles2D" parent="Sprite/ArmSprite/Muzzle"]
+[node name="ChargingParticles" type="CPUParticles2D" parent="Sprite/GunSprite/Muzzle"]
+z_index = 1
 emitting = false
 amount = 3
 lifetime = 0.3
@@ -297,10 +330,8 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
-[node name="ShotCooldown" type="Timer" parent="."]
-one_shot = true
-
 [node name="InvincibilityTimer" type="Timer" parent="."]
+wait_time = 3.0
 one_shot = true
 
 [node name="ChargeTimer" type="Timer" parent="."]
