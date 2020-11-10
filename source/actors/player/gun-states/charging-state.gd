@@ -5,15 +5,16 @@ extends PlayerState
 func initialize():
 	charge.connect("timeout", self, "finish_charging")
 	charge.start()
+	gun.charge_particles_timer.start()
 
 func exit(next_state):
 	if next_state == Player.SHOOTING_STATE:
 		player.spawn_shot(player.light_shot)
-		gun.spawn_particles(gun.light_shot_particles)
+		gun.spawn_muzzle_flash()
 		
 		# Keeping the player afloat code.
 		if player.aiming == Vector2.DOWN:
-			player.velocity.y = min(0, player.velocity.y)
+			player.velocity.y = min(-10, player.velocity.y)
 
 
 

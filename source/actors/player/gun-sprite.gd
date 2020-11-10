@@ -1,13 +1,12 @@
 extends Sprite
 
-export (PackedScene) var light_shot_particles
-export (PackedScene) var heavy_shot_particles
-
 onready var main: Main = get_tree().get_nodes_in_group("main")[0]
 onready var player: Player = get_parent().get_parent()
 onready var muzzle: Node2D = get_node("Muzzle")
 onready var charging_particles: CPUParticles2D = get_node("Muzzle/ChargingParticles")
+onready var charge_particles_timer: Timer = get_node("Muzzle/ChargingParticles/Timer")
 onready var absorb_particles: CPUParticles2D = get_node("Muzzle/AbsorbParticles")
+onready var muzzle_flash: Sprite = get_node("Muzzle/MuzzleFlash")
 onready var shader: ShaderMaterial = get_material()
 onready var player_shader: ShaderMaterial = get_parent().get_material()
 onready var invincibility: Timer = player.get_node("InvincibilityTimer")
@@ -37,6 +36,8 @@ func _process(_delta):
 			muzzle.position = Vector2(9,2)
 			muzzle.rotation_degrees = 0
 			charging_particles.emitting = false
+			charging_particles.visible = false
+			charge_particles_timer.stop()
 			absorb_particles.emitting = false
 			shader.set_shader_param("flash_yellow", 0.0)
 			player_shader.set_shader_param("flash_yellow", 0.0)
@@ -46,6 +47,8 @@ func _process(_delta):
 			muzzle.position = Vector2(-3,12)
 			muzzle.rotation_degrees = 90
 			charging_particles.emitting = false
+			charging_particles.visible = false
+			charge_particles_timer.stop()
 			absorb_particles.emitting = false
 			shader.set_shader_param("flash_yellow", 0.0)
 			player_shader.set_shader_param("flash_yellow", 0.0)
@@ -55,6 +58,8 @@ func _process(_delta):
 			muzzle.position = Vector2(12,0)
 			muzzle.rotation_degrees = 0
 			charging_particles.emitting = false
+			charging_particles.visible = false
+			charge_particles_timer.stop()
 			absorb_particles.emitting = true
 			shader.set_shader_param("flash_yellow", 0.0)
 			player_shader.set_shader_param("flash_yellow", 0.0)
@@ -64,10 +69,12 @@ func _process(_delta):
 			muzzle.position = Vector2(12,0)
 			muzzle.rotation_degrees = 0
 			charging_particles.emitting = false
+			charging_particles.visible = false
+			charge_particles_timer.stop()
 			absorb_particles.emitting = true
 			if player.get_gun_state_node().is_holding_shot():
 				shader.set_shader_param("flash_yellow", 1.0)
-				player_shader.set_shader_param("flash_yellow", 0.0)
+				player_shader.set_shader_param("flash_yellow", 1.0)
 			elif player.get_gun_state_node().is_holding_rocket():
 				shader.set_shader_param("flash_yellow", 1.0)
 				player_shader.set_shader_param("flash_yellow", 1.0)
@@ -75,23 +82,26 @@ func _process(_delta):
 		Player.SHOOTING_STATE:
 			multi_aim_case(player.aiming, player.facing)
 			charging_particles.emitting = false
+			charging_particles.visible = false
+			charge_particles_timer.stop()
 			absorb_particles.emitting = false
 			shader.set_shader_param("flash_yellow", 0.0)
 			player_shader.set_shader_param("flash_yellow", 0.0)
 		
 		Player.CHARGING_STATE:
 			multi_aim_case(player.aiming, player.facing)
-			charging_particles.emitting = true
 			absorb_particles.emitting = false
+			charging_particles.visible = true
 			shader.set_shader_param("flash_yellow", 0.0)
 			player_shader.set_shader_param("flash_yellow", 0.0)
 		
 		Player.CHARGED_STATE:
 			multi_aim_case(player.aiming, player.facing)
 			charging_particles.emitting = true
+			charging_particles.visible = true
 			absorb_particles.emitting = false
 			shader.set_shader_param("flash_yellow", 1.0)
-			player_shader.set_shader_param("flash_yellow", 0.0)
+			player_shader.set_shader_param("flash_yellow", 1.0)
 
 
 
@@ -117,11 +127,19 @@ func multi_aim_case(aim: Vector2, facing: float):
 
 
 
-func spawn_particles(packed_particles: PackedScene):
-	var level = player.get_parent()
-	var particles = packed_particles.instance()
-	particles.direction = player.aiming
-	particles.position = level.to_local(muzzle.global_position)
-	level.add_child(particles)
+func spawn_muzzle_flash():
+	muzzle_flash.frame = randi()%3
+	muzzle_flash.visible = true
+	$Muzzle/MuzzleFlash/Timer.start()
+
+
+
+func _on_muzzle_flash_timeout():
+	muzzle_flash.visible = false
+
+
+
+func _charge_particles_timeout():
+	charging_particles.emitting = true
 
 

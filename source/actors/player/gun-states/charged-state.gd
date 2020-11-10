@@ -5,10 +5,11 @@ extends PlayerState
 func exit(next_state):
 	if next_state == Player.SHOOTING_STATE:
 		player.spawn_shot(player.heavy_shot)
-		gun.spawn_particles(gun.heavy_shot_particles)
+		gun.spawn_muzzle_flash()
 		
 		# Double jump like shot.
 		if player.aiming == Vector2.DOWN:
+			player.change_movement_state(Player.AIRBORNE_STATE)
 			player.velocity.y = -player.jump_force
 		
 		# Other knockback effects of the heavy shot.
@@ -16,7 +17,8 @@ func exit(next_state):
 			if player.aiming == Vector2.UP:
 				player.velocity.y += player.falling_speed
 			else:
-				player.velocity -= Vector2(player.speed*player.aiming.x, player.jump_force/10)
+				player.velocity.x = -player.speed*player.aiming.x
+				player.velocity.y = min(-player.jump_force/3, player.velocity.y)
 
 
 

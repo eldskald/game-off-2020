@@ -9,8 +9,8 @@ uniform float flash_invisible: hint_range(0.0, 1.0) = 0.0;
 void fragment() {
 	vec4 color = texture(TEXTURE, UV);
 	
-	float is_yellow = mod(floor(2.0*TIME)*flash_yellow, 2.0);
-	float is_invisible = mod(floor(4.0*TIME)*flash_invisible, 2.0);
+	float is_yellow = mod(floor(4.0*TIME)*flash_yellow, 2.0);
+	float is_invisible = mod(floor(16.0*TIME)*flash_invisible, 2.0);
 	
 	color.rgb += (yellow.rgb - color.rgb)*is_yellow;
 	color.a *= 1.0 - is_invisible;
