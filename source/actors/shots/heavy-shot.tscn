@@ -25,6 +25,7 @@ type = "Heavy"
 
 [node name="Yellow" type="CPUParticles2D" parent="."]
 amount = 32
+lifetime = 0.2
 local_coords = false
 texture = ExtResource( 1 )
 gravity = Vector2( 0, 0 )
@@ -33,6 +34,7 @@ color = Color( 0.941176, 0.909804, 0.458824, 1 )
 
 [node name="White" type="CPUParticles2D" parent="."]
 amount = 32
+lifetime = 0.2
 local_coords = false
 texture = ExtResource( 1 )
 gravity = Vector2( 0, 0 )

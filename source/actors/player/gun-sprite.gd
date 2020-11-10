@@ -7,7 +7,7 @@ onready var main: Main = get_tree().get_nodes_in_group("main")[0]
 onready var player: Player = get_parent().get_parent()
 onready var muzzle: Node2D = get_node("Muzzle")
 onready var charging_particles: CPUParticles2D = get_node("Muzzle/ChargingParticles")
-onready var suck_particles: CPUParticles2D = get_node("Muzzle/SuckParticles")
+onready var absorb_particles: CPUParticles2D = get_node("Muzzle/AbsorbParticles")
 onready var shader: ShaderMaterial = get_material()
 onready var player_shader: ShaderMaterial = get_parent().get_material()
 onready var invincibility: Timer = player.get_node("InvincibilityTimer")
@@ -37,7 +37,7 @@ func _process(_delta):
 			muzzle.position = Vector2(9,2)
 			muzzle.rotation_degrees = 0
 			charging_particles.emitting = false
-			suck_particles.emitting = false
+			absorb_particles.emitting = false
 			shader.set_shader_param("flash_yellow", 0.0)
 			player_shader.set_shader_param("flash_yellow", 0.0)
 		
@@ -46,16 +46,16 @@ func _process(_delta):
 			muzzle.position = Vector2(-3,12)
 			muzzle.rotation_degrees = 90
 			charging_particles.emitting = false
-			suck_particles.emitting = false
+			absorb_particles.emitting = false
 			shader.set_shader_param("flash_yellow", 0.0)
 			player_shader.set_shader_param("flash_yellow", 0.0)
 		
-		Player.SUCKING_STATE:
+		Player.ABSORBING_STATE:
 			frame = FORWARD_FRAME
 			muzzle.position = Vector2(12,0)
 			muzzle.rotation_degrees = 0
 			charging_particles.emitting = false
-			suck_particles.emitting = true
+			absorb_particles.emitting = true
 			shader.set_shader_param("flash_yellow", 0.0)
 			player_shader.set_shader_param("flash_yellow", 0.0)
 		
@@ -64,7 +64,7 @@ func _process(_delta):
 			muzzle.position = Vector2(12,0)
 			muzzle.rotation_degrees = 0
 			charging_particles.emitting = false
-			suck_particles.emitting = true
+			absorb_particles.emitting = true
 			if player.get_gun_state_node().is_holding_shot():
 				shader.set_shader_param("flash_yellow", 1.0)
 				player_shader.set_shader_param("flash_yellow", 0.0)
@@ -75,21 +75,21 @@ func _process(_delta):
 		Player.SHOOTING_STATE:
 			multi_aim_case(player.aiming, player.facing)
 			charging_particles.emitting = false
-			suck_particles.emitting = false
+			absorb_particles.emitting = false
 			shader.set_shader_param("flash_yellow", 0.0)
 			player_shader.set_shader_param("flash_yellow", 0.0)
 		
 		Player.CHARGING_STATE:
 			multi_aim_case(player.aiming, player.facing)
 			charging_particles.emitting = true
-			suck_particles.emitting = false
+			absorb_particles.emitting = false
 			shader.set_shader_param("flash_yellow", 0.0)
 			player_shader.set_shader_param("flash_yellow", 0.0)
 		
 		Player.CHARGED_STATE:
 			multi_aim_case(player.aiming, player.facing)
 			charging_particles.emitting = true
-			suck_particles.emitting = false
+			absorb_particles.emitting = false
 			shader.set_shader_param("flash_yellow", 1.0)
 			player_shader.set_shader_param("flash_yellow", 0.0)
 

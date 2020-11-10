@@ -61,18 +61,11 @@ func vertical_movement(delta, factor: float = 1.0):
 onready var aiming: Vector2 = Vector2.RIGHT
 onready var muzzle: Node2D = $Sprite/GunSprite/Muzzle
 
-func spawn_light_shot():
-	var shot = light_shot.instance()
+func spawn_shot(shot_scene: PackedScene):
+	var shot = shot_scene.instance()
 	shot.direction = aiming
 	shot.position = get_parent().to_local(muzzle.global_position)
 	shot.position += aiming*8
-	get_parent().add_child(shot)
-
-func spawn_heavy_shot():
-	var shot = heavy_shot.instance()
-	shot.direction = aiming
-	shot.position = get_parent().to_local(muzzle.global_position)
-	shot.position += aiming*12
 	get_parent().add_child(shot)
 ##########################################################################
 
@@ -97,7 +90,7 @@ func get_movement_state_node():
 	return movement_machine.get_state_node()
 
 enum {READY_STATE, CHARGING_STATE, CHARGED_STATE, SHOOTING_STATE,
-	  SUCKING_STATE, HOLDING_STATE, UNUSABLE_STATE}
+	  ABSORBING_STATE, HOLDING_STATE, UNUSABLE_STATE}
 
 onready var gun_machine = $GunStatesMachine
 
@@ -118,6 +111,7 @@ func get_gun_state_node():
 
 func _ready():
 	movement_machine.start_machine(GROUNDED_STATE)
+	gun_machine.start_machine(READY_STATE)
 
 func _physics_process(delta):
 	velocity = move_and_slide(velocity, Vector2.UP)

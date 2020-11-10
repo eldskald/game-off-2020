@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://assets/textures/player-char.png" type="Texture" id=1]
 [ext_resource path="res://assets/textures/arm-gun.png" type="Texture" id=2]
@@ -14,21 +14,25 @@
 [ext_resource path="res://actors/player/flash.shader" type="Shader" id=12]
 [ext_resource path="res://actors/shots/heavy-shot.tscn" type="PackedScene" id=13]
 [ext_resource path="res://actors/shots/light-shot.tscn" type="PackedScene" id=14]
+[ext_resource path="res://actors/player/gun-states/charging-state.gd" type="Script" id=15]
+[ext_resource path="res://actors/player/gun-states/ready-state.gd" type="Script" id=16]
+[ext_resource path="res://actors/player/gun-states/charged-state.gd" type="Script" id=17]
+[ext_resource path="res://actors/player/gun-states/absorbing-state.gd" type="Script" id=18]
+[ext_resource path="res://actors/player/gun-states/shooting-state.gd" type="Script" id=19]
 
-[sub_resource type="ShaderMaterial" id=9]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 12 )
 shader_param/yellow = Color( 0.941176, 0.909804, 0.458824, 1 )
 shader_param/flash_yellow = 0.0
 shader_param/flash_invisible = 0.0
 
-[sub_resource type="ShaderMaterial" id=10]
+[sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 12 )
 shader_param/yellow = Color( 0.941176, 0.909804, 0.458824, 1 )
 shader_param/flash_yellow = 0.0
 shader_param/flash_invisible = 0.0
 
-[sub_resource type="Animation" id=1]
-resource_name = "airborne"
+[sub_resource type="Animation" id=3]
 length = 0.1
 loop = true
 tracks/0/type = "value"
@@ -56,8 +60,7 @@ tracks/1/keys = {
 "values": [ Vector2( 0, -4 ) ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "braking"
+[sub_resource type="Animation" id=4]
 length = 0.25
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -84,8 +87,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, -1 ) ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "idle"
+[sub_resource type="Animation" id=5]
 length = 1.6
 loop = true
 tracks/0/type = "value"
@@ -113,8 +115,7 @@ tracks/1/keys = {
 "values": [ Vector2( 0, -2 ), Vector2( 0, -1 ), Vector2( 0, -2 ) ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "landing"
+[sub_resource type="Animation" id=6]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -141,8 +142,7 @@ tracks/1/keys = {
 "values": [ Vector2( 0, -1 ) ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "running"
+[sub_resource type="Animation" id=7]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -170,7 +170,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, -2 ), Vector2( 1, -3 ), Vector2( 1, -2 ), Vector2( 1, -3 ), Vector2( 1, -2 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=8]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -197,8 +197,7 @@ tracks/1/keys = {
 "values": [ Vector2( -2, 1 ) ]
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "wall_grabbing"
+[sub_resource type="Animation" id=9]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -225,7 +224,7 @@ tracks/1/keys = {
 "values": [ Vector2( 0, -1 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 3, 11 )
 
 [node name="Player" type="KinematicBody2D" groups=[
@@ -254,14 +253,14 @@ drag_margin_right = 0.05
 drag_margin_bottom = 0.05
 
 [node name="Sprite" type="Sprite" parent="."]
-material = SubResource( 9 )
+material = SubResource( 1 )
 texture = ExtResource( 1 )
 vframes = 4
 hframes = 4
 script = ExtResource( 5 )
 
 [node name="GunSprite" type="Sprite" parent="Sprite"]
-material = SubResource( 10 )
+material = SubResource( 2 )
 position = Vector2( 0, -2 )
 texture = ExtResource( 2 )
 vframes = 2
@@ -276,7 +275,7 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="SuckParticles" type="CPUParticles2D" parent="Sprite/GunSprite/Muzzle"]
+[node name="AbsorbParticles" type="CPUParticles2D" parent="Sprite/GunSprite/Muzzle"]
 z_index = 1
 emitting = false
 amount = 4
@@ -300,18 +299,18 @@ radial_accel = -100.0
 color = Color( 0.941176, 0.909804, 0.458824, 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/airborne = SubResource( 1 )
-anims/braking = SubResource( 2 )
-anims/idle = SubResource( 3 )
-anims/landing = SubResource( 4 )
-anims/running = SubResource( 5 )
-anims/stunned = SubResource( 6 )
-anims/wall_grabbing = SubResource( 7 )
+anims/airborne = SubResource( 3 )
+anims/braking = SubResource( 4 )
+anims/idle = SubResource( 5 )
+anims/landing = SubResource( 6 )
+anims/running = SubResource( 7 )
+anims/stunned = SubResource( 8 )
+anims/wall_grabbing = SubResource( 9 )
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2( 0, 1 )
-shape = SubResource( 8 )
+shape = SubResource( 10 )
 
 [node name="MovementStatesMachine" type="Node2D" parent="."]
 script = ExtResource( 4 )
@@ -321,6 +320,7 @@ states = [ ExtResource( 6 ), ExtResource( 8 ), ExtResource( 7 ) ]
 [node name="GunStatesMachine" type="Node2D" parent="."]
 script = ExtResource( 4 )
 machine_type = "Gun"
+states = [ ExtResource( 16 ), ExtResource( 15 ), ExtResource( 17 ), ExtResource( 19 ), ExtResource( 18 ) ]
 
 [node name="CoyoteJumpTimer" type="Timer" parent="."]
 wait_time = 0.1
@@ -335,5 +335,5 @@ wait_time = 3.0
 one_shot = true
 
 [node name="ChargeTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 2.0
 one_shot = true

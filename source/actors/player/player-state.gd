@@ -32,3 +32,46 @@ func exit(next_state: int):
 
 
 
+# Deals with directional shoot inputs in a similar manner the main node
+# handles directional inputs. The only difference is these inputs can't
+# be diagonal, so we'll turn diagonals into vertical directions to
+# prioritize shooting charged and rocket shots down.
+var old_input: Vector2 = Vector2.ZERO
+var just_pressed: Vector2 = Vector2.ZERO
+var just_released: Vector2 = Vector2.ZERO
+
+func _physics_process(_delta):
+	if old_input != get_shoot_dir():
+		just_pressed = get_shoot_dir()
+		just_released = old_input
+	else:
+		just_pressed = Vector2.ZERO
+		just_released = Vector2.ZERO
+	old_input = get_shoot_dir()
+
+func get_shoot_dir() -> Vector2:
+	return Vector2( Input.get_action_strength("shoot_right")
+					- Input.get_action_strength("shoot_left"), 
+					Input.get_action_strength("shoot_down")
+					- Input.get_action_strength("shoot_up"))
+
+func get_pressed_shoot_dir() -> Vector2:
+	var dir = get_shoot_dir()
+	if dir in [Vector2(1,1), Vector2(-1,1), Vector2(1,-1), Vector2(-1,-1)]:
+		return Vector2(0, dir.y)
+	else:
+		return dir
+
+func get_just_pressed_shoot_dir() -> Vector2:
+	if just_pressed in [Vector2(1,1), Vector2(-1,1), Vector2(1,-1), Vector2(-1,-1)]:
+		return Vector2(0, just_pressed.y)
+	else:
+		return just_pressed
+
+func get_just_released_shoot_dir() -> Vector2:
+	if just_released in [Vector2(1,1), Vector2(-1,1), Vector2(1,-1), Vector2(-1,-1)]:
+		return Vector2(0, just_released.y)
+	else:
+		return just_released
+
+
