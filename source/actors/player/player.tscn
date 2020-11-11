@@ -310,7 +310,7 @@ texture = ExtResource( 20 )
 hframes = 3
 
 [node name="Timer" type="Timer" parent="Sprite/GunSprite/Muzzle/MuzzleFlash"]
-wait_time = 0.05
+wait_time = 0.1
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

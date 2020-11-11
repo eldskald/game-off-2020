@@ -13,15 +13,15 @@ func exit(next_state):
 		gun.spawn_muzzle_flash()
 		
 		# Keeping the player afloat code.
-		if player.aiming == Vector2.DOWN:
-			player.velocity.y = min(-10, player.velocity.y)
+		if player.aiming == Vector2.DOWN and player.get_movement_state() == Player.AIRBORNE_STATE:
+			player.velocity.y = min(-player.jump_force/5, player.velocity.y)
 
 
 
 func _physics_process(_delta):
 	if get_pressed_shoot_dir() == Vector2.ZERO:
 		var next = machine.change_state(Player.SHOOTING_STATE, true)
-		next.duration = 0.1
+		next.duration = 0.2
 		next.initialize()
 	else:
 		player.aiming = get_pressed_shoot_dir()

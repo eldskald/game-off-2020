@@ -38,12 +38,17 @@ func horizontal_movement(delta, factor: float = 1.0):
 		delta_v += abs(main.get_dir_input().x)*acceleration
 	
 	# Now, let's correctly clamp it.
-	if velocity.x > 0:
-		velocity.x = clamp(velocity.x + delta_v*delta*factor, 0, speed)
-	elif velocity.x < 0:
-		velocity.x = clamp(velocity.x - delta_v*delta*factor, -speed, 0)
+	if abs(velocity.x) <= speed:
+		if velocity.x > 0:
+			velocity.x = clamp(velocity.x + delta_v*delta*factor, 0, speed)
+		elif velocity.x < 0:
+			velocity.x = clamp(velocity.x - delta_v*delta*factor, -speed, 0)
+		else:
+			velocity.x = delta_v*delta*factor*main.get_dir_input().x
+	
+	# In case of getting knocked back faster than max speed.
 	else:
-		velocity.x = delta_v*delta*factor*main.get_dir_input().x
+		velocity.x -= friction*sign(velocity.x)*delta*factor
 	
 	# Lastly, let's change the direction the player is facing.
 	if main.get_dir_input().x != 0:
