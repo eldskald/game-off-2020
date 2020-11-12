@@ -23,18 +23,18 @@ func _physics_process(delta):
 	# when we were still on the ground, but we did not jump. Just try setting
 	# this timer to zero and play, try to make these jumps. Feel the difference.
 	# It's mostly about feel than about making the game easier.
-	if Input.is_action_just_pressed("jump") and not coyote.is_stopped():
+	if Input.is_action_just_pressed("jump") and not pity.is_stopped():
 		machine.change_state(Player.JUMPING_STATE)
 	
 	# On the other side of the spectrum, we want to jump at the exact frame
 	# we land on the ground, but we press the button a little to earlier and
 	# nothing happens. Bunny timer is a pity timer to allow us to make these
 	# jumps a little too early.
-	elif Input.is_action_just_pressed("jump") and bunny.is_stopped():
-		bunny.start()
+	elif Input.is_action_just_pressed("jump") and pity.is_stopped():
+		pity.start()
 	
 	if player.is_on_floor():
-		if Input.is_action_pressed("jump") and not bunny.is_stopped():
+		if Input.is_action_pressed("jump") and not pity.is_stopped():
 			machine.change_state(Player.JUMPING_STATE)
 		else:
 			if reached_max_fall_speed:

@@ -13,8 +13,7 @@ onready var gun: Sprite = sprite.get_node("GunSprite")
 onready var muzzle: Node2D = gun.get_node("Muzzle")
 onready var camera: Camera2D = player.get_node("Camera")
 
-onready var coyote: Timer = player.get_node("CoyoteJumpTimer")
-onready var bunny: Timer = player.get_node("BunnyJumpTimer")
+onready var pity: Timer = player.get_node("PityTimer")
 onready var charge: Timer = player.get_node("ChargeTimer")
 
 

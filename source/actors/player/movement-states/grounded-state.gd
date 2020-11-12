@@ -3,12 +3,12 @@ extends PlayerState
 
 
 func initialize():
-	bunny.stop()
+	pity.stop()
 	camera.drag_margin_top = 0.05
 
 func exit(next_state):
 	if next_state == Player.AIRBORNE_STATE:
-		coyote.start()
+		pity.start()
 
 
 

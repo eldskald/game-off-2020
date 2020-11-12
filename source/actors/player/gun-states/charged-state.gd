@@ -13,7 +13,7 @@ func exit(next_state):
 			player.velocity.y = -player.jump_force
 		
 		# Other knockback effects of the heavy shot.
-		elif player.get_movement_state() in [Player.JUMPING_STATE, Player.AIRBORNE_STATE]:
+		elif player.get_movement_state() != Player.GROUNDED_STATE:
 			player.change_movement_state(Player.AIRBORNE_STATE)
 			if player.aiming == Vector2.UP:
 				player.velocity.y += player.falling_speed

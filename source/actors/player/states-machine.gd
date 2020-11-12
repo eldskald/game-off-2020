@@ -26,7 +26,7 @@ func change_state(new_state: int, special: bool = false):
 	# Dealing with the new state
 	state_number = new_state
 	var state = PlayerState.new()
-	state.script = states[new_state - first_on_list_state[machine_type]] # Remember their order!
+ 	state.script = states[new_state - first_on_list_state[machine_type]] # Remember their order!
 	state.previous_state = old_state
 	add_child(state)
 	

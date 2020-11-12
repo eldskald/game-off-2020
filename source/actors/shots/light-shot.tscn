@@ -13,15 +13,12 @@ _data = [ Vector2( 0, 0.7 ), 0.0, -0.7, 0, 1, Vector2( 1, 0 ), -0.7, 0.0, 1, 0 ]
 [sub_resource type="CircleShape2D" id=3]
 radius = 5.09902
 
-[node name="LightShot" type="KinematicBody2D" groups=[
-"shot",
-]]
+[node name="LightShot" type="KinematicBody2D"]
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
 speed = 300.0
-range_ = 300.0
 
 [node name="Yellow" type="CPUParticles2D" parent="."]
 amount = 32
@@ -50,8 +47,7 @@ collision_mask = 178
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource( 3 )
 
-[node name="DurationTimer" type="Timer" parent="."]
-one_shot = true
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_area_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_body_entered"]
-[connection signal="timeout" from="DurationTimer" to="." method="destroy"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_screen_exited"]

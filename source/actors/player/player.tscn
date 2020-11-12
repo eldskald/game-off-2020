@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://assets/textures/player-char.png" type="Texture" id=1]
 [ext_resource path="res://assets/textures/arm-gun.png" type="Texture" id=2]
@@ -31,7 +31,13 @@ shader_param/yellow = Color( 0.941176, 0.909804, 0.458824, 1 )
 shader_param/flash_yellow = 0.0
 shader_param/flash_invisible = 0.0
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 22, 17 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 3, 5 )
+
+[sub_resource type="Animation" id=6]
 length = 0.1
 loop = true
 tracks/0/type = "value"
@@ -59,7 +65,7 @@ tracks/1/keys = {
 "values": [ Vector2( 0, -4 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=7]
 length = 0.25
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -86,7 +92,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, -1 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=8]
 length = 1.6
 loop = true
 tracks/0/type = "value"
@@ -114,7 +120,7 @@ tracks/1/keys = {
 "values": [ Vector2( 0, -2 ), Vector2( 0, -1 ), Vector2( 0, -2 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=9]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -141,7 +147,7 @@ tracks/1/keys = {
 "values": [ Vector2( 0, -1 ) ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=10]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -169,7 +175,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, -2 ), Vector2( 1, -3 ), Vector2( 1, -2 ), Vector2( 1, -3 ), Vector2( 1, -2 ) ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=11]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -196,7 +202,7 @@ tracks/1/keys = {
 "values": [ Vector2( -2, 1 ) ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=12]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -223,7 +229,7 @@ tracks/1/keys = {
 "values": [ Vector2( 0, -1 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 3, 11 )
 
 [node name="Player" type="KinematicBody2D" groups=[
@@ -236,7 +242,7 @@ speed = 100.0
 acceleration = 400.0
 friction = 1200.0
 gravity = 900.0
-jump_height = 76.0
+jump_height = 64.0
 light_shot = ExtResource( 14 )
 heavy_shot = ExtResource( 13 )
 
@@ -251,6 +257,7 @@ drag_margin_left = 0.05
 drag_margin_top = 0.05
 drag_margin_right = 0.05
 drag_margin_bottom = 0.05
+editor_draw_screen = false
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 1 )
@@ -272,6 +279,24 @@ position = Vector2( 9, 2 )
 __meta__ = {
 "_edit_group_": true
 }
+
+[node name="SuckArea" type="Area2D" parent="Sprite/GunSprite/Muzzle"]
+visible = false
+position = Vector2( 22, 0 )
+collision_layer = 128
+collision_mask = 304
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/GunSprite/Muzzle/SuckArea"]
+shape = SubResource( 3 )
+
+[node name="HeldArea" type="Area2D" parent="Sprite/GunSprite/Muzzle"]
+visible = false
+position = Vector2( 3, 0 )
+collision_layer = 128
+collision_mask = 18
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/GunSprite/Muzzle/HeldArea"]
+shape = SubResource( 4 )
 
 [node name="AbsorbParticles" type="CPUParticles2D" parent="Sprite/GunSprite/Muzzle"]
 rotation = -0.785398
@@ -314,18 +339,18 @@ wait_time = 0.1
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/airborne = SubResource( 3 )
-anims/braking = SubResource( 4 )
-anims/idle = SubResource( 5 )
-anims/landing = SubResource( 6 )
-anims/running = SubResource( 7 )
-anims/stunned = SubResource( 8 )
-anims/wall_grabbing = SubResource( 9 )
+anims/airborne = SubResource( 6 )
+anims/braking = SubResource( 7 )
+anims/idle = SubResource( 8 )
+anims/landing = SubResource( 9 )
+anims/running = SubResource( 10 )
+anims/stunned = SubResource( 11 )
+anims/wall_grabbing = SubResource( 12 )
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2( 0, 1 )
-shape = SubResource( 10 )
+shape = SubResource( 13 )
 
 [node name="MovementStatesMachine" type="Node2D" parent="."]
 script = ExtResource( 4 )
@@ -337,11 +362,7 @@ script = ExtResource( 4 )
 machine_type = "Gun"
 states = [ ExtResource( 16 ), ExtResource( 15 ), ExtResource( 17 ), ExtResource( 19 ), ExtResource( 18 ) ]
 
-[node name="CoyoteJumpTimer" type="Timer" parent="."]
-wait_time = 0.1
-one_shot = true
-
-[node name="BunnyJumpTimer" type="Timer" parent="."]
+[node name="PityTimer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
 
