@@ -16,7 +16,7 @@ func _physics_process(delta):
 	# Hidden mechanic: pressing the jump button as you shoot to wall jump
 	# away gives you more height.
 	if Input.is_action_just_pressed("jump") and not pity.is_stopped():
-		player.velocity.y = -player.jump_force
+		player.velocity.x /= 4
 	
 	# Leaving this state.
 	if player.velocity.y >= 0:

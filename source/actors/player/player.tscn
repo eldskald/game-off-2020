@@ -378,6 +378,7 @@ wait_time = 2.0
 one_shot = true
 
 [node name="WallRuler" type="RayCast2D" parent="."]
+visible = false
 cast_to = Vector2( 32, 0 )
 collision_mask = 2
 [connection signal="timeout" from="Sprite/GunSprite/Muzzle/ChargingParticles/Timer" to="Sprite/GunSprite" method="_charge_particles_timeout"]

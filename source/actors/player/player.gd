@@ -68,10 +68,11 @@ onready var muzzle: Node2D = $Sprite/GunSprite/Muzzle
 
 func spawn_shot(shot_scene: PackedScene):
 	var shot = shot_scene.instance()
-	shot.direction = aiming
+	shot.direction = aiming.normalized()
 	shot.position = get_parent().to_local(muzzle.global_position)
 	shot.position += aiming*8
 	get_parent().add_child(shot)
+	print(aiming)
 ##########################################################################
 
 

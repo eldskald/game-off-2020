@@ -7,7 +7,6 @@ export (PackedScene) var title_screen
 
 func _ready():
 	OS.window_size = Vector2(1024,576)
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	add_child(title_screen.instance())
 
 

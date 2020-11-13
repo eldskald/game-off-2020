@@ -40,37 +40,43 @@ var just_pressed: Vector2 = Vector2.ZERO
 var just_released: Vector2 = Vector2.ZERO
 
 func _physics_process(_delta):
-	if old_input != get_shoot_dir():
-		just_pressed = get_shoot_dir()
+	if old_input != get_pressed_aim_dir():
+		just_pressed = get_pressed_aim_dir()
 		just_released = old_input
 	else:
 		just_pressed = Vector2.ZERO
 		just_released = Vector2.ZERO
-	old_input = get_shoot_dir()
+	old_input = get_pressed_aim_dir()
 
-func get_shoot_dir() -> Vector2:
-	return Vector2( Input.get_action_strength("shoot_right")
-					- Input.get_action_strength("shoot_left"), 
-					Input.get_action_strength("shoot_down")
-					- Input.get_action_strength("shoot_up"))
-
-func get_pressed_shoot_dir() -> Vector2:
-	var dir = get_shoot_dir()
-	if dir in [Vector2(1,1), Vector2(-1,1), Vector2(1,-1), Vector2(-1,-1)]:
-		return Vector2(0, dir.y)
+func get_pressed_aim_dir() -> Vector2:
+	if main.is_using_controller():
+		return Vector2( Input.get_action_strength("aim_right")
+						-Input.get_action_strength("aim_left"),
+						Input.get_action_strength("aim_down")
+						-Input.get_action_strength("aim_up"))
 	else:
-		return dir
+		var angle = player.get_local_mouse_position().angle()
+		if angle > -7*PI/8 and angle <= -5*PI/8:
+			return Vector2(-1,-1)
+		elif angle > -5*PI/8 and angle <= -3*PI/8:
+			return Vector2(0,-1)
+		elif angle > -3*PI/8 and angle <= -PI/8:
+			return Vector2(1,-1)
+		elif angle > -PI/8 and angle <= PI/8:
+			return Vector2(1,0)
+		elif angle > PI/8 and angle <= 3*PI/8:
+			return Vector2(1,1)
+		elif angle > 3*PI/8 and angle <= 5*PI/8:
+			return Vector2(0,1)
+		elif angle > 5*PI/8 and angle <= 7*PI/8:
+			return Vector2(-1,1)
+		else:
+			return Vector2(-1,0)
 
-func get_just_pressed_shoot_dir() -> Vector2:
-	if just_pressed in [Vector2(1,1), Vector2(-1,1), Vector2(1,-1), Vector2(-1,-1)]:
-		return Vector2(0, just_pressed.y)
-	else:
-		return just_pressed
+func get_just_pressed_aim_dir() -> Vector2:
+	return just_pressed
 
-func get_just_released_shoot_dir() -> Vector2:
-	if just_released in [Vector2(1,1), Vector2(-1,1), Vector2(1,-1), Vector2(-1,-1)]:
-		return Vector2(0, just_released.y)
-	else:
-		return just_released
+func get_just_released_aim_dir() -> Vector2:
+	return just_released
 
 

@@ -19,17 +19,17 @@ func exit(next_state):
 
 
 func _physics_process(_delta):
-	if get_pressed_shoot_dir() == Vector2.ZERO:
+	if get_pressed_aim_dir() == Vector2.ZERO:
+		player.aiming = Vector2(player.facing, 0)
+	else:
+		player.aiming = get_pressed_aim_dir()
+	
+	if not Input.is_action_pressed("shoot"):
 		var next = machine.change_state(Player.SHOOTING_STATE, true)
 		next.duration = 0.2
 		next.initialize()
-	else:
-		player.aiming = get_pressed_shoot_dir()
 	
-	# Outside an elif statement in case the player presses the absorb
-	# button without letting go of the shoot button.
 	if Input.is_action_just_pressed("absorb"):
-		player.aiming = Vector2(player.facing, 0)
 		machine.change_state(Player.ABSORBING_STATE)
 
 
