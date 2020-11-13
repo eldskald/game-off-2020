@@ -71,7 +71,7 @@ func _process(_delta):
 			charging_particles.emitting = false
 			charging_particles.visible = false
 			charge_particles_timer.stop()
-			absorb_particles.emitting = true
+			absorb_particles.emitting = false
 			if player.get_gun_state_node().is_holding_shot():
 				shader.set_shader_param("flash_yellow", 1.0)
 				player_shader.set_shader_param("flash_yellow", 1.0)

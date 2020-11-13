@@ -4,19 +4,19 @@ var holding_node = null
 var holding = ""
 
 func initialize():
-	if holding_node.get_collision_mask_bit(1) == true: # Solids layer
+	if holding_node.get_collision_layer_bit(1) == true: # Solids layer
 		player.change_movement_state(Player.WALL_GRABBING_STATE)
 		holding = "wall"
-	elif holding_node.get_collision_mask_bit(4) == true: # Enemies layer
+	elif holding_node.get_collision_layer_bit(4) == true: # Enemies layer
 		holding = "enemy"
-	elif holding_node.get_collision_mask_bit(5) == true: # Shots layer
+	elif holding_node.get_collision_layer_bit(5) == true: # Shots layer
 		match holding_node.type:
 			"Light":
 				holding = "shot"
 			"Heavy":
 				holding = "rocket"
 	
-	if not player.get_movement_state() in [Player.GROUNDED_STATE, Player.WALL_GRABBING_STATE]:
+	if holding != "wall" and player.get_movement_state() != Player.GROUNDED_STATE:
 		player.change_movement_state(Player.FLOATING_STATE)
 
 
@@ -29,6 +29,7 @@ func _physics_process(delta):
 			if not Input.is_action_pressed("absorb"):
 				player.change_movement_state(Player.AIRBORNE_STATE)
 				player.velocity.x = -player.facing*player.speed
+				machine.change_state(Player.READY_STATE)
 			
 			if get_just_pressed_shoot_dir() != Vector2.ZERO:
 				
@@ -47,7 +48,7 @@ func _physics_process(delta):
 					next.initialize()
 					player.change_movement_state(Player.WALL_JUMPING_STATE)
 					player.velocity.x = -player.facing*player.speed*2
-					player.velocity.y = -player.jump_force/2
+					player.velocity.y = -player.jump_force
 					pity.start()
 				
 				# Jump up case
@@ -109,7 +110,6 @@ func shoot_and_knockback(shoot_duration: float):
 
 
 
-
 func is_holding_shot():
 	return holding == "shot"
 
@@ -121,5 +121,7 @@ func is_holding_wall():
 
 func is_holding_rocket():
 	return holding == "rocket"
+
+
 
 
