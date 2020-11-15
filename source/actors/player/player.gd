@@ -72,14 +72,14 @@ func spawn_shot(shot_scene: PackedScene):
 	shot.position = get_parent().to_local(muzzle.global_position)
 	shot.position += aiming*8
 	get_parent().add_child(shot)
-	print(aiming)
 ##########################################################################
 
 
 
 ### STATES MACHINES ######################################################
 enum {GROUNDED_STATE, AIRBORNE_STATE, JUMPING_STATE, WALL_GRABBING_STATE,
-	  WALL_JUMPING_STATE, STUNNED_STATE, FLOATING_STATE, ROCKETING_STATE}
+	  WALL_JUMPING_STATE, HANGING_STATE, STUNNED_STATE, FLOATING_STATE,
+	  ROCKETING_STATE}
 
 onready var movement_machine = $MovementStatesMachine
 

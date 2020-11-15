@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://assets/textures/player-char.png" type="Texture" id=1]
 [ext_resource path="res://assets/textures/arm-gun.png" type="Texture" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://actors/player/gun-states/shooting-state.gd" type="Script" id=19]
 [ext_resource path="res://assets/textures/muzzle-flash.png" type="Texture" id=20]
 [ext_resource path="res://actors/player/gun-states/holding-state.gd" type="Script" id=21]
+[ext_resource path="res://actors/player/movement-states/hanging-state.gd" type="Script" id=22]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 12 )
@@ -358,7 +359,7 @@ shape = SubResource( 12 )
 [node name="MovementStatesMachine" type="Node2D" parent="."]
 script = ExtResource( 4 )
 machine_type = "Movement"
-states = [ ExtResource( 6 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 10 ), ExtResource( 11 ) ]
+states = [ ExtResource( 6 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 22 ) ]
 
 [node name="GunStatesMachine" type="Node2D" parent="."]
 script = ExtResource( 4 )
@@ -377,9 +378,22 @@ one_shot = true
 wait_time = 2.0
 one_shot = true
 
-[node name="WallRuler" type="RayCast2D" parent="."]
+[node name="RightWallFinder" type="RayCast2D" parent="."]
 visible = false
+enabled = true
 cast_to = Vector2( 32, 0 )
+collision_mask = 2
+
+[node name="LeftWallFinder" type="RayCast2D" parent="."]
+visible = false
+enabled = true
+cast_to = Vector2( -32, 0 )
+collision_mask = 2
+
+[node name="UpWallFinder" type="RayCast2D" parent="."]
+visible = false
+enabled = true
+cast_to = Vector2( 0, -32 )
 collision_mask = 2
 [connection signal="timeout" from="Sprite/GunSprite/Muzzle/ChargingParticles/Timer" to="Sprite/GunSprite" method="_charge_particles_timeout"]
 [connection signal="timeout" from="Sprite/GunSprite/Muzzle/MuzzleFlash/Timer" to="Sprite/GunSprite" method="_on_muzzle_flash_timeout"]

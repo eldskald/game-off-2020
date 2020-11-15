@@ -2,7 +2,7 @@ extends PlayerState
 
 
 
-func initialize():
+func initialize(argument):
 	pity.stop()
 	camera.drag_margin_top = 0.05
 

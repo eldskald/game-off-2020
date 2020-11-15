@@ -2,7 +2,7 @@ extends PlayerState
 
 
 
-func initialize():
+func initialize(argument):
 	pity.stop()
 	player.velocity.y = -player.jump_force
 	camera.drag_margin_top = 0.9

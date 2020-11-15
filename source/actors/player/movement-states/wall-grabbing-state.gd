@@ -5,11 +5,15 @@ extends PlayerState
 
 
 
-onready var raycast: RayCast2D = player.get_node("WallRuler")
+onready var left_raycast: RayCast2D = player.get_node("LeftWallFinder")
+onready var right_raycast: RayCast2D = player.get_node("RightWallFinder")
 
-func initialize():
-	raycast.enabled = true
-	raycast.cast_to = Vector2(32*player.facing, 0)
+func initialize(argument):
+	var raycast
+	if player.facing == 1:
+		raycast = right_raycast
+	else:
+		raycast = left_raycast
 	raycast.force_raycast_update()
 	player.velocity = Vector2.ZERO
 	if raycast.is_colliding():
@@ -23,12 +27,10 @@ func initialize():
 	# wall grabbing state without the raycast colliding somehow, better
 	# go to airborne and ready states than have the game crash.
 	else:
-		print("seriously...")
 		machine.change_state(Player.AIRBORNE_STATE)
 		player.change_gun_state(Player.READY_STATE)
 
-func exit(next_state):
-	raycast.enabled = false
+
 
 
 

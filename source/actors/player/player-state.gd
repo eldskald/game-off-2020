@@ -23,7 +23,7 @@ onready var charge: Timer = player.get_node("ChargeTimer")
 # each state will have their own use for them, hence why overriding these
 # empty ones defined for hierarchy purposes.
 
-func initialize():
+func initialize(argument):
 	pass
 
 func exit(next_state: int):

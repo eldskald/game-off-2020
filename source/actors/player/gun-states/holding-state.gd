@@ -1,12 +1,14 @@
 extends PlayerState
 
-var holding_node = null
 var holding = ""
+var holding_node
 var wall_jump_let_go = false
 
-func initialize():
+
+
+func initialize(argument):
+	holding_node = argument
 	if holding_node.get_collision_layer_bit(1) == true: # Solids layer
-		player.change_movement_state(Player.WALL_GRABBING_STATE)
 		holding = "wall"
 	elif holding_node.get_collision_layer_bit(4) == true: # Enemies layer
 		holding = "enemy"
@@ -23,40 +25,49 @@ func initialize():
 
 
 func _physics_process(delta):
-	player.aiming = Vector2(player.facing, 0)
-	
 	match holding:
 		"wall":
-			player.aiming = Vector2(player.facing, 0)
+			# Dealing with ceilings
+			if player.aiming == Vector2.UP:
+				if Input.is_action_just_pressed("absorb"):
+					player.change_movement_state(Player.AIRBORNE_STATE)
+					machine.change_state(Player.READY_STATE)
+				elif Input.is_action_just_pressed("jump"):
+					player.change_movement_state(Player.AIRBORNE_STATE)
+					machine.change_state(Player.READY_STATE)
+				elif Input.is_action_just_pressed("shoot"):
+					player.change_movement_state(Player.AIRBORNE_STATE)
+					machine.change_state(Player.SHOOTING_STATE, 0.2)
+					player.velocity.y = player.falling_speed
 			
-			if Input.is_action_just_pressed("absorb"):
-				player.change_movement_state(Player.AIRBORNE_STATE)
-				player.velocity.x = -player.facing*player.speed
-				machine.change_state(Player.READY_STATE)
-			
-			if Input.is_action_just_pressed("jump"):
-				pity.start()
-				wall_jump_let_go = true
-			elif wall_jump_let_go and pity.is_stopped():
-				player.change_movement_state(Player.AIRBORNE_STATE)
-				player.velocity.x = -player.facing*player.speed
-				machine.change_state(Player.READY_STATE)
-			
-			if Input.is_action_just_pressed("shoot"):
-				var next = machine.change_state(Player.SHOOTING_STATE, true)
-				next.duration = 0.2
-				next.initialize()
-				player.change_movement_state(Player.WALL_JUMPING_STATE)
-				player.velocity.y = -player.jump_force
+			# Dealing with walls
+			else:
+				if Input.is_action_just_pressed("absorb"):
+					player.change_movement_state(Player.AIRBORNE_STATE)
+					player.velocity.x = -player.facing*player.speed
+					machine.change_state(Player.READY_STATE)
 				
-				# Hidden mechanic: if you press jump as you shoot to wall jump,
-				# you get more height.
-				if pity.is_stopped():
-					player.velocity.x = -player.facing*player.speed*2
+				if Input.is_action_just_pressed("jump"):
 					pity.start()
-				else:
-					player.velocity.x = -player.facing*player.speed/2
-					pity.stop()
+					wall_jump_let_go = true
+				elif wall_jump_let_go and pity.is_stopped():
+					player.change_movement_state(Player.AIRBORNE_STATE)
+					player.velocity.x = -player.facing*player.speed
+					machine.change_state(Player.READY_STATE)
+				
+				if Input.is_action_just_pressed("shoot"):
+					machine.change_state(Player.SHOOTING_STATE, 0.2)
+					player.change_movement_state(Player.WALL_JUMPING_STATE)
+					player.velocity.y = -player.jump_force
+					
+					# Hidden mechanic: if you press jump as you shoot to wall jump,
+					# you get more height.
+					if pity.is_stopped():
+						player.velocity.x = -player.facing*player.speed*2
+						pity.start()
+					else:
+						player.velocity.x = -player.facing*player.speed/2
+						pity.stop()
 		
 		"enemy":
 			pass

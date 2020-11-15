@@ -1,17 +1,14 @@
 extends PlayerState
 
 var timer
-var duration: float = 1.0
 
 
 
-func initialize():
+func initialize(argument):
 	timer = Timer.new()
 	add_child(timer)
 	timer.connect("timeout", self, "over")
-	timer.start(duration)
-
-
+	timer.start(argument)
 
 func over():
 	machine.change_state(Player.READY_STATE)

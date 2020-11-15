@@ -4,7 +4,7 @@ var reached_max_fall_speed
 
 
 
-func initialize():
+func initialize(argument):
 	reached_max_fall_speed = false
 	camera.drag_margin_top = 0.9
 

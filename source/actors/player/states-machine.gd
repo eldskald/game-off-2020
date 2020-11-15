@@ -5,17 +5,20 @@ extends Node2D
 export (String, "Movement", "Gun") var machine_type
 export (Array, Script) var states
 
-# These must be the first states that appear on the player's enum.
-#var first_on_list_state: Dictionary = {
-#	"Movement": Player.GROUNDED_STATE,
-#	"Gun": Player.READY_STATE
-#}
-
 var state_number
 
 
 
-func change_state(new_state: int, special: bool = false):
+
+# This thing isn't supposed to be called more than once per frame,
+# but horrible things can happen and it can be called multiple times
+# a frame sometimes, and I think that's what causing problems. You
+# can tell I'm crazy because I don't know what's going on, just take
+# care the way you implement your machines.
+func change_state(new_state: int, argument = null):
+	call_deferred("actual_change_state", new_state, argument)
+
+func actual_change_state(new_state: int, argument = null):
 	
 	# Dealing with the old state
 	var old_state = state_number
@@ -29,14 +32,7 @@ func change_state(new_state: int, special: bool = false):
 	state.script = states[new_state] # Remember their order!
 	state.previous_state = old_state
 	add_child(state)
-	
-	# In case you want to change some specific parameters in the
-	# state before initializing it, make the special variable true
-	# and initialize it yourself after calling change_state.
-	if special:
-		return state
-	else:
-		state.initialize()
+	state.initialize(argument)
 
 
 
@@ -53,6 +49,8 @@ func debugging(state):
 				print("wall_grabbing_state")
 			Player.WALL_JUMPING_STATE:
 				print("wall_jumping_state")
+			Player.HANGING_STATE:
+				print("hanging_state")
 			Player.STUNNED_STATE:
 				print("stunned_state")
 			Player.FLOATING_STATE:
@@ -79,13 +77,13 @@ func debugging(state):
 
 
 
-func start_machine(starting_state: int):
+func start_machine(starting_state: int, argument = null):
 	state_number = starting_state
 	var state = PlayerState.new()
 	state.script = states[starting_state]
 	state.previous_state = starting_state
 	add_child(state)
-	state.initialize()
+	state.initialize(argument)
 
 
 

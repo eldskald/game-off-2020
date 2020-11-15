@@ -9,7 +9,7 @@ func exit(next_state):
 
 func _physics_process(delta):
 	
-	# Make acceleration slower to make it harder to scale walls
+	# Make acceleration slower to make it harder to scale walls.
 	player.horizontal_movement(delta, 0.4)
 	player.vertical_movement(delta, 1.0)
 	

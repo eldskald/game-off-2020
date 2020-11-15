@@ -2,7 +2,7 @@ extends PlayerState
 
 
 
-func initialize():
+func initialize(argument):
 	charge.connect("timeout", self, "finish_charging")
 	charge.start()
 	gun.charge_particles_timer.start()
@@ -13,8 +13,8 @@ func exit(next_state):
 		gun.spawn_muzzle_flash()
 		
 		# Keeping the player afloat code.
-		if player.aiming == Vector2.DOWN and player.get_movement_state() == Player.AIRBORNE_STATE:
-			player.velocity.y = min(-player.jump_force/5, player.velocity.y)
+		if player.aiming.y == 1 and player.get_movement_state() == Player.AIRBORNE_STATE:
+			player.velocity.y = min(-player.jump_force/4, player.velocity.y)
 
 
 
@@ -25,9 +25,7 @@ func _physics_process(_delta):
 		player.aiming = get_pressed_aim_dir()
 	
 	if not Input.is_action_pressed("shoot"):
-		var next = machine.change_state(Player.SHOOTING_STATE, true)
-		next.duration = 0.2
-		next.initialize()
+		machine.change_state(Player.SHOOTING_STATE, 0.1)
 	
 	if Input.is_action_just_pressed("absorb"):
 		machine.change_state(Player.ABSORBING_STATE)
