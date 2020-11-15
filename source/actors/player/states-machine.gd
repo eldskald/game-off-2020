@@ -9,7 +9,6 @@ var state_number
 
 
 
-
 # This thing isn't supposed to be called more than once per frame,
 # but horrible things can happen and it can be called multiple times
 # a frame sometimes, and I think that's what causing problems. You

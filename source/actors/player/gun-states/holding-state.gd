@@ -38,6 +38,7 @@ func _physics_process(delta):
 				elif Input.is_action_just_pressed("shoot"):
 					player.change_movement_state(Player.AIRBORNE_STATE)
 					machine.change_state(Player.SHOOTING_STATE, 0.2)
+					gun.spawn_muzzle_flash()
 					player.velocity.y = player.falling_speed
 			
 			# Dealing with walls
@@ -57,6 +58,7 @@ func _physics_process(delta):
 				
 				if Input.is_action_just_pressed("shoot"):
 					machine.change_state(Player.SHOOTING_STATE, 0.2)
+					gun.spawn_muzzle_flash()
 					player.change_movement_state(Player.WALL_JUMPING_STATE)
 					player.velocity.y = -player.jump_force
 					

@@ -33,11 +33,10 @@ func _process(_delta):
 	match player.get_gun_state():
 		Player.READY_STATE:
 			multi_aim_case(player.aiming, player.facing)
+			charging_particles.restart()
 			charging_particles.emitting = false
-			charging_particles.visible = false
 			charge_particles_timer.stop()
 			absorb_particles.emitting = false
-			absorb_particles.visible = true
 			shader.set_shader_param("flash_yellow", 0.0)
 			player_shader.set_shader_param("flash_yellow", 0.0)
 		
@@ -45,31 +44,30 @@ func _process(_delta):
 			frame = UNUSABLE_FRAME
 			muzzle.position = Vector2(-3,12)
 			muzzle.rotation_degrees = 90
+			charging_particles.restart()
 			charging_particles.emitting = false
-			charging_particles.visible = false
 			charge_particles_timer.stop()
+			absorb_particles.restart()
 			absorb_particles.emitting = false
-			absorb_particles.visible = false
 			shader.set_shader_param("flash_yellow", 0.0)
 			player_shader.set_shader_param("flash_yellow", 0.0)
 		
 		Player.ABSORBING_STATE:
 			multi_aim_case(player.aiming, player.facing)
+			charging_particles.restart()
 			charging_particles.emitting = false
-			charging_particles.visible = false
 			charge_particles_timer.stop()
 			absorb_particles.emitting = true
-			absorb_particles.visible = true
 			shader.set_shader_param("flash_yellow", 0.0)
 			player_shader.set_shader_param("flash_yellow", 0.0)
 		
 		Player.HOLDING_STATE:
 			multi_aim_case(player.aiming, player.facing)
+			charging_particles.restart()
 			charging_particles.emitting = false
-			charging_particles.visible = false
 			charge_particles_timer.stop()
+			absorb_particles.restart()
 			absorb_particles.emitting = false
-			absorb_particles.visible = false
 			if player.get_gun_state() == Player.HOLDING_STATE:
 				if player.get_gun_state_node().is_holding_shot():
 					shader.set_shader_param("flash_yellow", 1.0)
@@ -80,28 +78,26 @@ func _process(_delta):
 		
 		Player.SHOOTING_STATE:
 			multi_aim_case(player.aiming, player.facing)
+			charging_particles.restart()
 			charging_particles.emitting = false
-			charging_particles.visible = false
 			charge_particles_timer.stop()
+			absorb_particles.restart()
 			absorb_particles.emitting = false
-			absorb_particles.visible = false
 			shader.set_shader_param("flash_yellow", 0.0)
 			player_shader.set_shader_param("flash_yellow", 0.0)
 		
 		Player.CHARGING_STATE:
 			multi_aim_case(player.aiming, player.facing)
+			absorb_particles.restart()
 			absorb_particles.emitting = false
-			charging_particles.visible = true
-			absorb_particles.visible = false
 			shader.set_shader_param("flash_yellow", 0.0)
 			player_shader.set_shader_param("flash_yellow", 0.0)
 		
 		Player.CHARGED_STATE:
 			multi_aim_case(player.aiming, player.facing)
 			charging_particles.emitting = true
-			charging_particles.visible = true
+			absorb_particles.restart()
 			absorb_particles.emitting = false
-			absorb_particles.visible = false
 			shader.set_shader_param("flash_yellow", 1.0)
 			player_shader.set_shader_param("flash_yellow", 1.0)
 
