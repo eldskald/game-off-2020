@@ -21,7 +21,7 @@ func initialize(argument):
 		# Calculating the point of contact on coordinates local to
 		# the level, and positioning the player accordingly.
 		var point = player.get_parent().to_local(raycast.get_collision_point())
-		player.position.x = point.x - player.facing*12
+		player.position.x = point.x - player.facing*14
 	
 	# Just in case something horrible happens and the player gets into
 	# wall grabbing state without the raycast colliding somehow, better

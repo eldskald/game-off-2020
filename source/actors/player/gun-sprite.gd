@@ -16,9 +16,6 @@ onready var invincibility: Timer = player.get_node("InvincibilityTimer")
 const READY_FRAME = 0
 const UNUSABLE_FRAME = 1
 const FORWARD_FRAME = 2
-const DOWNWARD_FRAME = 3
-const BACKWARD_FRAME = 4
-const UPWARD_FRAME = 5
 
 
 
