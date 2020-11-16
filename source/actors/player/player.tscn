@@ -280,7 +280,7 @@ frame = 2
 script = ExtResource( 9 )
 
 [node name="Muzzle" type="Node2D" parent="Sprite/GunSprite"]
-position = Vector2( 9, 2 )
+position = Vector2( 15, 0 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -342,6 +342,8 @@ hframes = 3
 [node name="Timer" type="Timer" parent="Sprite/GunSprite/Muzzle/MuzzleFlash"]
 wait_time = 0.1
 one_shot = true
+
+[node name="HeldEnemy" type="Node2D" parent="Sprite/GunSprite/Muzzle"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/airborne = SubResource( 5 )

@@ -9,9 +9,9 @@ func _physics_process(delta):
 		player.aiming = get_pressed_aim_dir()
 	
 	if Input.is_action_just_pressed("shoot"):
-		machine.change_state(Player.CHARGING_STATE)
+		player.change_gun_state(Player.CHARGING_STATE)
 	elif Input.is_action_just_pressed("absorb"):
-		machine.change_state(Player.ABSORBING_STATE)
+		player.change_gun_state(Player.ABSORBING_STATE)
 
 
 

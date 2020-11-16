@@ -23,7 +23,7 @@ func exit(next_state):
 			if player.aiming.y == -1:
 				player.velocity.y += player.falling_speed
 			else:
-				player.velocity.y = min(-player.jump_force/3, player.velocity.y)
+				player.velocity.y = min(-player.jump_force/1.41, player.velocity.y)
 			if player.aiming.x != 0:
 				if player.velocity.x > 0:
 					player.velocity.x = -player.speed*player.aiming.x
@@ -39,11 +39,11 @@ func _physics_process(_delta):
 		player.aiming = get_pressed_aim_dir()
 	
 	if not Input.is_action_pressed("shoot"):
-		machine.change_state(Player.SHOOTING_STATE, 0.2)
+		player.change_gun_state(Player.SHOOTING_STATE, 0.2)
 	
 	if Input.is_action_just_pressed("absorb"):
 		player.aiming = Vector2(player.facing, 0)
-		machine.change_state(Player.ABSORBING_STATE)
+		player.change_gun_state(Player.ABSORBING_STATE)
 
 
 

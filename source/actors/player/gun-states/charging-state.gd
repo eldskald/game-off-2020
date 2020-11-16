@@ -12,7 +12,7 @@ func exit(next_state):
 		player.spawn_shot(player.light_shot)
 		gun.spawn_muzzle_flash()
 		
-		# Keeping the player afloat code.
+		# Keeping the player afloat when shooting downwards.
 		if player.aiming.y == 1 and player.get_movement_state() == Player.AIRBORNE_STATE:
 			player.velocity.y = min(-player.jump_force/4, player.velocity.y)
 
@@ -25,13 +25,13 @@ func _physics_process(_delta):
 		player.aiming = get_pressed_aim_dir()
 	
 	if not Input.is_action_pressed("shoot"):
-		machine.change_state(Player.SHOOTING_STATE, 0.1)
+		player.change_gun_state(Player.SHOOTING_STATE, 0.1)
 	
 	if Input.is_action_just_pressed("absorb"):
-		machine.change_state(Player.ABSORBING_STATE)
+		player.change_gun_state(Player.ABSORBING_STATE)
 
 
 
 func finish_charging():
-	machine.change_state(Player.CHARGED_STATE)
+	player.change_gun_state(Player.CHARGED_STATE)
 

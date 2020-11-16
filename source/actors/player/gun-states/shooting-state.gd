@@ -11,6 +11,6 @@ func initialize(argument):
 	timer.start(argument)
 
 func over():
-	machine.change_state(Player.READY_STATE)
+	player.change_gun_state(Player.READY_STATE)
 
 

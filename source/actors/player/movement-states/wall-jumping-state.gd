@@ -25,6 +25,6 @@ func _physics_process(delta):
 	
 	# Leaving this state.
 	if player.velocity.y >= 0:
-		machine.change_state(Player.AIRBORNE_STATE)
+		player.change_movement_state(Player.AIRBORNE_STATE)
 
 

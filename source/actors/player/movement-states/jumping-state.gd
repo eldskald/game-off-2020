@@ -15,6 +15,6 @@ func _physics_process(delta):
 	
 	if not Input.is_action_pressed("jump") or player.velocity.y >= 0:
 		player.velocity.y = max(player.velocity.y, player.jump_force/10)
-		machine.change_state(Player.AIRBORNE_STATE)
+		player.change_movement_state(Player.AIRBORNE_STATE)
 
 

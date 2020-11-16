@@ -31,13 +31,13 @@ func _physics_process(delta):
 			if player.aiming == Vector2.UP:
 				if Input.is_action_just_pressed("absorb"):
 					player.change_movement_state(Player.AIRBORNE_STATE)
-					machine.change_state(Player.READY_STATE)
+					player.change_gun_state(Player.READY_STATE)
 				elif Input.is_action_just_pressed("jump"):
 					player.change_movement_state(Player.AIRBORNE_STATE)
-					machine.change_state(Player.READY_STATE)
+					player.change_gun_state(Player.READY_STATE)
 				elif Input.is_action_just_pressed("shoot"):
 					player.change_movement_state(Player.AIRBORNE_STATE)
-					machine.change_state(Player.SHOOTING_STATE, 0.2)
+					player.change_gun_state(Player.SHOOTING_STATE, 0.2)
 					gun.spawn_muzzle_flash()
 					player.velocity.y = player.falling_speed
 			
@@ -46,7 +46,7 @@ func _physics_process(delta):
 				if Input.is_action_just_pressed("absorb"):
 					player.change_movement_state(Player.AIRBORNE_STATE)
 					player.velocity.x = -player.facing*player.speed
-					machine.change_state(Player.READY_STATE)
+					player.change_gun_state(Player.READY_STATE)
 				
 				if Input.is_action_just_pressed("jump"):
 					pity.start()
@@ -54,10 +54,10 @@ func _physics_process(delta):
 				elif wall_jump_let_go and pity.is_stopped():
 					player.change_movement_state(Player.AIRBORNE_STATE)
 					player.velocity.x = -player.facing*player.speed
-					machine.change_state(Player.READY_STATE)
+					player.change_gun_state(Player.READY_STATE)
 				
 				if Input.is_action_just_pressed("shoot"):
-					machine.change_state(Player.SHOOTING_STATE, 0.2)
+					player.change_gun_state(Player.SHOOTING_STATE, 0.2)
 					gun.spawn_muzzle_flash()
 					player.change_movement_state(Player.WALL_JUMPING_STATE)
 					player.velocity.y = -player.jump_force

@@ -5,10 +5,19 @@ export (String, "Light", "Heavy") var type
 
 var direction: Vector2 = Vector2.ZERO
 var suckable: bool = false
+var caught: bool = false
+var player_muzzle = null
 
 
 
 func _physics_process(delta):
+	if caught:
+		var distance = player_muzzle.global_position - self.global_position
+		if distance.length_squared() <= 36:
+			var player = player_muzzle.get_parent().get_parent().get_parent()
+			player.change_gun_state(Player.HOLDING_STATE, self)
+			destroy()
+		direction = distance.normalized()
 	move_and_slide(direction*speed)
 
 
@@ -41,5 +50,23 @@ func _on_area_entered(area):
 
 
 
+func grabbed(player: Player):
+	$Yellow.emitting = false
+	$White.emitting = false
+	$Grabbed.emitting = true
+	$Hitbox/CollisionShape2D.disabled = true
+	player_muzzle = player.get_node("Sprite/GunSprite/Muzzle")
+	caught = true
+	speed = 300
+
+
+
 func _on_screen_exited():
 	self.queue_free()
+
+
+
+
+
+
+

@@ -50,12 +50,12 @@ func debugging(state):
 				print("wall_jumping_state")
 			Player.HANGING_STATE:
 				print("hanging_state")
-			Player.STUNNED_STATE:
-				print("stunned_state")
 			Player.FLOATING_STATE:
 				print("floating_state")
 			Player.ROCKETING_STATE:
 				print("rocketing_state")
+			Player.STUNNED_STATE:
+				print("stunned_state")
 	
 	elif machine_type == "Gun":
 		match state:

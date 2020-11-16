@@ -28,7 +28,7 @@ func initialize(argument):
 	# wall grabbing state without the raycast colliding somehow, better
 	# go to airborne and ready states than have the game crash.
 	else:
-		machine.change_state(Player.AIRBORNE_STATE)
+		player.change_movement_state(Player.AIRBORNE_STATE)
 		player.change_gun_state(Player.READY_STATE)
 
 

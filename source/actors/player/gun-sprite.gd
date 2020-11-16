@@ -39,7 +39,7 @@ func _process(_delta):
 		
 		Player.UNUSABLE_STATE:
 			frame = UNUSABLE_FRAME
-			muzzle.position = Vector2(-3,12)
+			muzzle.position = Vector2(-4,14)
 			muzzle.rotation_degrees = 90
 			charging_particles.restart()
 			charging_particles.emitting = false
@@ -65,13 +65,12 @@ func _process(_delta):
 			charge_particles_timer.stop()
 			absorb_particles.restart()
 			absorb_particles.emitting = false
-			if player.get_gun_state() == Player.HOLDING_STATE:
-				if player.get_gun_state_node().is_holding_shot():
-					shader.set_shader_param("flash_yellow", 1.0)
-					player_shader.set_shader_param("flash_yellow", 1.0)
-				elif player.get_gun_state_node().is_holding_rocket():
-					shader.set_shader_param("flash_yellow", 1.0)
-					player_shader.set_shader_param("flash_yellow", 1.0)
+#			if player.get_gun_state_node().is_holding_shot():
+#				shader.set_shader_param("flash_yellow", 1.0)
+#				player_shader.set_shader_param("flash_yellow", 1.0)
+#			elif player.get_gun_state_node().is_holding_rocket():
+#				shader.set_shader_param("flash_yellow", 1.0)
+#				player_shader.set_shader_param("flash_yellow", 1.0)
 		
 		Player.SHOOTING_STATE:
 			multi_aim_case(player.aiming, player.facing)

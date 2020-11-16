@@ -85,11 +85,8 @@ enum {GROUNDED_STATE, AIRBORNE_STATE, JUMPING_STATE, WALL_GRABBING_STATE,
 func get_movement_state() -> int:
 	return movement_machine.state_number
 
-func change_movement_state(new_state: int, special: bool = false):
-	if special:
-		return movement_machine.change_state(new_state, true)
-	else:
-		movement_machine.change_state(new_state)
+func change_movement_state(new_state: int, argument = null):
+	movement_machine.change_state(new_state, argument)
 
 func get_movement_state_node():
 	return movement_machine.get_state_node()
@@ -105,11 +102,8 @@ enum {READY_STATE, CHARGING_STATE, CHARGED_STATE, SHOOTING_STATE,
 func get_gun_state() -> int:
 	return gun_machine.state_number
 
-func change_gun_state(new_state: int, special: bool = false):
-	if special:
-		return gun_machine.change_state(new_state, true)
-	else:
-		gun_machine.change_state(new_state)
+func change_gun_state(new_state: int, argument = null):
+	gun_machine.change_state(new_state, argument)
 
 func get_gun_state_node():
 	return gun_machine.get_state_node()
@@ -123,5 +117,6 @@ func _ready():
 
 func _physics_process(delta):
 	velocity = move_and_slide(velocity, Vector2.UP)
+
 
 

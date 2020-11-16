@@ -18,7 +18,7 @@ func initialize(argument):
 
 func _physics_process(delta):
 	if not reached_target:
-		if (player.position - target_location).length_squared() < 25:
+		if (player.position - target_location).length_squared() <= 25:
 			reached_target = true
 			player.velocity /= 3
 			timer.start(1.0)
@@ -29,6 +29,6 @@ func _physics_process(delta):
 
 
 func over():
-	machine.change_state(Player.AIRBORNE_STATE)
+	player.change_movement_state(Player.AIRBORNE_STATE)
 
 

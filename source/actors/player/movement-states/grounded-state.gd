@@ -17,6 +17,6 @@ func _physics_process(delta):
 	player.vertical_movement(delta)
 	
 	if Input.is_action_just_pressed("jump"):
-		machine.change_state(Player.JUMPING_STATE)
+		player.change_movement_state(Player.JUMPING_STATE)
 	elif not player.is_on_floor():
-		machine.change_state(Player.AIRBORNE_STATE)
+		player.change_movement_state(Player.AIRBORNE_STATE)
