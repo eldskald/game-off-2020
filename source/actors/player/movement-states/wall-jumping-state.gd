@@ -2,6 +2,11 @@ extends PlayerState
 
 
 
+func initialize(argument):
+	camera.drag_margin_top = 0.9
+
+
+
 func exit(next_state):
 	pity.stop()
 

@@ -9,6 +9,7 @@ onready var left_raycast: RayCast2D = player.get_node("LeftWallFinder")
 onready var right_raycast: RayCast2D = player.get_node("RightWallFinder")
 
 func initialize(argument):
+	camera.drag_margin_top = 0.05
 	var raycast
 	if player.facing == 1:
 		raycast = right_raycast

@@ -76,12 +76,11 @@ func spawn_shot(shot_scene: PackedScene):
 
 
 
-### STATES MACHINES ######################################################
-enum {GROUNDED_STATE, AIRBORNE_STATE, JUMPING_STATE, WALL_GRABBING_STATE,
-	  WALL_JUMPING_STATE, HANGING_STATE, STUNNED_STATE, FLOATING_STATE,
-	  ROCKETING_STATE}
-
+### MOVEMENT STATES MACHINES #############################################
 onready var movement_machine = $MovementStatesMachine
+enum {GROUNDED_STATE, AIRBORNE_STATE, JUMPING_STATE, WALL_GRABBING_STATE,
+	  WALL_JUMPING_STATE, HANGING_STATE, FLOATING_STATE, ROCKETING_STATE,
+	  STUNNED_STATE}
 
 func get_movement_state() -> int:
 	return movement_machine.state_number
@@ -94,11 +93,14 @@ func change_movement_state(new_state: int, special: bool = false):
 
 func get_movement_state_node():
 	return movement_machine.get_state_node()
+##########################################################################
 
+
+
+### GUN STATES MACHINE ###################################################
+onready var gun_machine = $GunStatesMachine
 enum {READY_STATE, CHARGING_STATE, CHARGED_STATE, SHOOTING_STATE,
 	  ABSORBING_STATE, HOLDING_STATE, UNUSABLE_STATE}
-
-onready var gun_machine = $GunStatesMachine
 
 func get_gun_state() -> int:
 	return gun_machine.state_number

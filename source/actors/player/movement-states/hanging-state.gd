@@ -8,6 +8,7 @@ extends PlayerState
 onready var raycast: RayCast2D = player.get_node("UpWallFinder")
 
 func initialize(argument):
+	camera.drag_margin_top = 0.05
 	raycast.force_raycast_update()
 	player.velocity = Vector2.ZERO
 	if raycast.is_colliding():
