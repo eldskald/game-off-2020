@@ -49,12 +49,18 @@ signal input_device_changed
 
 func _input(event):
 	var new_input_device
+	
 	if event is InputEventKey:
 		new_input_device = "Keyboard"
+		if new_input_device != last_input_device:
+			emit_signal("input_device_changed")
+		last_input_device = new_input_device
+	
 	elif event is InputEventJoypadButton or event is InputEventJoypadMotion:
 		new_input_device = "Controller"
-	if new_input_device != last_input_device:
-		emit_signal("input_device_changed")
+		if new_input_device != last_input_device:
+			emit_signal("input_device_changed")
+		last_input_device = new_input_device
 
 func is_using_keyboard() -> bool:
 	return last_input_device == "Keyboard"

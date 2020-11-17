@@ -26,9 +26,6 @@ func _physics_process(_delta):
 	
 	if not Input.is_action_pressed("shoot"):
 		player.change_gun_state(Player.SHOOTING_STATE, 0.1)
-	
-	if Input.is_action_just_pressed("absorb"):
-		player.change_gun_state(Player.ABSORBING_STATE)
 
 
 

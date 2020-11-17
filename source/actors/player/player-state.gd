@@ -50,28 +50,36 @@ func _physics_process(_delta):
 
 func get_pressed_aim_dir() -> Vector2:
 	if main.is_using_controller():
-		return Vector2( Input.get_action_strength("aim_right")
-						-Input.get_action_strength("aim_left"),
-						Input.get_action_strength("aim_down")
-						-Input.get_action_strength("aim_up"))
-	else:
-		var angle = player.get_local_mouse_position().angle()
-		if angle > -7*PI/8 and angle <= -5*PI/8:
-			return Vector2(-1,-1)
-		elif angle > -5*PI/8 and angle <= -3*PI/8:
-			return Vector2(0,-1)
-		elif angle > -3*PI/8 and angle <= -PI/8:
-			return Vector2(1,-1)
-		elif angle > -PI/8 and angle <= PI/8:
-			return Vector2(1,0)
-		elif angle > PI/8 and angle <= 3*PI/8:
-			return Vector2(1,1)
-		elif angle > 3*PI/8 and angle <= 5*PI/8:
-			return Vector2(0,1)
-		elif angle > 5*PI/8 and angle <= 7*PI/8:
-			return Vector2(-1,1)
+		var right_stick = Vector2(Input.get_joy_axis(0, JOY_AXIS_2),
+								  Input.get_joy_axis(0, JOY_AXIS_3))
+		
+		if right_stick.length_squared() > 0.16:
+			return discretize_angle(right_stick.angle())
 		else:
-			return Vector2(-1,0)
+			return Vector2( Input.get_action_strength("aim_right")
+							-Input.get_action_strength("aim_left"),
+							Input.get_action_strength("aim_down")
+							-Input.get_action_strength("aim_up"))
+	else:
+		return discretize_angle(player.get_local_mouse_position().angle())
+
+func discretize_angle(angle: float):
+	if angle > -7*PI/8 and angle <= -5*PI/8:
+		return Vector2(-1,-1)
+	elif angle > -5*PI/8 and angle <= -3*PI/8:
+		return Vector2(0,-1)
+	elif angle > -3*PI/8 and angle <= -PI/8:
+		return Vector2(1,-1)
+	elif angle > -PI/8 and angle <= PI/8:
+		return Vector2(1,0)
+	elif angle > PI/8 and angle <= 3*PI/8:
+		return Vector2(1,1)
+	elif angle > 3*PI/8 and angle <= 5*PI/8:
+		return Vector2(0,1)
+	elif angle > 5*PI/8 and angle <= 7*PI/8:
+		return Vector2(-1,1)
+	else:
+		return Vector2(-1,0)
 
 func get_just_pressed_aim_dir() -> Vector2:
 	return just_pressed

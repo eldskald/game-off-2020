@@ -4,7 +4,7 @@ export (float, 0, 1000) var speed
 export (String, "Light", "Heavy") var type
 
 var direction: Vector2 = Vector2.ZERO
-var suckable: bool = false
+var suckable: bool = true
 var caught: bool = false
 var player_muzzle = null
 
@@ -58,6 +58,9 @@ func grabbed(player: Player):
 	player_muzzle = player.get_node("Sprite/GunSprite/Muzzle")
 	caught = true
 	speed = 300
+
+func can_be_grabbed():
+	return suckable
 
 
 
