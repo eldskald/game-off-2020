@@ -2,4 +2,4 @@ extends TileMap
 
 
 func hit(shot):
-	shot.destroy()
+	shot.hit_a_wall()

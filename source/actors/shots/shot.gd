@@ -37,16 +37,23 @@ func destroy():
 func _on_body_entered(body):
 	body.hit(self)
 
-
-
 func _on_area_entered(area):
-	if area.is_in_group("shot"):
-		match type:
-			"Light":
+	area.hit(self)
+
+
+
+func hit(source):
+	match type:
+		"Light":
+			destroy()
+		"Heavy":
+			if source.type != "Light":
 				destroy()
-			"Heavy":
-				if area.type == "Heavy":
-					destroy()
+
+
+
+func hit_a_wall():
+	destroy()
 
 
 
