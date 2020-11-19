@@ -14,7 +14,7 @@ func exit(next_state):
 		
 		# Keeping the player afloat when shooting downwards.
 		if player.aiming.y == 1 and player.get_movement_state() == Player.AIRBORNE_STATE:
-			player.velocity.y = min(-player.jump_force/4, player.velocity.y)
+			player.velocity.y = min(-player.jump_force/3, player.velocity.y)
 
 
 

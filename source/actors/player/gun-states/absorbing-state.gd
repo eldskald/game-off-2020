@@ -10,6 +10,18 @@ onready var caught_shot: bool = false
 
 
 
+func initialize(argument):
+	suck_area.get_node("Shape").disabled = false
+	held_area.get_node("Shape").disabled = false
+
+
+
+func exit(next_state):
+	suck_area.get_node("Shape").disabled = true
+	held_area.get_node("Shape").disabled = true
+
+
+
 func _physics_process(_delta):
 	if get_pressed_aim_dir() == Vector2.ZERO:
 		player.aiming = Vector2(player.facing, 0)

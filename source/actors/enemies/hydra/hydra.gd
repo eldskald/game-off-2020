@@ -9,6 +9,9 @@ export (float, 0, 2000) var suck_acceleration
 export (float, 0, 2000) var gravity
 export (float, 0, 1000) var falling_speed
 
+export (String, "Horizontal", "Up", "Down", "Left", "Right") var shot_direction
+export (String, "Up", "Down", "Left", "Right") var facing
+
 onready var sprite: Sprite = get_node("Sprite")
 onready var animation_player: AnimationPlayer = get_node("AnimationPlayer")
 onready var hitbox = get_node("Hitbox")
@@ -30,6 +33,14 @@ func change_state(new_state: int, argument = null):
 
 func get_state_node():
 	return machine.get_state_node()
+
+func _on_screen_entered():
+	if get_state() != DEAD_STATE:
+		machine.change_state(READY_STATE)
+
+func _on_screen_exited():
+	if get_state() != DEAD_STATE:
+		machine.change_state(INACTIVE_STATE)
 ##########################################################################
 
 
@@ -62,8 +73,30 @@ func is_being_sucked() -> bool:
 
 
 
-### HIT POINTS ###########################################################
+### COMBAT ###############################################################
 onready var hp: int = max_hp
+
+func spawn_shot(direction: Vector2):
+	var level = get_tree().get_nodes_in_group("level")[0]
+	var shot_node = shot.instance()
+	shot_node.position = level.to_local($ChargeBall.global_position)
+	shot_node.direction = direction
+	shot_node.speed = 100
+	level.add_child(shot_node)
+
+func get_shot_dir_vector():
+	match shot_direction:
+		"Horizontal":
+			var player = get_tree().get_nodes_in_group("player")[0]
+			return Vector2(sign(player.global_position - self.global_position), 0)
+		"Up":
+			return Vector2.UP
+		"Down":
+			return Vector2.DOWN
+		"Left":
+			return Vector2.LEFT
+		"Right":
+			return Vector2.RIGHT
 
 func hit(source):
 	match source.type:
@@ -109,7 +142,10 @@ func hit_a_wall():
 
 
 func _ready():
-	machine.start_machine(INACTIVE_STATE)
+	if $VisibilityNotifier2D.is_on_screen():
+		machine.start_machine(READY_STATE)
+	else:
+		machine.start_machine(INACTIVE_STATE)
 
 func _physics_process(delta):
 	velocity = move_and_slide(velocity, Vector2.UP)

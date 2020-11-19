@@ -18,7 +18,7 @@ func actual_change_state(new_state: int, argument = null):
 	old_state_node.queue_free()
 	
 	state_number = new_state
-	var state = PlayerState.new()
+	var state = EnemyState.new()
 	state.script = states[new_state]
 	state.previous_state = old_state
 	add_child(state)
@@ -28,7 +28,7 @@ func actual_change_state(new_state: int, argument = null):
 
 func start_machine(starting_state: int, argument = null):
 	state_number = starting_state
-	var state = PlayerState.new()
+	var state = EnemyState.new()
 	state.script = states[starting_state]
 	state.previous_state = starting_state
 	add_child(state)

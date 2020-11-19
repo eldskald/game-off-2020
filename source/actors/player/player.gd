@@ -58,20 +58,32 @@ func vertical_movement(delta, factor: float = 1.0):
 	velocity.y += gravity*delta*factor
 	if velocity.y > falling_speed:
 		velocity.y = falling_speed
+
+func drop_from_platforms():
+	if $DropTimer.is_stopped():
+		self.set_collision_mask_bit(2, false)
+		$DropTimer.start()
+
+func _on_drop_timeout():
+	self.set_collision_mask_bit(2, true)
 ##########################################################################
 
 
 
-### GUNNING ##############################################################
+### COMBAT ###############################################################
 onready var aiming: Vector2 = Vector2.RIGHT
 onready var muzzle: Node2D = $Sprite/GunSprite/Muzzle
 
 func spawn_shot(shot_scene: PackedScene):
+	var level = get_tree().get_nodes_in_group("level")[0]
 	var shot = shot_scene.instance()
 	shot.direction = aiming.normalized()
-	shot.position = get_parent().to_local(muzzle.global_position)
+	shot.position = level.to_local(muzzle.global_position)
 	shot.position += aiming*8
-	get_parent().add_child(shot)
+	level.add_child(shot)
+
+func hit(source):
+	pass
 ##########################################################################
 
 
@@ -117,6 +129,8 @@ func _ready():
 
 func _physics_process(delta):
 	velocity = move_and_slide(velocity, Vector2.UP)
+
+
 
 
 

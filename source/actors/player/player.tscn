@@ -24,7 +24,6 @@
 [ext_resource path="res://actors/player/movement-states/hanging-state.gd" type="Script" id=22]
 [ext_resource path="res://actors/player/movement-states/floating-state.gd" type="Script" id=23]
 
-
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 12 )
 shader_param/yellow = Color( 0.941176, 0.909804, 0.458824, 1 )
@@ -292,8 +291,9 @@ position = Vector2( 22, 0 )
 collision_layer = 128
 collision_mask = 304
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/GunSprite/Muzzle/SuckArea"]
+[node name="Shape" type="CollisionShape2D" parent="Sprite/GunSprite/Muzzle/SuckArea"]
 shape = SubResource( 3 )
+disabled = true
 
 [node name="HeldArea" type="Area2D" parent="Sprite/GunSprite/Muzzle"]
 visible = false
@@ -301,8 +301,9 @@ position = Vector2( 3, 0 )
 collision_layer = 128
 collision_mask = 18
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/GunSprite/Muzzle/HeldArea"]
+[node name="Shape" type="CollisionShape2D" parent="Sprite/GunSprite/Muzzle/HeldArea"]
 shape = SubResource( 4 )
+disabled = true
 
 [node name="AbsorbParticles" type="CPUParticles2D" parent="Sprite/GunSprite/Muzzle"]
 rotation = -0.785398
@@ -382,6 +383,10 @@ one_shot = true
 wait_time = 2.0
 one_shot = true
 
+[node name="DropTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
 [node name="RightWallFinder" type="RayCast2D" parent="."]
 visible = false
 enabled = true
@@ -407,3 +412,4 @@ cast_to = Vector2( 0, 32 )
 collision_mask = 2
 [connection signal="timeout" from="Sprite/GunSprite/Muzzle/ChargingParticles/Timer" to="Sprite/GunSprite" method="_charge_particles_timeout"]
 [connection signal="timeout" from="Sprite/GunSprite/Muzzle/MuzzleFlash/Timer" to="Sprite/GunSprite" method="_on_muzzle_flash_timeout"]
+[connection signal="timeout" from="DropTimer" to="." method="_on_drop_timeout"]

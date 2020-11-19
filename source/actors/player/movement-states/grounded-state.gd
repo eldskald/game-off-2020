@@ -20,3 +20,6 @@ func _physics_process(delta):
 		player.change_movement_state(Player.JUMPING_STATE)
 	elif not player.is_on_floor():
 		player.change_movement_state(Player.AIRBORNE_STATE)
+	
+	if main.get_just_pressed_dir_input().y == 1:
+		player.drop_from_platforms()

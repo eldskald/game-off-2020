@@ -4,7 +4,9 @@
 [ext_resource path="res://rooms/level.gd" type="Script" id=2]
 [ext_resource path="res://rooms/tilemaps/blocks.tscn" type="PackedScene" id=3]
 
-[node name="Test" type="Node2D"]
+[node name="Test" type="Node2D" groups=[
+"level",
+]]
 script = ExtResource( 2 )
 height_in_screens = 1
 width_in_screens = 1
