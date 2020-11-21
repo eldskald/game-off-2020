@@ -88,3 +88,8 @@ func get_just_released_aim_dir() -> Vector2:
 	return just_released
 
 
+
+# This is to animate the holding state.
+func is_holding_shot_or_rocket():
+	return false
+

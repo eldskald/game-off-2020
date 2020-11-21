@@ -15,7 +15,7 @@ func initialize(argument):
 	
 	# Get the animation right.
 	charge_particles.emitting = true
-	charge_ball.visibility = false
+	charge_ball.visible = false
 	if animation_player.current_animation != "ready":
 		animation_player.play("ready", -1, 1 + (randi()%10)/10)
 		animation_player.advance((randi()%30)/10)
@@ -43,7 +43,7 @@ func _on_timeout():
 		charge_ball.visible = true
 		timer.start(0.5)
 	else:
-		enemy.spawn_shot(enemy.shot_direction)
+		enemy.spawn_shot(enemy.get_shot_dir_vector())
 		enemy.change_state(enemy.READY_STATE)
 
 

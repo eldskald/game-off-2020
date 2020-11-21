@@ -6,7 +6,6 @@ onready var left_raycast: RayCast2D = player.get_node("LeftWallFinder")
 onready var right_raycast: RayCast2D = player.get_node("RightWallFinder")
 onready var up_raycast: RayCast2D = player.get_node("UpWallFinder")
 onready var down_raycast: RayCast2D = player.get_node("DownWallFinder")
-onready var caught_shot: bool = false
 
 
 
@@ -28,11 +27,10 @@ func _physics_process(_delta):
 	else:
 		player.aiming = get_pressed_aim_dir()
 	
-	if not caught_shot:
-		if not Input.is_action_pressed("absorb"):
-			player.change_gun_state(Player.READY_STATE)
-		if Input.is_action_just_pressed("shoot"):
-			player.change_gun_state(Player.CHARGING_STATE)
+	if not Input.is_action_pressed("absorb"):
+		player.change_gun_state(Player.READY_STATE)
+	if Input.is_action_just_pressed("shoot"):
+		player.change_gun_state(Player.CHARGING_STATE)
 	
 	
 	
@@ -45,7 +43,8 @@ func _physics_process(_delta):
 			var shot = area.get_parent() # Area is actually the shot's hitbox
 			if shot.can_be_grabbed():
 				shot.grabbed(player)
-				caught_shot = true
+				if player.get_movement_state() in [Player.AIRBORNE_STATE, Player.JUMPING_STATE]:
+					player.change_movement_state(Player.FLOATING_STATE, player.aiming)
 	
 	
 	
@@ -88,6 +87,8 @@ func _physics_process(_delta):
 		else:
 			player.change_gun_state(Player.HOLDING_STATE, body)
 			body.grabbed(player)
+			if player.get_movement_state() in [Player.AIRBORNE_STATE, Player.JUMPING_STATE]:
+				player.change_movement_state(Player.FLOATING_STATE, player.aiming)
 	
 	
 

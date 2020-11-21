@@ -80,6 +80,7 @@ func spawn_shot(direction: Vector2):
 	var level = get_tree().get_nodes_in_group("level")[0]
 	var shot_node = shot.instance()
 	shot_node.position = level.to_local($ChargeBall.global_position)
+	shot_node.shooter = self
 	shot_node.direction = direction
 	shot_node.speed = 100
 	level.add_child(shot_node)
@@ -88,7 +89,7 @@ func get_shot_dir_vector():
 	match shot_direction:
 		"Horizontal":
 			var player = get_tree().get_nodes_in_group("player")[0]
-			return Vector2(sign(player.global_position - self.global_position), 0)
+			return Vector2(sign(player.global_position.x - self.global_position.x), 0)
 		"Up":
 			return Vector2.UP
 		"Down":
@@ -99,6 +100,8 @@ func get_shot_dir_vector():
 			return Vector2.RIGHT
 
 func hit(source):
+	$FlashTimer.start()
+	sprite.get_material().set_shader_param("flash_white", 1.0)
 	match source.type:
 		"Light":
 			source.destroy()
@@ -116,8 +119,24 @@ func hit(source):
 			source.destroy()
 			self.destroy()
 
+func _on_flash_timeout():
+	sprite.get_material().set_shader_param("flash_white", 0.0)
+
 func grabbed(player):
 	change_state(GRABBED_STATE, player)
+	shot_direction = "Horizontal"
+	facing = "Up"
+	scale = Vector2(1,1)
+
+func shoot(direction: Vector2):
+	change_state(SHOT_STATE, direction)
+
+func release(direction: Vector2):
+	change_state(READY_STATE)
+	if direction.y == 1:
+		velocity = 80*direction
+	else:
+		velocity = 80*Vector2(direction.x, -1)
 
 func destroy():
 	change_state(DEAD_STATE)
@@ -146,6 +165,15 @@ func _ready():
 		machine.start_machine(READY_STATE)
 	else:
 		machine.start_machine(INACTIVE_STATE)
+	match facing:
+		"Up":
+			scale = Vector2(1, 1)
+		"Down":
+			scale = Vector2(1,-1)
+		"Left":
+			rotation_degrees = -90
+		"Right":
+			rotation_degrees = 90
 
 func _physics_process(delta):
 	velocity = move_and_slide(velocity, Vector2.UP)

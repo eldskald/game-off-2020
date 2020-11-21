@@ -7,6 +7,7 @@ var direction: Vector2 = Vector2.ZERO
 var suckable: bool = true
 var caught: bool = false
 var player_muzzle = null
+var shooter = null
 
 
 
@@ -26,6 +27,7 @@ func destroy():
 	speed = 0.0
 	$Yellow.emitting = false
 	$White.emitting = false
+	$Grabbed.emitting = false
 	$Hitbox/CollisionShape2D.set_deferred("disabled", true)
 	var timer = Timer.new()
 	self.add_child(timer)
@@ -35,10 +37,12 @@ func destroy():
 
 
 func _on_body_entered(body):
-	body.hit(self)
+	if body != shooter:
+		body.hit(self)
 
 func _on_area_entered(area):
-	area.hit(self)
+	if area.get_collision_layer_bit(5) == true:
+		area.get_parent().hit(self)
 
 
 
@@ -49,8 +53,6 @@ func hit(source):
 		"Heavy":
 			if source.type != "Light":
 				destroy()
-
-
 
 func hit_a_wall():
 	destroy()
@@ -64,7 +66,7 @@ func grabbed(player: Player):
 	$Hitbox/CollisionShape2D.disabled = true
 	player_muzzle = player.get_node("Sprite/GunSprite/Muzzle")
 	caught = true
-	speed = 300
+	speed = 500
 
 func can_be_grabbed():
 	return suckable

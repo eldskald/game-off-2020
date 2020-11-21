@@ -1,11 +1,8 @@
 extends PlayerState
 
-var reached_max_fall_speed
-
 
 
 func initialize(argument):
-	reached_max_fall_speed = false
 	camera.drag_margin_top = 0.9
 
 
@@ -13,8 +10,6 @@ func initialize(argument):
 func _physics_process(delta):
 	player.horizontal_movement(delta)
 	player.vertical_movement(delta)
-	if player.velocity.y >= player.falling_speed*0.9:
-		reached_max_fall_speed = true
 	
 	# Sometimes, when we're doing a running jump at a ledge at the last
 	# second before we fall, we push the button a little too late and die.
@@ -37,8 +32,6 @@ func _physics_process(delta):
 		if Input.is_action_pressed("jump") and not pity.is_stopped():
 			player.change_movement_state(Player.JUMPING_STATE)
 		else:
-			if reached_max_fall_speed:
-				animation_player.play("landing")
 			player.change_movement_state(Player.GROUNDED_STATE)
 
 

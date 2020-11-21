@@ -11,7 +11,7 @@ max_value = 0.7
 _data = [ Vector2( 0, 0.7 ), 0.0, -0.7, 0, 1, Vector2( 1, 0 ), -0.7, 0.0, 1, 0 ]
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 5.09902
+radius = 5.0
 
 [node name="LightShot" type="KinematicBody2D"]
 collision_layer = 32
@@ -21,6 +21,7 @@ __meta__ = {
 "_edit_group_": true
 }
 speed = 300.0
+type = "Light"
 
 [node name="Yellow" type="CPUParticles2D" parent="."]
 amount = 32
@@ -51,7 +52,7 @@ gravity = Vector2( 0, 0 )
 ]]
 visible = false
 collision_layer = 32
-collision_mask = 178
+collision_mask = 50
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource( 3 )

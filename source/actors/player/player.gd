@@ -15,6 +15,47 @@ export (PackedScene) var rocket_shot
 
 
 
+### MOVEMENT STATES MACHINES #############################################
+onready var movement_machine = $MovementStatesMachine
+enum {GROUNDED_STATE, AIRBORNE_STATE, JUMPING_STATE, WALL_GRABBING_STATE,
+	  WALL_JUMPING_STATE, HANGING_STATE, FLOATING_STATE, ROCKETING_STATE,
+	  STUNNED_STATE}
+
+func get_movement_state() -> int:
+	return movement_machine.state_number
+
+func change_movement_state(new_state: int, argument = null):
+	movement_machine.change_state(new_state, argument)
+
+func get_movement_state_node():
+	return movement_machine.get_state_node()
+##########################################################################
+
+
+
+### GUN STATES MACHINE ###################################################
+onready var gun_machine = $GunStatesMachine
+enum {READY_STATE, CHARGING_STATE, CHARGED_STATE, SHOOTING_STATE,
+	  ABSORBING_STATE, HOLDING_STATE, UNUSABLE_STATE}
+
+func get_gun_state() -> int:
+	return gun_machine.state_number
+
+func change_gun_state(new_state: int, argument = null):
+	gun_machine.change_state(new_state, argument)
+
+func get_gun_state_node():
+	return gun_machine.get_state_node()
+
+func is_holding_shot_or_rocket() -> bool:
+	if get_gun_state() == HOLDING_STATE:
+		return get_gun_state_node().is_holding_shot_or_rocket()
+	else:
+		return false
+##########################################################################
+
+
+
 ### PHYSICS ##############################################################
 onready var velocity: Vector2 = Vector2.ZERO
 onready var jump_force: float = sqrt(2*gravity*jump_height)
@@ -66,6 +107,20 @@ func drop_from_platforms():
 
 func _on_drop_timeout():
 	self.set_collision_mask_bit(2, true)
+
+func apply_recoil_knockback(direction: Vector2):
+	change_movement_state(AIRBORNE_STATE)
+	if direction.y == -1:
+		velocity.y = -jump_force
+	elif direction.y == 1:
+		velocity.y += falling_speed
+	else:
+		velocity.y = min(-jump_force/1.41421, velocity.y)
+	if direction.x != 0:
+		if velocity.x > 0:
+			velocity.x = speed*direction.x
+		else:
+			velocity.x = 2*speed*direction.x
 ##########################################################################
 
 
@@ -77,48 +132,13 @@ onready var muzzle: Node2D = $Sprite/GunSprite/Muzzle
 func spawn_shot(shot_scene: PackedScene):
 	var level = get_tree().get_nodes_in_group("level")[0]
 	var shot = shot_scene.instance()
+	shot.shooter = self
 	shot.direction = aiming.normalized()
 	shot.position = level.to_local(muzzle.global_position)
-	shot.position += aiming*8
 	level.add_child(shot)
 
 func hit(source):
 	pass
-##########################################################################
-
-
-
-### MOVEMENT STATES MACHINES #############################################
-onready var movement_machine = $MovementStatesMachine
-enum {GROUNDED_STATE, AIRBORNE_STATE, JUMPING_STATE, WALL_GRABBING_STATE,
-	  WALL_JUMPING_STATE, HANGING_STATE, FLOATING_STATE, ROCKETING_STATE,
-	  STUNNED_STATE}
-
-func get_movement_state() -> int:
-	return movement_machine.state_number
-
-func change_movement_state(new_state: int, argument = null):
-	movement_machine.change_state(new_state, argument)
-
-func get_movement_state_node():
-	return movement_machine.get_state_node()
-##########################################################################
-
-
-
-### GUN STATES MACHINE ###################################################
-onready var gun_machine = $GunStatesMachine
-enum {READY_STATE, CHARGING_STATE, CHARGED_STATE, SHOOTING_STATE,
-	  ABSORBING_STATE, HOLDING_STATE, UNUSABLE_STATE}
-
-func get_gun_state() -> int:
-	return gun_machine.state_number
-
-func change_gun_state(new_state: int, argument = null):
-	gun_machine.change_state(new_state, argument)
-
-func get_gun_state_node():
-	return gun_machine.get_state_node()
 ##########################################################################
 
 

@@ -20,7 +20,6 @@ func _process(_delta):
 		
 		# Landing animation is called at airborne state script.
 		Player.GROUNDED_STATE:
-			if animation_player.current_animation != "landing":
 				if player.velocity.x == 0:
 					animation_player.play("idle")
 				else:
