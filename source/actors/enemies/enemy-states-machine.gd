@@ -5,13 +5,18 @@ extends Node2D
 export (Array, Script) var states
 
 var state_number
+var changing_state = false
 
 
 
 func change_state(new_state: int, argument = null):
-	call_deferred("actual_change_state", new_state, argument)
+	if not changing_state:
+		call_deferred("actual_change_state", new_state, argument)
+		changing_state = true
 
 func actual_change_state(new_state: int, argument = null):
+	changing_state = false
+	
 	var old_state = state_number
 	var old_state_node = get_children()[0]
 	old_state_node.exit(new_state)

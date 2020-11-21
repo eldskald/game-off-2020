@@ -6,6 +6,7 @@ export (String, "Movement", "Gun") var machine_type
 export (Array, Script) var states
 
 var state_number
+var changing_state = false
 
 
 
@@ -15,9 +16,12 @@ var state_number
 # can tell I'm crazy because I don't know what's going on, just take
 # care the way you implement your machines.
 func change_state(new_state: int, argument = null):
-	call_deferred("actual_change_state", new_state, argument)
+	if not changing_state:
+		call_deferred("actual_change_state", new_state, argument)
+		changing_state = true
 
 func actual_change_state(new_state: int, argument = null):
+	changing_state = false
 	
 	# Dealing with the old state
 	var old_state = state_number

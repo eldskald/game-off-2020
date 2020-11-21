@@ -37,7 +37,7 @@ shader_param/flash_yellow = 0.0
 shader_param/flash_invisible = 0.0
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 22, 17 )
+extents = Vector2( 30, 22 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 3, 5 )
@@ -287,7 +287,7 @@ __meta__ = {
 
 [node name="SuckArea" type="Area2D" parent="Sprite/GunSprite/Muzzle"]
 visible = false
-position = Vector2( 22, 0 )
+position = Vector2( 30, 0 )
 collision_layer = 128
 collision_mask = 304
 

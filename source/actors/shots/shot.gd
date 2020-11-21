@@ -4,6 +4,7 @@ export (float, 0, 1000) var speed
 export (String, "Light", "Heavy") var type
 
 var direction: Vector2 = Vector2.ZERO
+var destroyed: bool = false
 var suckable: bool = true
 var caught: bool = false
 var player_muzzle = null
@@ -12,18 +13,20 @@ var shooter = null
 
 
 func _physics_process(delta):
-	if caught:
-		var distance = player_muzzle.global_position - self.global_position
-		if distance.length_squared() <= 36:
-			var player = player_muzzle.get_parent().get_parent().get_parent()
-			player.change_gun_state(Player.HOLDING_STATE, self)
-			destroy()
-		direction = distance.normalized()
-	move_and_slide(direction*speed)
+	if not destroyed:
+		if caught:
+			var distance = player_muzzle.global_position - self.global_position
+			if distance.length_squared() <= 36:
+				var player = player_muzzle.get_parent().get_parent().get_parent()
+				player.change_gun_state(Player.HOLDING_STATE, self)
+				destroy()
+			direction = distance.normalized()
+		move_and_slide(direction*speed)
 
 
 
 func destroy():
+	destroyed = true
 	speed = 0.0
 	$Yellow.emitting = false
 	$White.emitting = false
