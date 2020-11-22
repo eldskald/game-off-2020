@@ -14,7 +14,7 @@
 [ext_resource path="res://actors/enemies/hydra/states/shot-state.gd" type="Script" id=12]
 [ext_resource path="res://actors/shots/light-shot.tscn" type="PackedScene" id=13]
 
-[sub_resource type="ShaderMaterial" id=10]
+[sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
 shader = ExtResource( 5 )
 shader_param/yellow = Color( 0.941176, 0.909804, 0.458824, 1 )
@@ -24,8 +24,7 @@ shader_param/flash_invisible = 0.0
 
 [sub_resource type="Animation" id=2]
 resource_name = "grabbed_charging"
-length = 0.1
-loop = true
+length = 0.75
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -41,8 +40,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=3]
 resource_name = "grabbed_resting"
-length = 0.1
-loop = true
+length = 0.75
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -127,7 +125,7 @@ shot_direction = "Horizontal"
 facing = "Up"
 
 [node name="Sprite" type="Sprite" parent="."]
-material = SubResource( 10 )
+material = SubResource( 1 )
 texture = ExtResource( 1 )
 vframes = 3
 hframes = 4
@@ -145,7 +143,6 @@ position = Vector2( 1, 4 )
 shape = SubResource( 7 )
 
 [node name="ChargeParticles" type="CPUParticles2D" parent="."]
-position = Vector2( 0, -8 )
 emitting = false
 amount = 16
 lifetime = 0.5
@@ -179,6 +176,7 @@ disabled = true
 visible = false
 position = Vector2( 1, 4 )
 collision_layer = 64
+collision_mask = 129
 __meta__ = {
 "_edit_group_": true
 }
@@ -199,6 +197,4 @@ wait_time = 0.2
 one_shot = true
 [connection signal="area_entered" from="ShotHitbox" to="." method="_on_ShotHitbox_area_entered"]
 [connection signal="body_entered" from="ShotHitbox" to="." method="_on_ShotHitbox_body_entered"]
-[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_screen_entered"]
-[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_screen_exited"]
 [connection signal="timeout" from="FlashTimer" to="." method="_on_flash_timeout"]

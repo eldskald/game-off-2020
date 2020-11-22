@@ -43,7 +43,7 @@ func _physics_process(_delta):
 			var shot = area.get_parent() # Area is actually the shot's hitbox
 			if shot.can_be_grabbed():
 				shot.grabbed(player)
-				if player.get_movement_state() in [Player.AIRBORNE_STATE, Player.JUMPING_STATE]:
+				if player.get_movement_state() != Player.GROUNDED_STATE:
 					player.change_movement_state(Player.FLOATING_STATE, player.aiming)
 	
 	
@@ -83,13 +83,15 @@ func _physics_process(_delta):
 						player.change_movement_state(Player.HANGING_STATE)
 						player.change_gun_state(Player.HOLDING_STATE, body)
 		
+		
+		
 		# Deal with enemies.
 		else:
 			player.change_gun_state(Player.HOLDING_STATE, body)
 			body.grabbed(player)
-			if player.get_movement_state() in [Player.AIRBORNE_STATE, Player.JUMPING_STATE]:
+			if player.get_movement_state() != Player.GROUNDED_STATE:
 				player.change_movement_state(Player.FLOATING_STATE, player.aiming)
-	
-	
+
+
 
 

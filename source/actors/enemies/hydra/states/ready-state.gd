@@ -2,17 +2,19 @@ extends EnemyState
 
 var timer
 
+onready var visibility = enemy.get_node("VisibilityNotifier2D")
+
 
 
 func initialize(argument):
-	
-	# Timer for the hydra to start charging its shot.
 	timer = Timer.new()
 	self.add_child(timer)
 	timer.connect("timeout", self, "_on_timeout")
 	timer.start(1 + (randi()%10)/10)
 	
-	# Get the animation right.
+	visibility.connect("viewport_entered", self, "_on_entered_screen")
+	visibility.connect("viewport_exited", self, "_on_exited_screen")
+	
 	if animation_player.current_animation != "ready":
 		animation_player.play("ready", -1, 1 + (randi()%10)/10)
 		animation_player.advance((randi()%30)/10)
@@ -30,5 +32,11 @@ func _physics_process(delta):
 
 func _on_timeout():
 	enemy.change_state(enemy.CHARGING_STATE)
+
+func _on_entered_screen(viewport):
+	timer.start(1 + (randi()%10)/10)
+
+func _on_exited_screen(viewport):
+	timer.stop()
 
 

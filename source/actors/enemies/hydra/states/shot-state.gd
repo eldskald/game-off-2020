@@ -17,6 +17,7 @@ func initialize(argument):
 
 
 func exit(next_state):
+	enemy.rotation = 0
 	shot_hitbox.disabled = true
 	hurtbox.disabled = false
 	hitbox.disabled = false
@@ -24,6 +25,7 @@ func exit(next_state):
 
 
 func _physics_process(delta):
+	enemy.rotation = direction.angle()
 	enemy.velocity = 300*direction
 
 

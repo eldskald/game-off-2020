@@ -33,14 +33,6 @@ func change_state(new_state: int, argument = null):
 
 func get_state_node():
 	return machine.get_state_node()
-
-func _on_screen_entered():
-	if get_state() != DEAD_STATE:
-		machine.change_state(READY_STATE)
-
-func _on_screen_exited():
-	if get_state() != DEAD_STATE:
-		machine.change_state(INACTIVE_STATE)
 ##########################################################################
 
 
@@ -61,7 +53,7 @@ func horizontal_movement(delta):
 	velocity.x = sign(velocity.x)*speed
 
 func vacuum_suck(delta):
-	var muzzle = hurtbox.get_overlapping_areas()[0].get_parent()
+	var muzzle = hitbox.get_overlapping_areas()[0].get_parent()
 	var distance = muzzle.global_position - self.global_position
 	velocity += distance.normalized()*suck_acceleration*delta
 	var dif_angle = distance.angle() - velocity.angle()
@@ -111,6 +103,8 @@ func hit(source):
 			else:
 				if get_state() == GRABBED_STATE:
 					self.destroy()
+					var player = get_tree().get_nodes_in_group("player")[0]
+					player.change_gun_state(Player.READY_STATE)
 				else:
 					change_state(STUNNED_STATE)
 		"Rocket":
@@ -151,7 +145,7 @@ func _on_ShotHitbox_body_entered(body):
 	body.hit(self)
 
 func _on_ShotHitbox_area_entered(area):
-	area.hit(self)
+	area.get_parent().hit(self) 
 
 func hit_a_wall():
 	change_state(READY_STATE)
@@ -161,10 +155,6 @@ func hit_a_wall():
 
 
 func _ready():
-	if $VisibilityNotifier2D.is_on_screen():
-		machine.start_machine(READY_STATE)
-	else:
-		machine.start_machine(INACTIVE_STATE)
 	match facing:
 		"Up":
 			scale = Vector2(1, 1)
@@ -174,6 +164,7 @@ func _ready():
 			rotation_degrees = -90
 		"Right":
 			rotation_degrees = 90
+	machine.start_machine(READY_STATE)
 
 func _physics_process(delta):
 	velocity = move_and_slide(velocity, Vector2.UP)
