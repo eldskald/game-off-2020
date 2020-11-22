@@ -23,7 +23,7 @@ onready var shot_hitbox = get_node("ShotHitbox")
 ### STATES MACHINE #######################################################
 onready var machine = $StatesMachine
 enum {READY_STATE, CHARGING_STATE, GRABBED_STATE, SHOT_STATE, STUNNED_STATE,
-	  DEAD_STATE, INACTIVE_STATE}
+	  DEAD_STATE}
 
 func get_state() -> int:
 	return machine.state_number

@@ -1,6 +1,7 @@
 extends EnemyState
 
 var timer
+var started = false
 
 onready var visibility = enemy.get_node("VisibilityNotifier2D")
 
@@ -10,7 +11,8 @@ func initialize(argument):
 	timer = Timer.new()
 	self.add_child(timer)
 	timer.connect("timeout", self, "_on_timeout")
-	timer.start(1 + (randi()%10)/10)
+	timer.one_shot = true
+	timer.start(0.1)
 	
 	visibility.connect("viewport_entered", self, "_on_entered_screen")
 	visibility.connect("viewport_exited", self, "_on_exited_screen")
@@ -31,7 +33,12 @@ func _physics_process(delta):
 
 
 func _on_timeout():
-	enemy.change_state(enemy.CHARGING_STATE)
+	if started:
+		enemy.change_state(enemy.CHARGING_STATE)
+	else:
+		started = true
+		if visibility.is_on_screen():
+			timer.start(1 + (randi()%10)/10)
 
 func _on_entered_screen(viewport):
 	timer.start(1 + (randi()%10)/10)
