@@ -6,8 +6,8 @@ export (String, "Two", "One", "Long Middle", "Long End") var type setget set_typ
 
 
 func set_type(new_type):
+	type = new_type
 	if Engine.editor_hint:
-		type = new_type
 		match type:
 			"Two":
 				frame = 0
@@ -22,15 +22,15 @@ func set_type(new_type):
 
 func _ready():
 	if not Engine.editor_hint:
-		var speed_mod = 1 + (randi()%30)/10
+		$AnimationPlayer.playback_speed = 1.0/(1 + (randi()%30)/10)
 		match type:
 			"Two":
-				$AnimationPlayer.play("sway0", -1, 1.0/speed_mod)
+				$AnimationPlayer.play("sway0")
 			"One":
-				$AnimationPlayer.play("sway1", -1, 1.0/speed_mod)
-			"Long, Middle":
-				$AnimationPlayer.play("sway2", -1, 1.0/speed_mod)
-			"Long, End":
-				$AnimationPlayer.play("sway3", -1, 1.0/speed_mod)
+				$AnimationPlayer.play("sway1")
+			"Long Middle":
+				$AnimationPlayer.play("sway2")
+			"Long End":
+				$AnimationPlayer.play("sway3")
 
 

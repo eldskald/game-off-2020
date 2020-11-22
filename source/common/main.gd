@@ -9,6 +9,12 @@ func _ready():
 	OS.window_size = Vector2(1024,576)
 	add_child(title_screen.instance())
 
+func _process(_delta):
+	if is_using_keyboard():
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
 
 
 func start():

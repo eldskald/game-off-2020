@@ -15,6 +15,11 @@ var changing_state = false
 # a frame sometimes, and I think that's what causing problems. You
 # can tell I'm crazy because I don't know what's going on, just take
 # care the way you implement your machines.
+#
+# PS: Seems like it worked. Beware writing calls to change state each
+# frame, calling on idle helped keep state changes in-between process
+# calls, and allowing only the first call to run stopped the game from
+# freezing.
 func change_state(new_state: int, argument = null):
 	if not changing_state:
 		call_deferred("actual_change_state", new_state, argument)
