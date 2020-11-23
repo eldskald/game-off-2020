@@ -28,9 +28,10 @@ func deactivate_tank(tank_number: int):
 
 func initialize(max_hp: int):
 	for i in range(max_hp):
-		bar_nodes.get_children[i].visible = true
+		bar_nodes.get_children()[i].visible = true
 	$BarSize.margin_right = 422 - 16*total_hp
-	self.modulate.a = 1.0
+	bar.max_value = 16*total_hp
+	self.modulate = Color("ffffff")
 	move_bar(0, max_hp)
 
 

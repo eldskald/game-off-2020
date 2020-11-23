@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://assets/textures/player-char.png" type="Texture" id=1]
 [ext_resource path="res://assets/textures/arm-gun.png" type="Texture" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://actors/player/gun-states/holding-state.gd" type="Script" id=21]
 [ext_resource path="res://actors/player/movement-states/hanging-state.gd" type="Script" id=22]
 [ext_resource path="res://actors/player/movement-states/floating-state.gd" type="Script" id=23]
+[ext_resource path="res://actors/player/movement-states/stunned-state.gd" type="Script" id=24]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 12 )
@@ -237,11 +238,14 @@ tracks/1/keys = {
 [sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 3, 11 )
 
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 4, 12 )
+
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
 ]]
 z_index = 10
-collision_mask = 23
+collision_mask = 63
 script = ExtResource( 3 )
 speed = 100.0
 acceleration = 400.0
@@ -359,10 +363,19 @@ visible = false
 position = Vector2( 0, 1 )
 shape = SubResource( 12 )
 
+[node name="SpikeDetector" type="Area2D" parent="."]
+visible = false
+collision_layer = 8
+collision_mask = 8
+
+[node name="Shape" type="CollisionShape2D" parent="SpikeDetector"]
+position = Vector2( 0, 1 )
+shape = SubResource( 13 )
+
 [node name="MovementStatesMachine" type="Node2D" parent="."]
 script = ExtResource( 4 )
 machine_type = "Movement"
-states = [ ExtResource( 6 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 22 ), ExtResource( 23 ) ]
+states = [ ExtResource( 6 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 22 ), ExtResource( 23 ), null, ExtResource( 24 ) ]
 
 [node name="GunStatesMachine" type="Node2D" parent="."]
 script = ExtResource( 4 )
@@ -410,4 +423,5 @@ cast_to = Vector2( 0, 32 )
 collision_mask = 2
 [connection signal="timeout" from="Sprite/GunSprite/Muzzle/ChargingParticles/Timer" to="Sprite/GunSprite" method="_charge_particles_timeout"]
 [connection signal="timeout" from="Sprite/GunSprite/Muzzle/MuzzleFlash/Timer" to="Sprite/GunSprite" method="_on_muzzle_flash_timeout"]
+[connection signal="body_entered" from="SpikeDetector" to="." method="_on_touched_spikes"]
 [connection signal="timeout" from="DropTimer" to="." method="_on_drop_timeout"]

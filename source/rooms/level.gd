@@ -14,6 +14,8 @@ func _ready():
 	camera.limit_left = 0
 	camera.limit_bottom = height_in_screens*288
 	camera.limit_right = width_in_screens*512
+	
+	main.hp_bar.initialize(main.data.max_hp)
 
 
 

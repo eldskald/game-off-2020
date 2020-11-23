@@ -1,13 +1,18 @@
-extends Node2D
+extends Node
 class_name Main
 
 export (PackedScene) var title_screen
+
+onready var hp_bar = $UI/HealthBar
+onready var data = $Data
+onready var scene = $Scene
 
 
 
 func _ready():
 	OS.window_size = Vector2(1024,576)
-	add_child(title_screen.instance())
+	OS.center_window()
+	scene.add_child(title_screen.instance())
 
 func _process(_delta):
 	if is_using_keyboard():
@@ -19,6 +24,12 @@ func _process(_delta):
 
 func start():
 	pass
+
+
+
+func player_died():
+	scene.get_children()[0].queue_free()
+	scene.call_deferred("add_child", title_screen.instance())
 
 
 
@@ -56,7 +67,7 @@ signal input_device_changed
 func _input(event):
 	var new_input_device
 	
-	if event is InputEventKey:
+	if event is InputEventKey or event is InputEventMouse:
 		new_input_device = "Keyboard"
 		if new_input_device != last_input_device:
 			emit_signal("input_device_changed")

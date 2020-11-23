@@ -128,6 +128,7 @@ func apply_recoil_knockback(direction: Vector2):
 ### COMBAT ###############################################################
 onready var aiming: Vector2 = Vector2.RIGHT
 onready var muzzle: Node2D = $Sprite/GunSprite/Muzzle
+onready var invincibility: Timer = $InvincibilityTimer
 
 func spawn_shot(shot_scene: PackedScene):
 	var level = get_tree().get_nodes_in_group("level")[0]
@@ -138,6 +139,22 @@ func spawn_shot(shot_scene: PackedScene):
 	level.add_child(shot)
 
 func hit(source):
+	if invincibility.is_stopped():
+		match source.type:
+			"Light":
+				take_damage(1)
+			_:
+				take_damage(2)
+
+func take_damage(damage: int):
+	if invincibility.is_stopped():
+		change_movement_state(STUNNED_STATE)
+		main.hp_bar.move_bar(main.data.hp, main.data.hp - damage)
+		main.data.hp -= damage
+		if main.data.hp <= 0:
+			main.player_died()
+
+func _on_touched_spikes(body):
 	pass
 ##########################################################################
 
@@ -149,6 +166,9 @@ func _ready():
 
 func _physics_process(delta):
 	velocity = move_and_slide(velocity, Vector2.UP)
+
+
+
 
 
 

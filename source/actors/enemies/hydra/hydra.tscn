@@ -175,7 +175,7 @@ disabled = true
 visible = false
 position = Vector2( 1, 4 )
 collision_layer = 64
-collision_mask = 129
+collision_mask = 137
 __meta__ = {
 "_edit_group_": true
 }
@@ -196,4 +196,5 @@ wait_time = 0.2
 one_shot = true
 [connection signal="area_entered" from="ShotHitbox" to="." method="_on_ShotHitbox_area_entered"]
 [connection signal="body_entered" from="ShotHitbox" to="." method="_on_ShotHitbox_body_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="timeout" from="FlashTimer" to="." method="_on_flash_timeout"]

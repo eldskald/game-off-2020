@@ -113,6 +113,12 @@ func hit(source):
 			source.destroy()
 			self.destroy()
 
+func _on_hitbox_body_entered(body):
+	if body.get_collision_layer_bit(0) == true: # Player layer
+		body.take_damage(1)
+	elif body.get_collision_layer_bit(3) == true: # Spikes layer
+		self.destroy()
+
 func _on_flash_timeout():
 	sprite.get_material().set_shader_param("flash_white", 0.0)
 

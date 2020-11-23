@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://actors/enemies/enemy-state.gd"
 }, {
-"base": "Node2D",
+"base": "Node",
 "class": "Main",
 "language": "GDScript",
 "path": "res://common/main.gd"

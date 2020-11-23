@@ -7,6 +7,8 @@ export (Array, Script) var states
 
 var state_number
 var changing_state = false
+var changing_new_state
+var changing_argument
 
 
 
@@ -19,28 +21,36 @@ var changing_state = false
 # PS: Seems like it worked. Beware writing calls to change state each
 # frame, calling on idle helped keep state changes in-between process
 # calls, and allowing only the first call to run stopped the game from
-# freezing.
+# freezing. This implementation uses the order in which they are listed
+# as a priority list, so if this function is called multiple times in
+# a frame, it will change to the state that appears last on the list.
 func change_state(new_state: int, argument = null):
 	if not changing_state:
-		call_deferred("actual_change_state", new_state, argument)
+		call_deferred("actual_change_state")
 		changing_state = true
+		changing_new_state = new_state
+		changing_argument = argument
+	else:
+		if new_state > changing_new_state:
+			changing_new_state = new_state
+			changing_argument = argument
 
-func actual_change_state(new_state: int, argument = null):
+func actual_change_state():
 	changing_state = false
 	
 	# Dealing with the old state
 	var old_state = state_number
 	var old_state_node = get_children()[0]
-	old_state_node.exit(new_state)
+	old_state_node.exit(changing_new_state)
 	old_state_node.queue_free()
 	
 	# Dealing with the new state
-	state_number = new_state
+	state_number = changing_new_state
 	var state = PlayerState.new()
-	state.script = states[new_state] # Remember their order!
+	state.script = states[changing_new_state] # Remember their order!
 	state.previous_state = old_state
 	add_child(state)
-	state.initialize(argument)
+	state.initialize(changing_argument)
 
 
 
