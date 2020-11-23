@@ -1,0 +1,149 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/textures/health-bar.png" type="Texture" id=1]
+[ext_resource path="res://ui/health-bar/health-node.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/health-bar/health-bar.gd" type="Script" id=3]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 80, 32 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 0, 16, 32 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.0588235, 0.196078, 0.980392, 1 )
+border_color = Color( 0.0588235, 0.196078, 0.980392, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0, 0, 0, 0 )
+border_width_bottom = 8
+border_color = Color( 0, 0, 0, 0 )
+anti_aliasing = false
+
+[node name="HealhBar" type="Control"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Margin" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hbox" type="HBoxContainer" parent="Margin"]
+margin_right = 96.0
+margin_bottom = 32.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_constants/separation = 0
+
+[node name="Start" type="TextureRect" parent="Margin/Hbox"]
+margin_right = 80.0
+margin_bottom = 32.0
+texture = SubResource( 1 )
+
+[node name="Bar" type="HBoxContainer" parent="Margin/Hbox"]
+margin_left = 80.0
+margin_right = 80.0
+margin_bottom = 32.0
+custom_constants/separation = 0
+
+[node name="HealthNode1" parent="Margin/Hbox/Bar" instance=ExtResource( 2 )]
+visible = false
+margin_right = 16.0
+margin_bottom = 32.0
+
+[node name="HealthNode2" parent="Margin/Hbox/Bar" instance=ExtResource( 2 )]
+visible = false
+margin_left = 16.0
+margin_right = 32.0
+margin_bottom = 32.0
+
+[node name="HealthNode3" parent="Margin/Hbox/Bar" instance=ExtResource( 2 )]
+visible = false
+margin_left = 32.0
+margin_right = 48.0
+margin_bottom = 32.0
+
+[node name="HealthNode4" parent="Margin/Hbox/Bar" instance=ExtResource( 2 )]
+visible = false
+margin_left = 48.0
+margin_right = 64.0
+margin_bottom = 32.0
+
+[node name="HealthNode5" parent="Margin/Hbox/Bar" instance=ExtResource( 2 )]
+visible = false
+margin_left = 64.0
+margin_right = 80.0
+margin_bottom = 32.0
+
+[node name="HealthNode6" parent="Margin/Hbox/Bar" instance=ExtResource( 2 )]
+visible = false
+margin_left = 80.0
+margin_right = 96.0
+margin_bottom = 32.0
+
+[node name="HealthNode7" parent="Margin/Hbox/Bar" instance=ExtResource( 2 )]
+visible = false
+margin_left = 96.0
+margin_right = 112.0
+margin_bottom = 32.0
+
+[node name="HealthNode8" parent="Margin/Hbox/Bar" instance=ExtResource( 2 )]
+visible = false
+margin_left = 112.0
+margin_right = 128.0
+margin_bottom = 32.0
+
+[node name="HealthNode9" parent="Margin/Hbox/Bar" instance=ExtResource( 2 )]
+visible = false
+margin_left = 128.0
+margin_right = 144.0
+margin_bottom = 32.0
+
+[node name="HealthNode10" parent="Margin/Hbox/Bar" instance=ExtResource( 2 )]
+visible = false
+margin_left = 144.0
+margin_right = 160.0
+margin_bottom = 32.0
+
+[node name="End" type="TextureRect" parent="Margin/Hbox"]
+margin_left = 80.0
+margin_right = 96.0
+margin_bottom = 32.0
+texture = SubResource( 2 )
+
+[node name="BarSize" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1.0
+margin_right = -1.0
+custom_constants/margin_right = 262
+custom_constants/margin_top = 16
+custom_constants/margin_left = 89
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressBar" type="ProgressBar" parent="BarSize"]
+margin_left = 89.0
+margin_top = 16.0
+margin_right = 250.0
+margin_bottom = 24.0
+custom_styles/fg = SubResource( 3 )
+custom_styles/bg = SubResource( 4 )
+max_value = 160.0
+step = 1.0
+percent_visible = false
+
+[node name="Tween" type="Tween" parent="."]
