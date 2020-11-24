@@ -79,19 +79,6 @@ func deactivate_wall_collisions():
 func activate_wall_collisions():
 	self.set_collision_mask_bit(1, true)
 	hitbox.set_collision_mask_bit(3, true)
-
-
-# These are made to keep the room from spawning too many jellyfish.
-# Spawn them far from the camera or else both functions activate at
-# the same time for some reason.
-var entered_screen: bool = false
-
-func _on_screen_entered():
-	entered_screen = true
-
-func _on_screen_exited():
-	if entered_screen and moving != "Static":
-		self.queue_free()
 ##########################################################################
 
 ### COMBAT ###############################################################
