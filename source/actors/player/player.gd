@@ -19,7 +19,7 @@ export (PackedScene) var rocket_shot
 onready var movement_machine = $MovementStatesMachine
 enum {GROUNDED_STATE, AIRBORNE_STATE, JUMPING_STATE, WALL_GRABBING_STATE,
 	  WALL_JUMPING_STATE, HANGING_STATE, FLOATING_STATE, ROCKETING_STATE,
-	  STUNNED_STATE}
+	  STUNNED_STATE, DYING_STATE}
 
 func get_movement_state() -> int:
 	return movement_machine.state_number
@@ -50,6 +50,18 @@ func get_gun_state_node():
 func is_holding_shot_or_rocket() -> bool:
 	if get_gun_state() == HOLDING_STATE:
 		return get_gun_state_node().is_holding_shot_or_rocket()
+	else:
+		return false
+
+func is_holding_rocket() -> bool:
+	if get_gun_state() == HOLDING_STATE:
+		return get_gun_state_node().is_holding_rocket()
+	else:
+		return false
+
+func is_holding_mega_rocket() -> bool:
+	if get_gun_state() == HOLDING_STATE:
+		return get_gun_state_node().is_holding_mega_rocket()
 	else:
 		return false
 ##########################################################################
@@ -148,11 +160,14 @@ func hit(source):
 
 func take_damage(damage: int):
 	if invincibility.is_stopped():
-		change_movement_state(STUNNED_STATE)
 		main.hp_bar.move_bar(main.data.hp, main.data.hp - damage)
 		main.data.hp -= damage
-		if main.data.hp <= 0:
-			main.player_died()
+		if main.data.hp > 0:
+			change_movement_state(STUNNED_STATE, false)
+			change_gun_state(UNUSABLE_STATE)
+		else:
+			change_movement_state(DYING_STATE)
+			change_gun_state(UNUSABLE_STATE)
 
 func _on_touched_spikes(body):
 	pass

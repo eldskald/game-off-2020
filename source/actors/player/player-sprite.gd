@@ -28,7 +28,7 @@ func _process(_delta):
 		Player.WALL_GRABBING_STATE:
 			animation_player.play("wall_grabbing")
 		
-		Player.STUNNED_STATE:
+		Player.STUNNED_STATE, Player.DYING_STATE:
 			animation_player.play("stunned")
 		
 		_:

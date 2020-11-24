@@ -39,8 +39,6 @@ func _process(_delta):
 		
 		Player.UNUSABLE_STATE:
 			frame = UNUSABLE_FRAME
-			muzzle.position = Vector2(-4,14)
-			muzzle.rotation_degrees = 90
 			charging_particles.restart()
 			charging_particles.emitting = false
 			charge_particles_timer.stop()

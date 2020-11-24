@@ -7,6 +7,8 @@ onready var main: Main = get_tree().get_nodes_in_group("main")[0]
 onready var player: Player = get_tree().get_nodes_in_group("player")[0]
 onready var camera: Camera2D = player.get_node("Camera")
 
+var entrance
+
 
 
 func _ready():

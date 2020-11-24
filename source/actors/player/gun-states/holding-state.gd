@@ -21,6 +21,11 @@ func initialize(argument):
 
 
 
+func exit(next_state):
+	if next_state == Player.UNUSABLE_STATE and holding == "enemy":
+		holding_node.release(Vector2(player.facing, 0))
+
+
 
 func _physics_process(delta):
 	match holding:
@@ -107,11 +112,25 @@ func _physics_process(delta):
 				player.aiming = Vector2(player.facing, 0)
 			else:
 				player.aiming = get_pressed_aim_dir()
+		
+		
+		
+		"mega_rocket":
+			if get_pressed_aim_dir() == Vector2.ZERO:
+				player.aiming = Vector2(player.facing, 0)
+			else:
+				player.aiming = get_pressed_aim_dir()
 
 
 
 func is_holding_shot_or_rocket():
 	return holding == "shot" or holding == "rocket"
+
+func is_holding_rocket():
+	return holding == "rocket"
+
+func is_holding_mega_rocket():
+	return holding == "mega_rocket"
 
 
 

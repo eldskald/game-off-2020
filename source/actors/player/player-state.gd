@@ -89,7 +89,16 @@ func get_just_released_aim_dir() -> Vector2:
 
 
 
-# This is to animate the holding state.
+# This is to animate the holding state. Overriden on holding state script.
 func is_holding_shot_or_rocket():
 	return false
+
+func is_holding_rocket():
+	return false
+
+func is_holding_mega_rocket():
+	return false
+
+
+
 

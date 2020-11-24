@@ -6,12 +6,16 @@ export (PackedScene) var title_screen
 onready var hp_bar = $UI/HealthBar
 onready var data = $Data
 onready var scene = $Scene
+onready var transition = $UI/Transition
 
 
 
 func _ready():
 	OS.window_size = Vector2(1024,576)
 	OS.center_window()
+	transition.get_node("Timer").connect("timeout", self, "_on_transition_timer_timeout")
+	transition.get_node("AnimationPlayer").connect("animation_finished",
+												   self, "_on_transition_finished")
 	scene.add_child(title_screen.instance())
 
 func _process(_delta):
@@ -28,8 +32,33 @@ func start():
 
 
 func player_died():
-	scene.get_children()[0].queue_free()
-	scene.call_deferred("add_child", title_screen.instance())
+	data.hp = data.max_hp
+	change_room(title_screen, 0)
+
+
+
+### CHANGING ROOMS ########################################################################
+var next_entrance: int
+var next_room: PackedScene
+
+func change_room(room: PackedScene, entrance: int):
+	if not transition.animation_player.is_playing() and transition.timer.is_stopped():
+		next_entrance = entrance
+		next_room = room
+		transition.close_screen()
+
+func _on_transition_finished(anim_name: String):
+	if anim_name == "out":
+		if scene.get_children().size() > 0:
+			scene.get_children()[0].queue_free()
+		transition.timer.start()
+
+func _on_transition_timer_timeout():
+	var room = next_room.instance()
+	room.entrance = next_entrance
+	scene.call_deferred("add_child", room)
+	transition.open_screen()
+###########################################################################################
 
 
 
@@ -85,6 +114,8 @@ func is_using_keyboard() -> bool:
 func is_using_controller() -> bool:
 	return last_input_device == "Controller"
 ###########################################################################################
+
+
 
 
 
