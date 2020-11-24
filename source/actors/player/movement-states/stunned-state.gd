@@ -17,5 +17,9 @@ func _physics_process(delta):
 		if not touched_spikes:
 			player.change_movement_state(Player.AIRBORNE_STATE)
 			player.change_gun_state(Player.READY_STATE)
+		else:
+			player.position = player.checkpoint
+			player.change_movement_state(Player.GROUNDED_STATE)
+			player.change_gun_state(Player.READY_STATE)
 
 

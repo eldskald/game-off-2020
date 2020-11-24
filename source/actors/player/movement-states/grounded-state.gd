@@ -15,6 +15,7 @@ func exit(next_state):
 func _physics_process(delta):
 	player.horizontal_movement(delta)
 	player.vertical_movement(delta)
+	player.safety_check()
 	
 	if Input.is_action_just_pressed("jump"):
 		player.change_movement_state(Player.JUMPING_STATE)

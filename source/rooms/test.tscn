@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://actors/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://rooms/level.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://actors/enemies/hydra/hydra.tscn" type="PackedScene" id=5]
 [ext_resource path="res://rooms/backgrounds/seaweed.tscn" type="PackedScene" id=6]
 [ext_resource path="res://rooms/backgrounds/jellyfish.tscn" type="PackedScene" id=7]
+[ext_resource path="res://rooms/tilemaps/spikes.tscn" type="PackedScene" id=8]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -321,6 +322,9 @@ tile_data = PoolIntArray( 196608, 20, 0, 262144, 20, 0, 327680, 20, 0, 393216, 2
 
 [node name="Platforms" parent="." instance=ExtResource( 4 )]
 tile_data = PoolIntArray( 1572910, 3, 0, 1572911, 1, 0, 1572912, 1, 0, 1572913, 1, 0, 1572914, 1, 0, 1572915, 1, 0, 1572916, 1, 0, 1572917, 1, 0, 1572918, 1, 0, 1572919, 1, 0, 1572920, 1, 0, 1572921, 4, 0, 2359342, 3, 0, 2359343, 1, 0, 2359344, 1, 0, 2359345, 1, 0, 2359346, 1, 0, 2359347, 1, 0, 2359348, 1, 0, 2359349, 1, 0, 2359350, 1, 0, 2359351, 1, 0, 2359352, 1, 0, 2359353, 4, 0, 3145774, 3, 0, 3145775, 1, 0, 3145776, 1, 0, 3145777, 1, 0, 3145778, 1, 0, 3145779, 1, 0, 3145780, 1, 0, 3145781, 1, 0, 3145782, 1, 0, 3145783, 1, 0, 3145784, 1, 0, 3145785, 4, 0 )
+
+[node name="Spikes" parent="." instance=ExtResource( 8 )]
+tile_data = PoolIntArray( 1048589, 0, 0, 1048590, 0, 0, 1048591, 0, 0, 1048592, 0, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 56, 528 )

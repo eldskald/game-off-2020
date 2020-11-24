@@ -31,4 +31,6 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 12, 16, 12 )
 [node name="Spikes" type="TileMap"]
 tile_set = SubResource( 2 )
 cell_size = Vector2( 16, 16 )
+collision_layer = 8
+collision_mask = 8
 format = 1

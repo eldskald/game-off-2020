@@ -3,6 +3,7 @@ extends PlayerState
 
 
 func initialize(argument):
+	camera.drag_margin_top = 0.05
 	player.velocity = Vector2(-player.facing, -1)*150
 	player.invincibility.connect("timeout", self, "_on_timeout")
 	player.invincibility.start()

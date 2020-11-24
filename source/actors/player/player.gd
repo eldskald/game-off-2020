@@ -17,6 +17,10 @@ export (PackedScene) var rocket_shot
 
 ### MOVEMENT STATES MACHINES #############################################
 onready var movement_machine = $MovementStatesMachine
+onready var checkpoint: Vector2 = self.position
+onready var left_safety: Area2D = $LeftSafety
+onready var right_safety: Area2D = $RightSafety
+
 enum {GROUNDED_STATE, AIRBORNE_STATE, JUMPING_STATE, WALL_GRABBING_STATE,
 	  WALL_JUMPING_STATE, HANGING_STATE, FLOATING_STATE, ROCKETING_STATE,
 	  STUNNED_STATE, DYING_STATE}
@@ -29,6 +33,11 @@ func change_movement_state(new_state: int, argument = null):
 
 func get_movement_state_node():
 	return movement_machine.get_state_node()
+
+func safety_check():
+	if left_safety.get_overlapping_bodies().size() > 0:
+		if right_safety.get_overlapping_bodies().size() > 0:
+			checkpoint = self.position
 ##########################################################################
 
 
@@ -158,19 +167,19 @@ func hit(source):
 			_:
 				take_damage(2)
 
-func take_damage(damage: int):
-	if invincibility.is_stopped():
+func take_damage(damage: int, touched_spikes: bool = false):
+	if invincibility.is_stopped() or touched_spikes:
 		main.hp_bar.move_bar(main.data.hp, main.data.hp - damage)
 		main.data.hp -= damage
 		if main.data.hp > 0:
-			change_movement_state(STUNNED_STATE, false)
+			change_movement_state(STUNNED_STATE, touched_spikes)
 			change_gun_state(UNUSABLE_STATE)
 		else:
 			change_movement_state(DYING_STATE)
 			change_gun_state(UNUSABLE_STATE)
 
 func _on_touched_spikes(body):
-	pass
+	take_damage(1, true)
 ##########################################################################
 
 

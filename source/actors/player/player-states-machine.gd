@@ -6,9 +6,6 @@ export (String, "Movement", "Gun") var machine_type
 export (Array, Script) var states
 
 var state_number
-var changing_state = false
-var changing_new_state
-var changing_argument
 
 
 
@@ -21,9 +18,15 @@ var changing_argument
 # PS: Seems like it worked. Beware writing calls to change state each
 # frame, calling on idle helped keep state changes in-between process
 # calls, and allowing only the first call to run stopped the game from
-# freezing. This implementation uses the order in which they are listed
+# freezing.
+#
+# PPS: This implementation uses the order in which they are listed
 # as a priority list, so if this function is called multiple times in
 # a frame, it will change to the state that appears last on the list.
+var changing_state = false
+var changing_new_state
+var changing_argument
+
 func change_state(new_state: int, argument = null):
 	if not changing_state:
 		call_deferred("actual_change_state")
@@ -51,6 +54,31 @@ func actual_change_state():
 	state.previous_state = old_state
 	add_child(state)
 	state.initialize(changing_argument)
+
+
+
+func start_machine(starting_state: int, argument = null):
+	state_number = starting_state
+	var state = PlayerState.new()
+	state.script = states[starting_state]
+	state.previous_state = starting_state
+	add_child(state)
+	state.initialize(argument)
+
+
+
+func get_state_node():
+	return get_children()[0]
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -93,19 +121,5 @@ func debugging(state):
 			Player.UNUSABLE_STATE:
 				print("unusable_state")
 
-
-
-func start_machine(starting_state: int, argument = null):
-	state_number = starting_state
-	var state = PlayerState.new()
-	state.script = states[starting_state]
-	state.previous_state = starting_state
-	add_child(state)
-	state.initialize(argument)
-
-
-
-func get_state_node():
-	return get_children()[0]
 
 
