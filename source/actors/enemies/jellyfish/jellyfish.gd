@@ -3,6 +3,7 @@ extends KinematicBody2D
 onready var main: Main = get_tree().get_nodes_in_group("main")[0]
 
 export (String, "Static", "Up", "Left", "Down", "Right") var moving
+export (float, 0, 500) var moving_speed
 export (float, 0, 2000) var suck_acceleration
 
 onready var sprite: Sprite = get_node("Sprite")
@@ -42,19 +43,19 @@ func starting_velocity():
 		"Up":
 			deactivate_wall_collisions()
 			acceleration = Vector2.ZERO
-			velocity = 100*Vector2.UP
+			velocity = moving_speed*Vector2.UP
 		"Left":
 			deactivate_wall_collisions()
 			acceleration = Vector2.ZERO
-			velocity = 100*Vector2.LEFT
+			velocity = moving_speed*Vector2.LEFT
 		"Down":
 			deactivate_wall_collisions()
 			acceleration = Vector2.ZERO
-			velocity = 100*Vector2.DOWN
+			velocity = moving_speed*Vector2.DOWN
 		"Right":
 			deactivate_wall_collisions()
 			acceleration = Vector2.ZERO
-			velocity = 100*Vector2.RIGHT
+			velocity = moving_speed*Vector2.RIGHT
 
 func swim_up():
 	if moving == "Static":
@@ -78,6 +79,19 @@ func deactivate_wall_collisions():
 func activate_wall_collisions():
 	self.set_collision_mask_bit(1, true)
 	hitbox.set_collision_mask_bit(3, true)
+
+
+# These are made to keep the room from spawning too many jellyfish.
+# Spawn them far from the camera or else both functions activate at
+# the same time for some reason.
+var entered_screen: bool = false
+
+func _on_screen_entered():
+	entered_screen = true
+
+func _on_screen_exited():
+	if entered_screen and moving != "Static":
+		self.queue_free()
 ##########################################################################
 
 ### COMBAT ###############################################################
@@ -131,7 +145,6 @@ func _ready():
 func _physics_process(delta):
 	velocity += acceleration*delta
 	velocity = move_and_slide(velocity, Vector2.UP)
-
 
 
 

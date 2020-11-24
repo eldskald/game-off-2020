@@ -341,3 +341,7 @@ position = Vector2( 849, 456 )
 
 [node name="Jellyfish2" parent="." instance=ExtResource( 9 )]
 position = Vector2( 920, 440 )
+
+[node name="Jellyfish3" parent="." instance=ExtResource( 9 )]
+position = Vector2( 144, 736 )
+moving = "Up"
