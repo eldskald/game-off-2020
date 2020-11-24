@@ -28,5 +28,6 @@ func exit(next_state):
 func _physics_process(delta):
 	enemy.rotation = direction.angle()
 	enemy.velocity = 300*direction
+	enemy.acceleration = Vector2.ZERO
 
 
