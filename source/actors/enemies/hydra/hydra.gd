@@ -71,7 +71,7 @@ onready var hp: int = max_hp
 func spawn_shot(direction: Vector2):
 	var level = get_tree().get_nodes_in_group("level")[0]
 	var shot_node = shot.instance()
-	shot_node.position = level.to_local($ChargeBall.global_position)
+	shot_node.position = level.to_local($ChargeBall.global_position) + direction*8
 	shot_node.shooter = self
 	shot_node.direction = direction
 	shot_node.speed = 100
