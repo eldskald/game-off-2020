@@ -3,7 +3,7 @@ extends PlayerState
 
 
 func initialize(argument):
-	player.velocity = Vector2(-player.facing, -1)*200
+	player.velocity = Vector2(-player.facing, -1)*150
 	player.invincibility.connect("timeout", self, "_on_timeout")
 	player.invincibility.start()
 	player.get_node("Sprite/DeathParticles1").emitting = true
@@ -13,10 +13,9 @@ func initialize(argument):
 
 
 func _physics_process(delta):
-	player.vertical_movement(delta)
+	player.vertical_movement(delta, 0.2)
 	if player.velocity.y >= 0:
-		player.velocity.x -= delta*player.friction/2
-		player.vertical_movement(delta, 0.2)
+		player.velocity.x -= delta*player.friction*sign(player.velocity.x)
 
 
 

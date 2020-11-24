@@ -9,6 +9,8 @@ onready var absorb_particles: CPUParticles2D = get_node("Muzzle/AbsorbParticles"
 onready var muzzle_flash: Sprite = get_node("Muzzle/MuzzleFlash")
 onready var shader: ShaderMaterial = get_material()
 onready var player_shader: ShaderMaterial = get_parent().get_material()
+onready var rocket_charge: CPUParticles2D = get_parent().get_node("RocketChargeParticles")
+onready var mega_rocket: CPUParticles2D = get_parent().get_node("MegaRocketChargeParticles")
 onready var invincibility: Timer = player.get_node("InvincibilityTimer")
 
 # Sprite frames to make it easier to write and read code while
@@ -32,6 +34,10 @@ func _process(_delta):
 			multi_aim_case(player.aiming, player.facing)
 			charging_particles.restart()
 			charging_particles.emitting = false
+			rocket_charge.restart()
+			rocket_charge.emitting = false
+			mega_rocket.restart()
+			mega_rocket.emitting = false
 			charge_particles_timer.stop()
 			absorb_particles.emitting = false
 			shader.set_shader_param("flash_yellow", 0.0)
@@ -41,6 +47,10 @@ func _process(_delta):
 			frame = UNUSABLE_FRAME
 			charging_particles.restart()
 			charging_particles.emitting = false
+			rocket_charge.restart()
+			rocket_charge.emitting = false
+			mega_rocket.restart()
+			mega_rocket.emitting = false
 			charge_particles_timer.stop()
 			absorb_particles.restart()
 			absorb_particles.emitting = false
@@ -51,6 +61,10 @@ func _process(_delta):
 			multi_aim_case(player.aiming, player.facing)
 			charging_particles.restart()
 			charging_particles.emitting = false
+			rocket_charge.restart()
+			rocket_charge.emitting = false
+			mega_rocket.restart()
+			mega_rocket.emitting = false
 			charge_particles_timer.stop()
 			absorb_particles.emitting = true
 			shader.set_shader_param("flash_yellow", 0.0)
@@ -66,12 +80,20 @@ func _process(_delta):
 			if player.is_holding_shot_or_rocket():
 				shader.set_shader_param("flash_yellow", 1.0)
 				player_shader.set_shader_param("flash_yellow", 1.0)
+				if player.is_holding_rocket():
+					rocket_charge.emitting = true
+				elif player.is_holding_mega_rocket():
+					mega_rocket.emitting = true
 
 		
 		Player.SHOOTING_STATE:
 			multi_aim_case(player.aiming, player.facing)
 			charging_particles.restart()
 			charging_particles.emitting = false
+			rocket_charge.restart()
+			rocket_charge.emitting = false
+			mega_rocket.restart()
+			mega_rocket.emitting = false
 			charge_particles_timer.stop()
 			absorb_particles.restart()
 			absorb_particles.emitting = false
@@ -82,6 +104,10 @@ func _process(_delta):
 			multi_aim_case(player.aiming, player.facing)
 			absorb_particles.restart()
 			absorb_particles.emitting = false
+			rocket_charge.restart()
+			rocket_charge.emitting = false
+			mega_rocket.restart()
+			mega_rocket.emitting = false
 			shader.set_shader_param("flash_yellow", 0.0)
 			player_shader.set_shader_param("flash_yellow", 0.0)
 		
@@ -90,6 +116,10 @@ func _process(_delta):
 			charging_particles.emitting = true
 			absorb_particles.restart()
 			absorb_particles.emitting = false
+			rocket_charge.restart()
+			rocket_charge.emitting = false
+			mega_rocket.restart()
+			mega_rocket.emitting = false
 			shader.set_shader_param("flash_yellow", 1.0)
 			player_shader.set_shader_param("flash_yellow", 1.0)
 
