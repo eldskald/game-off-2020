@@ -3,6 +3,7 @@ extends EnemyState
 
 
 func initialize(argument):
+	main.data.drop_health_pickup(enemy.position)
 	enemy.get_node("Hurtbox").disabled = true
 	enemy.get_node("Hitbox/Shape").disabled = true
 	enemy.get_node("ShotHitbox/Shape").disabled = true

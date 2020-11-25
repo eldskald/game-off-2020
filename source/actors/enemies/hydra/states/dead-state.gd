@@ -5,6 +5,7 @@ var timer
 
 
 func initialize(argument):
+	main.data.drop_health_pickup(enemy.position)
 	sprite.scale = Vector2(1, -1)
 	sprite.get_material().set_shader_param("flash_invisible", 1.0)
 	animation_player.play("hurt")

@@ -45,6 +45,12 @@ func _physics_process(_delta):
 				shot.grabbed(player)
 				if player.get_movement_state() != Player.GROUNDED_STATE:
 					player.change_movement_state(Player.FLOATING_STATE, player.aiming)
+		
+		# Deal with pickups.
+		if held_area.get_overlapping_areas().size() > 0:
+			var pickup = held_area.get_overlapping_areas()[0]
+			if area.get_collision_layer_bit(8) == true: # Pickups layer
+				area.get_parent().grabbed(player)
 	
 	
 	

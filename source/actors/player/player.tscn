@@ -318,7 +318,7 @@ disabled = true
 visible = false
 position = Vector2( 3, 0 )
 collision_layer = 128
-collision_mask = 18
+collision_mask = 274
 
 [node name="Shape" type="CollisionShape2D" parent="Sprite/GunSprite/Muzzle/HeldArea"]
 shape = SubResource( 4 )
