@@ -4,7 +4,12 @@ extends EnemyState
 
 func initialize(argument):
 	animation_player.play("floating")
-	animation_player.advance((randi()%40)/10)
+	
+	# To make them dance in synchrony!
+	if enemy.starting_animation_frame < 0:
+		animation_player.advance((randi()%40)/10)
+	else:
+		animation_player.advance(((enemy.starting_animation_frame*10)%40)/10)
 
 
 

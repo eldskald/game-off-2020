@@ -164,7 +164,7 @@ func hit(source):
 		match source.type:
 			"Light":
 				take_damage(1)
-			_:
+			"Heavy", "Mega Heavy", "Explosion":
 				take_damage(2)
 
 func take_damage(damage: int, touched_spikes: bool = false):

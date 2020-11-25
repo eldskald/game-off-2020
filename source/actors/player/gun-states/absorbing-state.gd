@@ -41,9 +41,10 @@ func _physics_process(_delta):
 		# Deal with shots.
 		if area.get_collision_layer_bit(5) == true: # Shots layer
 			var shot = area.get_parent() # Area is actually the shot's hitbox
-			shot.grabbed(player)
-			if player.get_movement_state() != Player.GROUNDED_STATE:
-				player.change_movement_state(Player.FLOATING_STATE, player.aiming)
+			if shot.can_be_grabbed():
+				shot.grabbed(player)
+				if player.get_movement_state() != Player.GROUNDED_STATE:
+					player.change_movement_state(Player.FLOATING_STATE, player.aiming)
 	
 	
 	

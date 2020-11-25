@@ -44,7 +44,7 @@ func _on_body_entered(body):
 		body.hit(self)
 
 func _on_area_entered(area):
-	if area.get_collision_layer_bit(5) == true:
+	if area.get_collision_layer_bit(5) == true: # Shots layer
 		area.get_parent().hit(self)
 
 

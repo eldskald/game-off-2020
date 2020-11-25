@@ -9,7 +9,7 @@
 [ext_resource path="res://rooms/backgrounds/jellyfish.tscn" type="PackedScene" id=7]
 [ext_resource path="res://rooms/tilemaps/spikes.tscn" type="PackedScene" id=8]
 [ext_resource path="res://actors/enemies/jellyfish/jellyfish.tscn" type="PackedScene" id=9]
-[ext_resource path="res://actors/enemies/jellyfish/spawner.tscn" type="PackedScene" id=10]
+[ext_resource path="res://actors/enemies/bomb/bomb.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -331,22 +331,14 @@ tile_data = PoolIntArray( 1048589, 0, 0, 1048590, 0, 0, 1048591, 0, 0, 1048592, 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 56, 528 )
 
-[node name="Hydra" parent="." instance=ExtResource( 5 )]
-position = Vector2( 275, 516 )
-
 [node name="Hydra2" parent="." instance=ExtResource( 5 )]
-position = Vector2( 768, 372 )
+position = Vector2( 734, 467 )
 
 [node name="Jellyfish" parent="." instance=ExtResource( 9 )]
-position = Vector2( 849, 456 )
+position = Vector2( 104, 400 )
 
 [node name="Jellyfish2" parent="." instance=ExtResource( 9 )]
-position = Vector2( 920, 440 )
+position = Vector2( 175, 384 )
 
-[node name="JellyfishSpawner" parent="." instance=ExtResource( 10 )]
-position = Vector2( 128, 704 )
-moving = "Up"
-
-[node name="JellyfishSpawner2" parent="." instance=ExtResource( 10 )]
-position = Vector2( 208, 656 )
-moving = "Up"
+[node name="Bomb" parent="." instance=ExtResource( 11 )]
+position = Vector2( 256, 496 )

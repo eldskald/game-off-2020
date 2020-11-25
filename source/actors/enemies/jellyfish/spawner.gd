@@ -15,12 +15,14 @@ func _ready():
 	spawn_jellyfish()
 
 func _physics_process(_delta):
-	if current_jellyfish.is_inside_tree():
-		if (current_jellyfish.position - self.position).length() > 550:
-			current_jellyfish.queue_free()
-			spawn_jellyfish()
-		elif current_jellyfish.get_state() == current_jellyfish.DEAD_STATE:
-			spawn_jellyfish()
+	if current_jellyfish != null:
+		if current_jellyfish.is_inside_tree():
+			if (current_jellyfish.position - self.position).length() > 550:
+				if current_jellyfish.get_state() == current_jellyfish.READY_STATE:
+					current_jellyfish.queue_free()
+					spawn_jellyfish()
+			elif current_jellyfish.get_state() == current_jellyfish.DEAD_STATE:
+				spawn_jellyfish()
 
 
 

@@ -1,0 +1,187 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://assets/textures/enemy-2.png" type="Texture" id=1]
+[ext_resource path="res://actors/enemies/enemy-states-machine.gd" type="Script" id=2]
+[ext_resource path="res://actors/enemies/bomb/bomb.gd" type="Script" id=3]
+[ext_resource path="res://actors/enemies/flash.shader" type="Shader" id=4]
+[ext_resource path="res://actors/enemies/bomb/states/shot-state.gd" type="Script" id=5]
+[ext_resource path="res://actors/enemies/bomb/states/grabbed-state.gd" type="Script" id=6]
+[ext_resource path="res://actors/enemies/bomb/states/ready-state.gd" type="Script" id=7]
+[ext_resource path="res://actors/shots/heavy-shot.tscn" type="PackedScene" id=8]
+[ext_resource path="res://actors/shots/light-shot.tscn" type="PackedScene" id=9]
+[ext_resource path="res://actors/enemies/bomb/states/dead-state.gd" type="Script" id=10]
+[ext_resource path="res://actors/enemies/bomb/states/reflecting-heavy-shot-state.gd" type="Script" id=11]
+[ext_resource path="res://actors/enemies/bomb/states/reflecting-light-shot-state.gd" type="Script" id=12]
+[ext_resource path="res://actors/enemies/bomb/explosion.tscn" type="PackedScene" id=13]
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = ExtResource( 4 )
+shader_param/yellow = Color( 0.941176, 0.909804, 0.458824, 1 )
+shader_param/flash_white = 0.0
+shader_param/flash_yellow = 0.0
+shader_param/flash_invisible = 0.0
+
+[sub_resource type="Animation" id=1]
+resource_name = "floating"
+length = 1.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8, 1.2, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -4 ), Vector2( 0, 4 ), Vector2( 0, -4 ), Vector2( 0, 4 ), Vector2( 0, -4 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "grabbed"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 16, 17 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "shot"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 18, 19 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 5, 8 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 6, 9 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 10, 5 )
+
+[node name="Bomb" type="KinematicBody2D"]
+collision_layer = 16
+collision_mask = 163
+script = ExtResource( 3 )
+explosion = ExtResource( 13 )
+light_shot = ExtResource( 9 )
+heavy_shot = ExtResource( 8 )
+suck_acceleration = 500.0
+friction = 100.0
+starting_animation_frame = -1.0
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 7 )
+position = Vector2( 0, -4 )
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 4
+
+[node name="ChargeParticles" type="CPUParticles2D" parent="Sprite"]
+emitting = false
+amount = 16
+lifetime = 0.5
+emission_shape = 1
+emission_sphere_radius = 32.0
+gravity = Vector2( 0, 0 )
+radial_accel = -200.0
+color = Color( 0.941176, 0.909804, 0.458824, 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/floating = SubResource( 1 )
+anims/grabbed = SubResource( 2 )
+anims/shot = SubResource( 3 )
+
+[node name="Hurtbox" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, -3 )
+shape = SubResource( 4 )
+
+[node name="Hitbox" type="Area2D" parent="."]
+visible = false
+position = Vector2( 0, -3 )
+collision_layer = 64
+collision_mask = 153
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource( 5 )
+
+[node name="ShotHitbox" type="Area2D" parent="."]
+visible = false
+position = Vector2( 2, 0 )
+collision_layer = 32
+collision_mask = 50
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Shape" type="CollisionShape2D" parent="ShotHitbox"]
+shape = SubResource( 6 )
+disabled = true
+
+[node name="StatesMachine" type="Node2D" parent="."]
+script = ExtResource( 2 )
+states = [ ExtResource( 7 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 10 ) ]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="area_entered" from="ShotHitbox" to="." method="_on_ShotHitbox_area_entered"]
+[connection signal="body_entered" from="ShotHitbox" to="." method="_on_ShotHitbox_body_entered"]

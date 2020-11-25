@@ -5,6 +5,7 @@ onready var main: Main = get_tree().get_nodes_in_group("main")[0]
 export (String, "Static", "Up", "Left", "Down", "Right") var moving
 export (float, 0, 500) var moving_speed
 export (float, 0, 2000) var suck_acceleration
+export (float, -1, 10, 0.1) var starting_animation_frame
 
 onready var sprite: Sprite = get_node("Sprite")
 onready var animation_player: AnimationPlayer = get_node("AnimationPlayer")
@@ -92,6 +93,9 @@ func _on_hitbox_body_entered(body):
 		body.take_damage(1)
 	elif body.get_collision_layer_bit(3) == true: # Spikes layer
 		self.destroy()
+	elif body.get_collision_layer_bit(4) == true: # Enemies layer
+		if body != self:
+			body.hit(self)
 
 func grabbed(player):
 	change_state(GRABBED_STATE, player)
@@ -105,6 +109,9 @@ func release(direction: Vector2):
 	starting_velocity()
 
 func destroy():
+	if get_state() == GRABBED_STATE:
+		var player = get_tree().get_nodes_in_group("player")[0]
+		player.change_gun_state(Player.READY_STATE)
 	change_state(DEAD_STATE)
 ##########################################################################
 

@@ -10,7 +10,7 @@ onready var total_hp: int = bar_nodes.get_child_count()
 func move_bar(from: int, to: int):
 	from = clamp(from, 0, total_hp)  # Just in case
 	to = clamp(to, 0, total_hp)
-	tween.interpolate_property(bar, "value", from*16, to*16, abs(to - from)*0.5,
+	tween.interpolate_property(bar, "value", from*16, to*16, abs(to - from)*0.3,
 							   Tween.TRANS_LINEAR, Tween.EASE_IN)
 	tween.start()
 

@@ -250,7 +250,7 @@ extents = Vector2( 1, 1 )
 "player",
 ]]
 z_index = 10
-collision_mask = 63
+collision_mask = 47
 script = ExtResource( 3 )
 speed = 100.0
 acceleration = 400.0
@@ -477,7 +477,7 @@ collision_mask = 2
 [node name="LeftSafety" type="Area2D" parent="."]
 visible = false
 position = Vector2( -13, 13 )
-collision_layer = 6
+collision_layer = 0
 collision_mask = 6
 __meta__ = {
 "_edit_group_": true
@@ -489,7 +489,7 @@ shape = SubResource( 14 )
 [node name="RightSafety" type="Area2D" parent="."]
 visible = false
 position = Vector2( 13, 13 )
-collision_layer = 6
+collision_layer = 0
 collision_mask = 6
 __meta__ = {
 "_edit_group_": true
