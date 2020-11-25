@@ -11,7 +11,6 @@ export (float, 0, 256) var jump_height
 
 export (PackedScene) var light_shot
 export (PackedScene) var heavy_shot
-export (PackedScene) var rocket_shot
 
 
 

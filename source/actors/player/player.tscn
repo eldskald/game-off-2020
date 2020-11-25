@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://assets/textures/player-char.png" type="Texture" id=1]
 [ext_resource path="res://assets/textures/arm-gun.png" type="Texture" id=2]
@@ -26,6 +26,9 @@
 [ext_resource path="res://actors/player/movement-states/stunned-state.gd" type="Script" id=24]
 [ext_resource path="res://actors/player/gun-states/unusable_state.gd" type="Script" id=25]
 [ext_resource path="res://actors/player/movement-states/dying-state.gd" type="Script" id=26]
+[ext_resource path="res://actors/shots/rocket.tscn" type="PackedScene" id=27]
+[ext_resource path="res://actors/player/movement-states/rocketing-state.gd" type="Script" id=28]
+[ext_resource path="res://actors/shots/mega-rocket.tscn" type="PackedScene" id=29]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 12 )
@@ -294,6 +297,13 @@ __meta__ = {
 "_edit_group_": true
 }
 
+[node name="RocketLaser" parent="Sprite/GunSprite/Muzzle" instance=ExtResource( 27 )]
+rotation = -1.5708
+z_index = -1
+z_as_relative = false
+
+[node name="MegaRocket" parent="Sprite/GunSprite/Muzzle" instance=ExtResource( 29 )]
+
 [node name="SuckArea" type="Area2D" parent="Sprite/GunSprite/Muzzle"]
 visible = false
 position = Vector2( 30, 0 )
@@ -427,7 +437,7 @@ shape = SubResource( 13 )
 [node name="MovementStatesMachine" type="Node2D" parent="."]
 script = ExtResource( 4 )
 machine_type = "Movement"
-states = [ ExtResource( 6 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 22 ), ExtResource( 23 ), null, ExtResource( 24 ), ExtResource( 26 ) ]
+states = [ ExtResource( 6 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 28 ), ExtResource( 24 ), ExtResource( 26 ) ]
 
 [node name="GunStatesMachine" type="Node2D" parent="."]
 script = ExtResource( 4 )
