@@ -2,7 +2,9 @@ extends Node
 
 onready var main = get_parent()
 
+export (PackedScene) var player_character
 export (PackedScene) var health_pickup
+export (Array, PackedScene) var rooms
 
 var hp: int
 var max_hp: int
@@ -36,6 +38,9 @@ func drop_health_pickup(location: Vector2):
 			var drop = health_pickup.instance()
 			drop.position = location
 			level.add_child(drop)
+
+func heal_to_full():
+	hp = max_hp
 
 
 
