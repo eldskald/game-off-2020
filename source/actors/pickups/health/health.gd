@@ -28,8 +28,7 @@ func is_being_sucked() -> bool:
 
 func _on_body_entered(body):
 	if body.get_collision_layer_bit(0) == true: # Player's layer
-		main.hp_bar.move_bar(main.data.hp, main.data.hp + 1)
-		main.data.hp = clamp(main.data.hp + 1, 0, main.data.max_hp)
+		main.data.heal_one_notch()
 		self.queue_free()
 
 func grabbed(body):

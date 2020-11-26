@@ -27,13 +27,12 @@ func _process(_delta):
 
 
 func start():
-	pass
+	change_room(data.rooms[0], -1)
 
 
 
 func player_died():
-	data.hp = data.max_hp
-	change_room(title_screen, 0)
+	change_room(data.rooms[data.current_checkpoint], -1)
 
 
 

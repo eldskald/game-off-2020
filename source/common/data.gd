@@ -40,8 +40,12 @@ func drop_health_pickup(location: Vector2):
 			level.add_child(drop)
 
 func heal_to_full():
+	main.hp_bar.move_bar(hp, max_hp)
 	hp = max_hp
 
+func heal_one_notch():
+	main.hp_bar.move_bar(hp, clamp(hp + 1, 0, max_hp))
+	hp = clamp(hp + 1, 0, max_hp)
 
 
 

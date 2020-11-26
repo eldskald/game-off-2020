@@ -28,6 +28,8 @@ func spawn_player(arg: int):
 	else:
 		player.position = get_node("Checkpoint").position
 		main.hp_bar.initialize(main.data.max_hp)
-		main.data.heal_to_full()
+		main.data.hp = main.data.max_hp
+	
+	self.add_child(player)
 
 

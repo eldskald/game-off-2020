@@ -1,0 +1,90 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/textures/checkpoint.png" type="Texture" id=1]
+[ext_resource path="res://rooms/checkpoint/checkpoint.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "activating"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "active"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 3 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "inactive"
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 11, 2 )
+
+[node name="Checkpoint" type="StaticBody2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, 21 )
+texture = ExtResource( 1 )
+vframes = 4
+frame = 2
+
+[node name="Shape" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( 24, 29, 24, 21, 16, 21, 16, 13, -16, 13, -16, 21, -24, 21, -24, 29 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/activating = SubResource( 1 )
+anims/active = SubResource( 2 )
+anims/inactive = SubResource( 3 )
+
+[node name="Detector" type="Area2D" parent="."]
+visible = false
+position = Vector2( 0, 11 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Shape" type="CollisionShape2D" parent="Detector"]
+shape = SubResource( 4 )
+
+[node name="Ready" type="Timer" parent="."]
+one_shot = true
+autostart = true
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
+[connection signal="body_entered" from="Detector" to="." method="_on_Detector_body_entered"]
