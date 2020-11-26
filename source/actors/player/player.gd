@@ -178,7 +178,8 @@ func take_damage(damage: int, touched_spikes: bool = false):
 			change_gun_state(UNUSABLE_STATE)
 
 func _on_touched_spikes(body):
-	take_damage(1, true)
+	if get_movement_state() != DYING_STATE:
+		take_damage(1, true)
 ##########################################################################
 
 
