@@ -47,5 +47,10 @@ func heal_one_notch():
 	main.hp_bar.move_bar(hp, clamp(hp + 1, 0, max_hp))
 	hp = clamp(hp + 1, 0, max_hp)
 
+func increase_max_hp():
+	max_hp += 1
+	main.hp_bar.activate_tank(max_hp)
+	heal_to_full()
+
 
 
