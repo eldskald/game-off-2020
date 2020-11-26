@@ -59,13 +59,14 @@ extents = Vector2( 11, 2 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, 21 )
+position = Vector2( 0, 8 )
 texture = ExtResource( 1 )
 vframes = 4
 frame = 2
 
 [node name="Shape" type="CollisionPolygon2D" parent="."]
 visible = false
+position = Vector2( 0, -13 )
 polygon = PoolVector2Array( 24, 29, 24, 21, 16, 21, 16, 13, -16, 13, -16, 21, -24, 21, -24, 29 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -75,7 +76,7 @@ anims/inactive = SubResource( 3 )
 
 [node name="Detector" type="Area2D" parent="."]
 visible = false
-position = Vector2( 0, 11 )
+position = Vector2( 0, -2 )
 __meta__ = {
 "_edit_group_": true
 }

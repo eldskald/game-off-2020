@@ -11,15 +11,15 @@
 resource_local_to_scene = true
 extents = Vector2( 51, 10 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=2]
 resource_local_to_scene = true
 extents = Vector2( 10, 17 )
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=3]
 resource_local_to_scene = true
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=4]
 resource_local_to_scene = true
 font_data = ExtResource( 3 )
 
@@ -44,10 +44,10 @@ tile_data = PoolIntArray( -131064, 1, 0, -131063, 1, 0, -131062, 1, 0, -131061, 
 position = Vector2( 64, 32 )
 
 [node name="1" type="Node2D" parent="Entrances" index="1"]
-position = Vector2( 496, 240 )
+position = Vector2( 496, 256 )
 
 [node name="2" type="Node2D" parent="Entrances" index="2"]
-position = Vector2( 27, 240 )
+position = Vector2( 27, 256 )
 
 [node name="Exit" parent="." index="3" instance=ExtResource( 2 )]
 position = Vector2( 79, -10 )
@@ -62,14 +62,14 @@ position = Vector2( -16, 240 )
 next_room = 4
 
 [node name="Shape" parent="Exit2" index="0"]
-shape = SubResource( 6 )
+shape = SubResource( 2 )
 
 [node name="Message" parent="." index="5" instance=ExtResource( 4 )]
 margin_left = 201.0
 margin_top = 10.0
 margin_right = 505.0
 margin_bottom = 26.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 3 )
 text = "Right click: vacuum"
 keyboard_text = "Right click: vacuum"
 controller_text = "LT: vacuum"
@@ -79,7 +79,7 @@ margin_left = 201.0
 margin_top = 53.0
 margin_right = 505.0
 margin_bottom = 88.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 4 )
 text = "Try grabbing a
 wall and shooting."
 keyboard_text = "Try grabbing a

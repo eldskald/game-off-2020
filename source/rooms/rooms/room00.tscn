@@ -33,13 +33,13 @@ tile_data = PoolIntArray( -65532, 9, 196608, -65531, 9, 196609, -65530, 9, 19660
 tile_data = PoolIntArray( 1048605, 0, 0, 1048606, 0, 0, 1048607, 0, 0, 1048608, 0, 0, 1048609, 0, 0, 1048610, 0, 0 )
 
 [node name="0" type="Node2D" parent="Entrances" index="0"]
-position = Vector2( 496, 176 )
+position = Vector2( 496, 192 )
 
 [node name="1" type="Node2D" parent="Entrances" index="1"]
-position = Vector2( 16, 176 )
+position = Vector2( 16, 192 )
 
 [node name="Checkpoint" parent="." index="3" instance=ExtResource( 1 )]
-position = Vector2( 224, 131 )
+position = Vector2( 224, 144 )
 
 [node name="Exit" parent="." index="4" instance=ExtResource( 2 )]
 position = Vector2( 525, 122 )
