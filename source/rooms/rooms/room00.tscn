@@ -66,7 +66,7 @@ Space: jump"
 keyboard_text = "WASD: move
 Space: jump"
 controller_text = "D Pad: move
-RB, RT: jump"
+RT, RB: jump"
 
 [editable path="Exit"]
 

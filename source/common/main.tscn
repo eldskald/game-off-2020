@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://common/main.gd" type="Script" id=1]
 [ext_resource path="res://rooms/rooms/room01.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://actors/player/player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://rooms/rooms/room00.tscn" type="PackedScene" id=8]
 [ext_resource path="res://ui/title-screen/title-screen.tscn" type="PackedScene" id=9]
+[ext_resource path="res://rooms/rooms/room02.tscn" type="PackedScene" id=10]
 
 [node name="Main" type="Node" groups=[
 "main",
@@ -21,7 +22,7 @@ title_screen = ExtResource( 9 )
 script = ExtResource( 4 )
 player_character = ExtResource( 7 )
 health_pickup = ExtResource( 6 )
-rooms = [ ExtResource( 8 ), ExtResource( 2 ) ]
+rooms = [ ExtResource( 8 ), ExtResource( 2 ), ExtResource( 10 ) ]
 
 [node name="Scene" type="Node" parent="."]
 

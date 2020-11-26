@@ -10,7 +10,8 @@ func initialize(argument):
 		if enemy.starting_animation_frame < 0:
 			animation_player.advance((randi()%40)/10)
 		else:
-			animation_player.advance(((enemy.starting_animation_frame*10)%16)/10)
+			var converted = int(enemy.starting_animation_frame*10.0)
+			animation_player.advance(float(converted%16)/10.0)
 
 
 

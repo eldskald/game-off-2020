@@ -7,9 +7,10 @@ func initialize(argument):
 	
 	# To make them dance in synchrony!
 	if enemy.starting_animation_frame < 0:
-		animation_player.advance((randi()%40)/10)
+		animation_player.advance(float(randi()%40)/10)
 	else:
-		animation_player.advance(((enemy.starting_animation_frame*10)%40)/10)
+		var converted = int(enemy.starting_animation_frame*10.0)
+		animation_player.advance(float(converted%40)/10.0)
 
 
 
