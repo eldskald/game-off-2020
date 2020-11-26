@@ -76,8 +76,30 @@ func _physics_process(_delta):
 	old_input = get_dir_input()
 
 func get_dir_input() -> Vector2:
-	return Vector2( Input.get_action_strength("right") - Input.get_action_strength("left"), 
-					Input.get_action_strength("down") - Input.get_action_strength("up"))
+	var stick = Vector2(Input.get_joy_axis(0, JOY_AXIS_0), Input.get_joy_axis(0, JOY_AXIS_1))
+	if stick.length_squared() > 0.16:
+		return discretize_angle(stick.angle())
+	else:
+		return Vector2( Input.get_action_strength("right") - Input.get_action_strength("left"), 
+						Input.get_action_strength("down") - Input.get_action_strength("up"))
+
+func discretize_angle(angle: float):
+	if angle > -7*PI/8 and angle <= -5*PI/8:
+		return Vector2(-1,-1)
+	elif angle > -5*PI/8 and angle <= -3*PI/8:
+		return Vector2(0,-1)
+	elif angle > -3*PI/8 and angle <= -PI/8:
+		return Vector2(1,-1)
+	elif angle > -PI/8 and angle <= PI/8:
+		return Vector2(1,0)
+	elif angle > PI/8 and angle <= 3*PI/8:
+		return Vector2(1,1)
+	elif angle > 3*PI/8 and angle <= 5*PI/8:
+		return Vector2(0,1)
+	elif angle > 5*PI/8 and angle <= 7*PI/8:
+		return Vector2(-1,1)
+	else:
+		return Vector2(-1,0)
 
 func get_just_pressed_dir_input() -> Vector2:
 	return just_pressed
