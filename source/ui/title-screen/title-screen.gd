@@ -11,7 +11,7 @@ func _ready():
 
 
 func _process(_delta):
-	if Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("ui_cancel"):
+	if Input.is_action_just_pressed("pause"):
 		if animation_player.is_playing():
 			if animation_player.current_animation_position < 13:
 				animation_player.advance(13 - animation_player.current_animation_position)
