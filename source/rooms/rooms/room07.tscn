@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://rooms/base-room/base-room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://rooms/exits/exit.tscn" type="PackedScene" id=2]
@@ -8,7 +8,7 @@
 [ext_resource path="res://rooms/secrets/secret.tscn" type="PackedScene" id=6]
 [ext_resource path="res://actors/enemies/jellyfish/spawner.tscn" type="PackedScene" id=7]
 
-[sub_resource type="Shader" id=2]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 const float PI = 3.14159265359;
@@ -26,9 +26,17 @@ void fragment() {
 }
 "
 
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/amplitude = 4.0
+shader_param/wavelength = 8.0
+shader_param/frequency = 5.0
+shader_param/phase = 0.0
+
 [sub_resource type="ShaderMaterial" id=3]
 resource_local_to_scene = true
-shader = SubResource( 2 )
+shader = SubResource( 1 )
 shader_param/amplitude = 4.0
 shader_param/wavelength = 8.0
 shader_param/frequency = 5.0
@@ -36,7 +44,7 @@ shader_param/phase = 0.0
 
 [sub_resource type="ShaderMaterial" id=4]
 resource_local_to_scene = true
-shader = SubResource( 2 )
+shader = SubResource( 1 )
 shader_param/amplitude = 4.0
 shader_param/wavelength = 8.0
 shader_param/frequency = 5.0
@@ -44,7 +52,7 @@ shader_param/phase = 0.0
 
 [sub_resource type="ShaderMaterial" id=5]
 resource_local_to_scene = true
-shader = SubResource( 2 )
+shader = SubResource( 1 )
 shader_param/amplitude = 4.0
 shader_param/wavelength = 8.0
 shader_param/frequency = 5.0
@@ -52,7 +60,7 @@ shader_param/phase = 0.0
 
 [sub_resource type="ShaderMaterial" id=6]
 resource_local_to_scene = true
-shader = SubResource( 2 )
+shader = SubResource( 1 )
 shader_param/amplitude = 4.0
 shader_param/wavelength = 8.0
 shader_param/frequency = 5.0
@@ -60,7 +68,7 @@ shader_param/phase = 0.0
 
 [sub_resource type="ShaderMaterial" id=7]
 resource_local_to_scene = true
-shader = SubResource( 2 )
+shader = SubResource( 1 )
 shader_param/amplitude = 4.0
 shader_param/wavelength = 8.0
 shader_param/frequency = 5.0
@@ -68,7 +76,7 @@ shader_param/phase = 0.0
 
 [sub_resource type="ShaderMaterial" id=8]
 resource_local_to_scene = true
-shader = SubResource( 2 )
+shader = SubResource( 1 )
 shader_param/amplitude = 4.0
 shader_param/wavelength = 8.0
 shader_param/frequency = 5.0
@@ -76,7 +84,7 @@ shader_param/phase = 0.0
 
 [sub_resource type="ShaderMaterial" id=9]
 resource_local_to_scene = true
-shader = SubResource( 2 )
+shader = SubResource( 1 )
 shader_param/amplitude = 4.0
 shader_param/wavelength = 8.0
 shader_param/frequency = 5.0
@@ -84,7 +92,7 @@ shader_param/phase = 0.0
 
 [sub_resource type="ShaderMaterial" id=10]
 resource_local_to_scene = true
-shader = SubResource( 2 )
+shader = SubResource( 1 )
 shader_param/amplitude = 4.0
 shader_param/wavelength = 8.0
 shader_param/frequency = 5.0
@@ -92,7 +100,7 @@ shader_param/phase = 0.0
 
 [sub_resource type="ShaderMaterial" id=11]
 resource_local_to_scene = true
-shader = SubResource( 2 )
+shader = SubResource( 1 )
 shader_param/amplitude = 4.0
 shader_param/wavelength = 8.0
 shader_param/frequency = 5.0
@@ -100,7 +108,7 @@ shader_param/phase = 0.0
 
 [sub_resource type="ShaderMaterial" id=12]
 resource_local_to_scene = true
-shader = SubResource( 2 )
+shader = SubResource( 1 )
 shader_param/amplitude = 4.0
 shader_param/wavelength = 8.0
 shader_param/frequency = 5.0
@@ -108,7 +116,7 @@ shader_param/phase = 0.0
 
 [sub_resource type="ShaderMaterial" id=13]
 resource_local_to_scene = true
-shader = SubResource( 2 )
+shader = SubResource( 1 )
 shader_param/amplitude = 4.0
 shader_param/wavelength = 8.0
 shader_param/frequency = 5.0
@@ -116,7 +124,7 @@ shader_param/phase = 0.0
 
 [sub_resource type="ShaderMaterial" id=14]
 resource_local_to_scene = true
-shader = SubResource( 2 )
+shader = SubResource( 1 )
 shader_param/amplitude = 4.0
 shader_param/wavelength = 8.0
 shader_param/frequency = 5.0
@@ -124,7 +132,7 @@ shader_param/phase = 0.0
 
 [sub_resource type="ShaderMaterial" id=15]
 resource_local_to_scene = true
-shader = SubResource( 2 )
+shader = SubResource( 1 )
 shader_param/amplitude = 4.0
 shader_param/wavelength = 8.0
 shader_param/frequency = 5.0
@@ -132,7 +140,7 @@ shader_param/phase = 0.0
 
 [sub_resource type="ShaderMaterial" id=16]
 resource_local_to_scene = true
-shader = SubResource( 2 )
+shader = SubResource( 1 )
 shader_param/amplitude = 4.0
 shader_param/wavelength = 8.0
 shader_param/frequency = 5.0
@@ -140,7 +148,7 @@ shader_param/phase = 0.0
 
 [sub_resource type="ShaderMaterial" id=17]
 resource_local_to_scene = true
-shader = SubResource( 2 )
+shader = SubResource( 1 )
 shader_param/amplitude = 4.0
 shader_param/wavelength = 8.0
 shader_param/frequency = 5.0
@@ -148,21 +156,13 @@ shader_param/phase = 0.0
 
 [sub_resource type="ShaderMaterial" id=18]
 resource_local_to_scene = true
-shader = SubResource( 2 )
+shader = SubResource( 1 )
 shader_param/amplitude = 4.0
 shader_param/wavelength = 8.0
 shader_param/frequency = 5.0
 shader_param/phase = 0.0
 
-[sub_resource type="ShaderMaterial" id=19]
-resource_local_to_scene = true
-shader = SubResource( 2 )
-shader_param/amplitude = 4.0
-shader_param/wavelength = 8.0
-shader_param/frequency = 5.0
-shader_param/phase = 0.0
-
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=19]
 resource_local_to_scene = true
 extents = Vector2( 48, 5 )
 
@@ -174,77 +174,81 @@ shader_param/flash_white = 0.0
 shader_param/flash_yellow = 0.0
 shader_param/flash_invisible = 0.0
 
+[sub_resource type="RectangleShape2D" id=21]
+resource_local_to_scene = true
+extents = Vector2( 35, 10 )
+
 [node name="Room" instance=ExtResource( 1 )]
 room_id = 7
 height_in_screens = 4
 width_in_screens = 2
 
 [node name="BgJellyfish" parent="Background" index="0" instance=ExtResource( 4 )]
-material = SubResource( 3 )
+material = SubResource( 2 )
 position = Vector2( 201, 878 )
 
 [node name="BgJellyfish2" parent="Background" index="1" instance=ExtResource( 4 )]
-material = SubResource( 4 )
+material = SubResource( 3 )
 position = Vector2( 327, 972 )
 
 [node name="BgJellyfish3" parent="Background" index="2" instance=ExtResource( 4 )]
-material = SubResource( 5 )
+material = SubResource( 4 )
 position = Vector2( 337, 764 )
 
 [node name="BgJellyfish4" parent="Background" index="3" instance=ExtResource( 4 )]
-material = SubResource( 6 )
+material = SubResource( 5 )
 position = Vector2( 442, 675 )
 
 [node name="BgJellyfish5" parent="Background" index="4" instance=ExtResource( 4 )]
-material = SubResource( 7 )
+material = SubResource( 6 )
 position = Vector2( 481, 818 )
 
 [node name="BgJellyfish6" parent="Background" index="5" instance=ExtResource( 4 )]
-material = SubResource( 8 )
+material = SubResource( 7 )
 position = Vector2( 452, 1023 )
 
 [node name="BgJellyfish7" parent="Background" index="6" instance=ExtResource( 4 )]
-material = SubResource( 9 )
+material = SubResource( 8 )
 position = Vector2( 389, 866 )
 
 [node name="BgJellyfish8" parent="Background" index="7" instance=ExtResource( 4 )]
-material = SubResource( 10 )
+material = SubResource( 9 )
 position = Vector2( 337, 621 )
 
 [node name="BgJellyfish9" parent="Background" index="8" instance=ExtResource( 4 )]
-material = SubResource( 11 )
+material = SubResource( 10 )
 position = Vector2( 216, 541 )
 
 [node name="BgJellyfish10" parent="Background" index="9" instance=ExtResource( 4 )]
-material = SubResource( 12 )
+material = SubResource( 11 )
 position = Vector2( 297, 447 )
 
 [node name="BgJellyfish11" parent="Background" index="10" instance=ExtResource( 4 )]
-material = SubResource( 13 )
+material = SubResource( 12 )
 position = Vector2( 468, 516 )
 
 [node name="BgJellyfish12" parent="Background" index="11" instance=ExtResource( 4 )]
-material = SubResource( 14 )
+material = SubResource( 13 )
 position = Vector2( 505, 360 )
 
 [node name="BgJellyfish13" parent="Background" index="12" instance=ExtResource( 4 )]
-material = SubResource( 15 )
+material = SubResource( 14 )
 position = Vector2( 362, 274 )
 
 [node name="BgJellyfish14" parent="Background" index="13" instance=ExtResource( 4 )]
-material = SubResource( 16 )
+material = SubResource( 15 )
 position = Vector2( 548, 175 )
 
 [node name="BgJellyfish15" parent="Background" index="14" instance=ExtResource( 4 )]
-material = SubResource( 17 )
+material = SubResource( 16 )
 position = Vector2( 402, 145 )
 
 [node name="BgJellyfish16" parent="Background" index="15" instance=ExtResource( 4 )]
-material = SubResource( 18 )
+material = SubResource( 17 )
 position = Vector2( 316, 159 )
 
 [node name="BgJellyfish17" parent="Background" index="16" instance=ExtResource( 4 )]
-material = SubResource( 19 )
+material = SubResource( 18 )
 position = Vector2( 423, 410 )
 
 [node name="Seaweed" parent="Background" index="17" instance=ExtResource( 5 )]
@@ -347,7 +351,7 @@ next_room = 5
 next_entrance = 1
 
 [node name="Shape" parent="Exit" index="0"]
-shape = SubResource( 1 )
+shape = SubResource( 19 )
 
 [node name="Secret" parent="." index="4" instance=ExtResource( 6 )]
 material = SubResource( 20 )
@@ -439,4 +443,13 @@ despawn_distance = 1500.0
 position = Vector2( -333, 1038 )
 despawn_distance = 1500.0
 
+[node name="Exit2" parent="." index="26" instance=ExtResource( 2 )]
+position = Vector2( 192, 1175 )
+next_room = 8
+
+[node name="Shape" parent="Exit2" index="0"]
+shape = SubResource( 21 )
+
 [editable path="Exit"]
+
+[editable path="Exit2"]
