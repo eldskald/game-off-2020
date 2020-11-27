@@ -46,7 +46,7 @@ position = Vector2( 432, 176 )
 [node name="Exit" parent="." index="4" instance=ExtResource( 2 )]
 position = Vector2( 192, -23 )
 next_room = 7
-next_entrance = 5
+next_entrance = 4
 
 [node name="Shape" parent="Exit" index="0"]
 shape = SubResource( 1 )

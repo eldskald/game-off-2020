@@ -7,6 +7,9 @@ resource_local_to_scene = true
 
 [node name="Exit" type="Area2D"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Shape" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
