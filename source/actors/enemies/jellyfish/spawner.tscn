@@ -7,3 +7,4 @@
 script = ExtResource( 1 )
 jellyfish = ExtResource( 2 )
 moving_speed = 50.0
+despawn_distance = 550.0
