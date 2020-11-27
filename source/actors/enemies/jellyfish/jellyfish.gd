@@ -105,8 +105,7 @@ func shoot(direction: Vector2):
 	change_state(SHOT_STATE, direction)
 
 func release(direction: Vector2):
-	change_state(READY_STATE)
-	starting_velocity()
+	shoot(direction)
 
 func destroy():
 	if get_state() == GRABBED_STATE:
