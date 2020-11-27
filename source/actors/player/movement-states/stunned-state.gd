@@ -19,6 +19,7 @@ func _physics_process(delta):
 			player.change_gun_state(Player.READY_STATE)
 		else:
 			player.position = player.checkpoint
+			player.velocity = Vector2.ZERO
 			player.change_movement_state(Player.GROUNDED_STATE)
 			player.change_gun_state(Player.READY_STATE)
 
