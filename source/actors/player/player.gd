@@ -154,6 +154,7 @@ func spawn_shot(shot_scene: PackedScene):
 	var level = get_tree().get_nodes_in_group("level")[0]
 	var shot = shot_scene.instance()
 	shot.shooter = self
+	shot.suckable = false
 	shot.direction = aiming.normalized()
 	shot.position = level.to_local(muzzle.global_position)
 	level.add_child(shot)
