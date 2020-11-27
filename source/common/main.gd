@@ -27,7 +27,7 @@ func _process(_delta):
 
 
 func start():
-	change_room(data.rooms[8], -1)
+	change_room(data.rooms[0], -1)
 
 
 
