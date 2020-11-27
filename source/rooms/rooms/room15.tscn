@@ -1,0 +1,228 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://rooms/base-room/base-room.tscn" type="PackedScene" id=1]
+[ext_resource path="res://rooms/exits/exit.tscn" type="PackedScene" id=2]
+[ext_resource path="res://rooms/backgrounds/seaweed.tscn" type="PackedScene" id=3]
+[ext_resource path="res://actors/pickups/egg/egg.tscn" type="PackedScene" id=4]
+[ext_resource path="res://rooms/backgrounds/jellyfish.tscn" type="PackedScene" id=5]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+const float PI = 3.14159265359;
+
+uniform float amplitude: hint_range(0.0, 5.0) = 0.0;
+uniform float wavelength: hint_range(0.001, 10.0) = 1.0;
+uniform float frequency: hint_range(0.0, 10.0) = 0.0;
+uniform float phase: hint_range(0.0, 10.0) = 0.0;
+
+void fragment() {
+	vec2 uv = floor(UV/TEXTURE_PIXEL_SIZE);
+	float dx = floor(amplitude*(clamp(4.0*(UV.y - 0.15), 0.0, 1.0)));
+	dx *= sin(PI*(uv.y + (TIME + phase)*frequency)/wavelength);
+	COLOR = texture(TEXTURE, (uv + vec2(dx, 0.0))*TEXTURE_PIXEL_SIZE);
+}
+"
+
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/amplitude = 4.0
+shader_param/wavelength = 8.0
+shader_param/frequency = 5.0
+shader_param/phase = 0.0
+
+[sub_resource type="ShaderMaterial" id=3]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/amplitude = 4.0
+shader_param/wavelength = 8.0
+shader_param/frequency = 5.0
+shader_param/phase = 0.0
+
+[sub_resource type="ShaderMaterial" id=4]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/amplitude = 4.0
+shader_param/wavelength = 8.0
+shader_param/frequency = 5.0
+shader_param/phase = 0.0
+
+[sub_resource type="ShaderMaterial" id=5]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/amplitude = 4.0
+shader_param/wavelength = 8.0
+shader_param/frequency = 5.0
+shader_param/phase = 0.0
+
+[sub_resource type="ShaderMaterial" id=6]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/amplitude = 4.0
+shader_param/wavelength = 8.0
+shader_param/frequency = 5.0
+shader_param/phase = 0.0
+
+[sub_resource type="ShaderMaterial" id=7]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/amplitude = 4.0
+shader_param/wavelength = 8.0
+shader_param/frequency = 5.0
+shader_param/phase = 0.0
+
+[sub_resource type="ShaderMaterial" id=8]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/amplitude = 4.0
+shader_param/wavelength = 8.0
+shader_param/frequency = 5.0
+shader_param/phase = 0.0
+
+[sub_resource type="ShaderMaterial" id=9]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/amplitude = 4.0
+shader_param/wavelength = 8.0
+shader_param/frequency = 5.0
+shader_param/phase = 0.0
+
+[sub_resource type="RectangleShape2D" id=10]
+resource_local_to_scene = true
+extents = Vector2( 32, 10 )
+
+[node name="Room" instance=ExtResource( 1 )]
+room_id = 15
+
+[node name="BgJellyfish" parent="Background" index="0" instance=ExtResource( 5 )]
+material = SubResource( 2 )
+position = Vector2( 136, 152 )
+
+[node name="BgJellyfish2" parent="Background" index="1" instance=ExtResource( 5 )]
+material = SubResource( 3 )
+position = Vector2( 192, 84 )
+
+[node name="BgJellyfish3" parent="Background" index="2" instance=ExtResource( 5 )]
+material = SubResource( 4 )
+position = Vector2( 309, 162 )
+
+[node name="BgJellyfish4" parent="Background" index="3" instance=ExtResource( 5 )]
+material = SubResource( 5 )
+position = Vector2( 260, 115 )
+
+[node name="BgJellyfish5" parent="Background" index="4" instance=ExtResource( 5 )]
+material = SubResource( 6 )
+position = Vector2( 340, 95 )
+
+[node name="BgJellyfish8" parent="Background" index="5" instance=ExtResource( 5 )]
+material = SubResource( 7 )
+position = Vector2( 404, 111 )
+
+[node name="Seaweed" parent="Background" index="6" instance=ExtResource( 3 )]
+position = Vector2( 170, 227 )
+
+[node name="Seaweed2" parent="Background" index="7" instance=ExtResource( 3 )]
+position = Vector2( 202, 226 )
+frame = 4
+type = "Long Middle"
+
+[node name="Seaweed3" parent="Background" index="8" instance=ExtResource( 3 )]
+position = Vector2( 202, 165 )
+frame = 7
+type = "Long End"
+
+[node name="Seaweed5" parent="Background" index="9" instance=ExtResource( 3 )]
+position = Vector2( 223, 123 )
+frame = 7
+type = "Long End"
+
+[node name="Seaweed4" parent="Background" index="10" instance=ExtResource( 3 )]
+position = Vector2( 223, 206 )
+scale = Vector2( 1, 1.625 )
+frame = 4
+type = "Long Middle"
+
+[node name="Seaweed6" parent="Background" index="11" instance=ExtResource( 3 )]
+position = Vector2( 252, 224 )
+
+[node name="Seaweed7" parent="Background" index="12" instance=ExtResource( 3 )]
+position = Vector2( 365, 227 )
+frame = 4
+type = "Long Middle"
+
+[node name="Seaweed8" parent="Background" index="13" instance=ExtResource( 3 )]
+position = Vector2( 365, 163 )
+frame = 4
+type = "Long Middle"
+
+[node name="Seaweed9" parent="Background" index="14" instance=ExtResource( 3 )]
+position = Vector2( 365, 101 )
+frame = 7
+type = "Long End"
+
+[node name="Seaweed10" parent="Background" index="15" instance=ExtResource( 3 )]
+position = Vector2( 399, 176 )
+scale = Vector2( 1, 2.04688 )
+
+[node name="Seaweed11" parent="Background" index="16" instance=ExtResource( 3 )]
+position = Vector2( 344, 228 )
+frame = 4
+type = "Long Middle"
+
+[node name="Seaweed12" parent="Background" index="17" instance=ExtResource( 3 )]
+position = Vector2( 344, 177 )
+scale = Vector2( 1, 0.84375 )
+frame = 4
+type = "Long Middle"
+
+[node name="Seaweed13" parent="Background" index="18" instance=ExtResource( 3 )]
+position = Vector2( 344, 122 )
+frame = 7
+type = "Long End"
+
+[node name="Seaweed14" parent="Background" index="19" instance=ExtResource( 3 )]
+position = Vector2( 328, 224 )
+scale = Vector2( 1, 1.1875 )
+frame = 2
+type = "One"
+
+[node name="Seaweed15" parent="Background" index="20" instance=ExtResource( 3 )]
+position = Vector2( 306, 235.5 )
+scale = Vector2( 1, 0.859375 )
+frame = 2
+type = "One"
+
+[node name="Seaweed16" parent="Background" index="21" instance=ExtResource( 3 )]
+position = Vector2( 283, 224.75 )
+scale = Vector2( 1, 1.21094 )
+frame = 2
+type = "One"
+
+[node name="BgJellyfish6" parent="Background" index="22" instance=ExtResource( 5 )]
+material = SubResource( 8 )
+position = Vector2( 212, 181 )
+
+[node name="BgJellyfish7" parent="Background" index="23" instance=ExtResource( 5 )]
+material = SubResource( 9 )
+position = Vector2( 371, 174 )
+
+[node name="Blocks" parent="Tilemaps" index="0"]
+tile_data = PoolIntArray( -1, 0, 196608, -65536, 0, 196609, -65535, 0, 196609, -65534, 0, 196609, -65533, 0, 196609, -65532, 0, 196609, -65531, 0, 196609, -65530, 0, 196609, -65529, 0, 196609, -65528, 0, 196609, -65527, 0, 196609, -65526, 0, 196609, -65525, 0, 196609, -65524, 0, 196609, -65523, 0, 196609, -65522, 0, 196609, -65521, 0, 196609, -65520, 0, 196609, -65519, 0, 196609, -65518, 0, 196609, -65517, 0, 196609, -65516, 0, 196609, -65515, 0, 196609, -65514, 0, 196609, -65513, 0, 196609, -65512, 0, 196609, -65511, 0, 196609, -65510, 0, 196609, -65509, 0, 196609, -65508, 0, 196609, -65507, 0, 196609, -65506, 0, 196609, -65505, 0, 196609, -65504, 0, 196610, 65535, 0, 262144, 0, 0, 262145, 1, 0, 262145, 2, 0, 262145, 3, 0, 262145, 4, 0, 262145, 5, 0, 262145, 6, 0, 262145, 7, 0, 262145, 8, 0, 262145, 9, 0, 262145, 10, 0, 262145, 11, 0, 262145, 12, 0, 262145, 13, 0, 262145, 14, 0, 262145, 15, 0, 262145, 16, 0, 262145, 17, 0, 262145, 18, 0, 262145, 19, 0, 262145, 20, 0, 262145, 21, 0, 262145, 22, 0, 262145, 23, 0, 262145, 24, 0, 262145, 25, 0, 262145, 26, 0, 262145, 27, 0, 262145, 28, 0, 262145, 29, 0, 262145, 30, 0, 262145, 31, 0, 262145, 32, 0, 262146, 131071, 0, 262144, 65536, 0, 262145, 65537, 0, 262145, 65538, 0, 262145, 65539, 0, 262145, 65540, 0, 262145, 65541, 0, 262145, 65542, 0, 262145, 65543, 0, 262145, 65544, 0, 262145, 65545, 0, 262145, 65546, 0, 262145, 65547, 0, 262145, 65548, 0, 262145, 65549, 0, 262145, 65550, 0, 262145, 65551, 0, 262145, 65552, 0, 262145, 65553, 0, 262145, 65554, 0, 262145, 65555, 0, 262145, 65556, 0, 262145, 65557, 0, 262145, 65558, 0, 262145, 65559, 0, 262145, 65560, 0, 262145, 65561, 0, 262145, 65562, 0, 262145, 65563, 0, 262145, 65564, 0, 262145, 65565, 0, 262145, 65566, 0, 262145, 65567, 0, 262145, 65568, 0, 262146, 196607, 0, 262144, 131072, 0, 262145, 131073, 0, 262145, 131074, 0, 262145, 131075, 0, 262145, 131076, 0, 262145, 131077, 0, 262145, 131078, 0, 262145, 131079, 0, 655360, 131080, 0, 327681, 131081, 0, 327681, 131082, 0, 327681, 131083, 0, 327681, 131084, 0, 327681, 131085, 0, 327681, 131086, 0, 327681, 131087, 0, 327681, 131088, 0, 327681, 131089, 0, 327681, 131090, 0, 327681, 131091, 0, 327681, 131092, 0, 327681, 131093, 0, 327681, 131094, 0, 327681, 131095, 0, 327681, 131096, 0, 786432, 131097, 0, 262145, 131098, 0, 262145, 131099, 0, 262145, 131100, 0, 262145, 131101, 0, 262145, 131102, 0, 262145, 131103, 0, 262145, 131104, 0, 262146, 262143, 0, 262144, 196608, 0, 262145, 196609, 0, 262145, 196610, 0, 262145, 196611, 0, 262145, 196612, 0, 262145, 196613, 0, 655360, 196614, 0, 327681, 196615, 0, 327682, 196632, 0, 327680, 196633, 0, 327681, 196634, 0, 327681, 196635, 0, 327681, 196636, 0, 786432, 196637, 0, 262145, 196638, 0, 262145, 196639, 0, 262145, 196640, 0, 262146, 327679, 0, 262144, 262144, 0, 262145, 262145, 0, 262145, 262146, 0, 262145, 262147, 0, 262145, 262148, 0, 655360, 262149, 0, 327682, 262172, 0, 327680, 262173, 0, 327681, 262174, 0, 786432, 262175, 0, 262145, 262176, 0, 262146, 393215, 0, 262144, 327680, 0, 262145, 327681, 0, 262145, 327682, 0, 262145, 327683, 0, 655360, 327684, 0, 327682, 327710, 0, 327680, 327711, 0, 786432, 327712, 0, 262146, 458751, 0, 262144, 393216, 0, 262145, 393217, 0, 262145, 393218, 0, 262145, 393219, 0, 262146, 393247, 0, 262144, 393248, 0, 262146, 524287, 0, 262144, 458752, 0, 262145, 458753, 0, 262145, 458754, 0, 262145, 458755, 0, 262146, 458783, 0, 262144, 458784, 0, 262146, 589823, 0, 262144, 524288, 0, 262145, 524289, 0, 262145, 524290, 0, 655360, 524291, 0, 327682, 524319, 0, 262144, 524320, 0, 262146, 655359, 0, 262144, 589824, 0, 262145, 589825, 0, 262145, 589826, 0, 262146, 589855, 0, 262144, 589856, 0, 262146, 720895, 0, 262144, 655360, 0, 262145, 655361, 0, 262145, 655362, 0, 262146, 655391, 0, 262144, 655392, 0, 262146, 786431, 0, 262144, 720896, 0, 262145, 720897, 0, 262145, 720898, 0, 262146, 720927, 0, 262144, 720928, 0, 262146, 851967, 0, 262144, 786432, 0, 262145, 786433, 0, 655360, 786434, 0, 327682, 786463, 0, 262144, 786464, 0, 262146, 917503, 0, 262144, 851968, 0, 262145, 851969, 0, 262146, 851999, 0, 262144, 852000, 0, 262146, 983039, 0, 262144, 917504, 0, 262145, 917505, 0, 262146, 917534, 0, 196608, 917535, 0, 851968, 917536, 0, 262146, 1048575, 0, 262144, 983040, 0, 262145, 983041, 0, 262146, 983064, 0, 196608, 983065, 0, 196609, 983066, 0, 196609, 983067, 0, 196609, 983068, 0, 196609, 983069, 0, 196609, 983070, 0, 851968, 983071, 0, 262145, 983072, 0, 262146, 1114111, 0, 262144, 1048576, 0, 262145, 1048577, 0, 720896, 1048578, 0, 196609, 1048579, 0, 196610, 1048584, 0, 196608, 1048585, 0, 196609, 1048586, 0, 196609, 1048587, 0, 196609, 1048588, 0, 196609, 1048589, 0, 196609, 1048590, 0, 196609, 1048591, 0, 196609, 1048592, 0, 196609, 1048593, 0, 196609, 1048594, 0, 196609, 1048595, 0, 196609, 1048596, 0, 196609, 1048597, 0, 196609, 1048598, 0, 196609, 1048599, 0, 196609, 1048600, 0, 851968, 1048601, 0, 262145, 1048602, 0, 262145, 1048603, 0, 262145, 1048604, 0, 262145, 1048605, 0, 262145, 1048606, 0, 262145, 1048607, 0, 262145, 1048608, 0, 262146, 1179647, 0, 262144, 1114112, 0, 262145, 1114113, 0, 262145, 1114114, 0, 262145, 1114115, 0, 262146, 1114120, 0, 262144, 1114121, 0, 262145, 1114122, 0, 262145, 1114123, 0, 262145, 1114124, 0, 262145, 1114125, 0, 262145, 1114126, 0, 262145, 1114127, 0, 262145, 1114128, 0, 262145, 1114129, 0, 262145, 1114130, 0, 262145, 1114131, 0, 262145, 1114132, 0, 262145, 1114133, 0, 262145, 1114134, 0, 262145, 1114135, 0, 262145, 1114136, 0, 262145, 1114137, 0, 262145, 1114138, 0, 262145, 1114139, 0, 262145, 1114140, 0, 262145, 1114141, 0, 262145, 1114142, 0, 262145, 1114143, 0, 262145, 1114144, 0, 262146, 1245183, 0, 262144, 1179648, 0, 262145, 1179649, 0, 262145, 1179650, 0, 262145, 1179651, 0, 262146, 1179656, 0, 262144, 1179657, 0, 262145, 1179658, 0, 262145, 1179659, 0, 262145, 1179660, 0, 262145, 1179661, 0, 262145, 1179662, 0, 262145, 1179663, 0, 262145, 1179664, 0, 262145, 1179665, 0, 262145, 1179666, 0, 262145, 1179667, 0, 262145, 1179668, 0, 262145, 1179669, 0, 262145, 1179670, 0, 262145, 1179671, 0, 262145, 1179672, 0, 262145, 1179673, 0, 262145, 1179674, 0, 262145, 1179675, 0, 262145, 1179676, 0, 262145, 1179677, 0, 262145, 1179678, 0, 262145, 1179679, 0, 262145, 1179680, 0, 262146, 1310719, 0, 327680, 1245184, 0, 327681, 1245185, 0, 327681, 1245186, 0, 327681, 1245187, 0, 327682, 1245192, 0, 327680, 1245193, 0, 327681, 1245194, 0, 327681, 1245195, 0, 327681, 1245196, 0, 327681, 1245197, 0, 327681, 1245198, 0, 327681, 1245199, 0, 327681, 1245200, 0, 327681, 1245201, 0, 327681, 1245202, 0, 327681, 1245203, 0, 327681, 1245204, 0, 327681, 1245205, 0, 327681, 1245206, 0, 327681, 1245207, 0, 327681, 1245208, 0, 327681, 1245209, 0, 327681, 1245210, 0, 327681, 1245211, 0, 327681, 1245212, 0, 327681, 1245213, 0, 327681, 1245214, 0, 327681, 1245215, 0, 327681, 1245216, 0, 327682 )
+
+[node name="0" type="Node2D" parent="Entrances" index="0"]
+position = Vector2( 144, 256 )
+
+[node name="Exit" parent="." index="3" instance=ExtResource( 2 )]
+position = Vector2( 96, 314 )
+next_room = 14
+next_entrance = 3
+
+[node name="Shape" parent="Exit" index="0"]
+shape = SubResource( 10 )
+
+[node name="Egg" parent="." index="4" instance=ExtResource( 4 )]
+position = Vector2( 448, 203 )
+egg_id = 2
+
+[editable path="Exit"]
