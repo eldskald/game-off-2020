@@ -88,8 +88,8 @@ func _physics_process(delta):
 				player.apply_recoil_knockback(-player.aiming)
 			elif Input.is_action_just_pressed("absorb"):
 				player.change_gun_state(Player.SHOOTING_STATE, 0.2)
-				holding_node.release(player.aiming)
-				player.apply_recoil_knockback(Vector2(-player.aiming.x, 0))
+				holding_node.shoot(player.aiming)
+				player.apply_recoil_knockback(-player.aiming)
 		
 		
 		
