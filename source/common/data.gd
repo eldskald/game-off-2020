@@ -54,3 +54,21 @@ func increase_max_hp():
 
 
 
+func get_eggs_number() -> int:
+	var total: int = 0
+	for egg in eggs:
+		if egg == true:
+			total += 1
+	return total
+
+func get_tanks_number() -> int:
+	var total: int = 0
+	for tank in tanks:
+		if tank == true:
+			total += 1
+	return total
+
+
+
+
+

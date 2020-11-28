@@ -8,6 +8,8 @@ onready var data = $Data
 onready var scene = $Scene
 onready var transition = $UI/Transition
 
+var can_pause = false
+
 
 
 func _ready():
@@ -27,6 +29,7 @@ func _process(_delta):
 
 
 func start():
+	can_pause = true
 	change_room(data.rooms[0], -1)
 
 
@@ -57,6 +60,10 @@ func _on_transition_timer_timeout():
 	room.entrance = next_entrance
 	scene.call_deferred("add_child", room)
 	transition.open_screen()
+
+# This function calls the same last instance of change_room's last call.
+func reload_room():
+	change_room(next_room, next_entrance)
 ###########################################################################################
 
 
