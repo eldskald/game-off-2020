@@ -10,8 +10,8 @@ var hp: int = 5
 var max_hp: int = 5
 
 var current_checkpoint: int = 0
-var secrets: Array = [false, false, false, false, false, false, false, false, false, false]
-var eggs: Array = [false, false, false, false, false, false, false, false, false, false]
+var secrets: Array = [false, false, false, false, false, false, false]
+var eggs: Array = [false, false, false, false, false]
 var tanks: Array = [false, false, false, false, false]
 
 

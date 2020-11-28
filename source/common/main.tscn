@@ -46,6 +46,7 @@ health_pickup = ExtResource( 6 )
 rooms = [ ExtResource( 8 ), ExtResource( 2 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 20 ), ExtResource( 19 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ) ]
 
 [node name="Scene" type="Node" parent="."]
+pause_mode = 1
 
 [node name="UI" type="CanvasLayer" parent="."]
 
