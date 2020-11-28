@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://rooms/base-room/base-room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://rooms/exits/exit.tscn" type="PackedScene" id=2]
@@ -158,11 +158,15 @@ extents = Vector2( 24, 10 )
 resource_local_to_scene = true
 extents = Vector2( 8, 24 )
 
-[sub_resource type="RectangleShape2D" id=21]
+[sub_resource type="RectangleShape2D" id=20]
 resource_local_to_scene = true
 extents = Vector2( 32, 10 )
 
-[sub_resource type="ShaderMaterial" id=20]
+[sub_resource type="RectangleShape2D" id=21]
+resource_local_to_scene = true
+extents = Vector2( 9, 40 )
+
+[sub_resource type="ShaderMaterial" id=22]
 resource_local_to_scene = true
 shader = ExtResource( 4 )
 shader_param/yellow = Color( 0.941176, 0.909804, 0.458824, 1 )
@@ -500,42 +504,49 @@ position = Vector2( 944, 890 )
 next_room = 18
 
 [node name="Shape" parent="Exit4" index="0"]
+shape = SubResource( 20 )
+
+[node name="Exit5" parent="." index="7" instance=ExtResource( 2 )]
+position = Vector2( 1046, 440 )
+next_room = 21
+
+[node name="Shape" parent="Exit5" index="0"]
 shape = SubResource( 21 )
 
-[node name="Secret" parent="." index="7" instance=ExtResource( 5 )]
-material = SubResource( 20 )
+[node name="Secret" parent="." index="8" instance=ExtResource( 5 )]
+material = SubResource( 22 )
 position = Vector2( 31, 640 )
 tile_data = PoolIntArray( -3, 0, 196608, -2, 0, 196609, -1, 0, 196610, 65533, 0, 262144, 65534, 0, 262145, 65535, 0, 262146, 131069, 0, 327680, 131070, 0, 327681, 131071, 0, 327682 )
 secret_id = 5
 
-[node name="Bomb" parent="." index="8" instance=ExtResource( 3 )]
+[node name="Bomb" parent="." index="9" instance=ExtResource( 3 )]
 position = Vector2( 946, 178 )
 
-[node name="Bomb2" parent="." index="9" instance=ExtResource( 3 )]
+[node name="Bomb2" parent="." index="10" instance=ExtResource( 3 )]
 position = Vector2( 908, 141 )
 
-[node name="Bomb3" parent="." index="10" instance=ExtResource( 3 )]
+[node name="Bomb3" parent="." index="11" instance=ExtResource( 3 )]
 position = Vector2( 962, 118 )
 
-[node name="Bomb4" parent="." index="11" instance=ExtResource( 3 )]
+[node name="Bomb4" parent="." index="12" instance=ExtResource( 3 )]
 position = Vector2( 503, 756 )
 
-[node name="Bomb5" parent="." index="12" instance=ExtResource( 3 )]
+[node name="Bomb5" parent="." index="13" instance=ExtResource( 3 )]
 position = Vector2( 414, 709 )
 
-[node name="Bomb6" parent="." index="13" instance=ExtResource( 3 )]
+[node name="Bomb6" parent="." index="14" instance=ExtResource( 3 )]
 position = Vector2( 173, 678 )
 
-[node name="Bomb7" parent="." index="14" instance=ExtResource( 3 )]
+[node name="Bomb7" parent="." index="15" instance=ExtResource( 3 )]
 position = Vector2( 298, 647 )
 
-[node name="Bomb8" parent="." index="15" instance=ExtResource( 3 )]
+[node name="Bomb8" parent="." index="16" instance=ExtResource( 3 )]
 position = Vector2( 170, 219 )
 
-[node name="Bomb9" parent="." index="16" instance=ExtResource( 3 )]
+[node name="Bomb9" parent="." index="17" instance=ExtResource( 3 )]
 position = Vector2( 272, 174 )
 
-[node name="Bomb10" parent="." index="17" instance=ExtResource( 3 )]
+[node name="Bomb10" parent="." index="18" instance=ExtResource( 3 )]
 position = Vector2( 231, 118 )
 
 [editable path="Exit"]
@@ -545,3 +556,5 @@ position = Vector2( 231, 118 )
 [editable path="Exit3"]
 
 [editable path="Exit4"]
+
+[editable path="Exit5"]

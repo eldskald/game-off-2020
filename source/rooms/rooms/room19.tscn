@@ -149,6 +149,7 @@ position = Vector2( 144, 256 )
 
 [node name="EnergyTank" parent="." index="3" instance=ExtResource( 7 )]
 position = Vector2( 138, 56 )
+tank_id = 3
 
 [node name="Secret" parent="." index="4" instance=ExtResource( 5 )]
 material = SubResource( 5 )

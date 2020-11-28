@@ -250,6 +250,7 @@ to jump higher."
 
 [node name="EnergyTank" parent="." index="4" instance=ExtResource( 4 )]
 position = Vector2( 1462, 211 )
+tank_id = 2
 
 [node name="Secret" parent="." index="5" instance=ExtResource( 8 )]
 material = SubResource( 9 )
