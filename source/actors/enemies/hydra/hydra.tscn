@@ -112,7 +112,7 @@ extents = Vector2( 8, 10 )
 
 [node name="Hydra" type="KinematicBody2D"]
 collision_layer = 16
-collision_mask = 167
+collision_mask = 2147483814
 script = ExtResource( 3 )
 shot = ExtResource( 13 )
 max_hp = 5

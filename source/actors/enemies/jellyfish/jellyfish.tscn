@@ -93,7 +93,7 @@ extents = Vector2( 7, 7 )
 
 [node name="Jellyfish" type="KinematicBody2D"]
 collision_layer = 16
-collision_mask = 163
+collision_mask = 162
 script = ExtResource( 4 )
 moving = "Static"
 moving_speed = 50.0
