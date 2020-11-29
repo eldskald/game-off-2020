@@ -56,17 +56,20 @@ next_room = 2
 shape = SubResource( 2 )
 
 [node name="Message" parent="." index="6" instance=ExtResource( 4 )]
-margin_left = 65.0
-margin_top = 215.0
-margin_right = 241.0
-margin_bottom = 250.0
+margin_left = 16.0
+margin_top = 211.0
+margin_right = 288.0
+margin_bottom = 265.0
 custom_fonts/font = SubResource( 3 )
 text = "WASD: move
-Space: jump"
+Space: jump
+ESC, Enter: map"
 keyboard_text = "WASD: move
-Space: jump"
+Space: jump
+ESC, Enter: map"
 controller_text = "D Pad: move
-RT, RB: jump"
+RT, RB: jump
+Start, Select: map"
 
 [editable path="Exit"]
 

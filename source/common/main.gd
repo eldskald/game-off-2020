@@ -29,7 +29,6 @@ func _process(_delta):
 
 
 func start():
-	can_pause = true
 	change_room(data.rooms[0], -1)
 
 
@@ -48,6 +47,7 @@ func change_room(room: PackedScene, entrance: int):
 		next_entrance = entrance
 		next_room = room
 		transition.close_screen()
+		can_pause = false
 
 func _on_transition_finished(anim_name: String):
 	if anim_name == "out":
@@ -60,6 +60,8 @@ func _on_transition_timer_timeout():
 	room.entrance = next_entrance
 	scene.call_deferred("add_child", room)
 	transition.open_screen()
+	can_pause = true
+	data.visited_rooms[room.room_id] = true
 
 # This function calls the same last instance of change_room's last call.
 func reload_room():

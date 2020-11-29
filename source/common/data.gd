@@ -10,20 +10,12 @@ var hp: int = 5
 var max_hp: int = 5
 
 var current_checkpoint: int = 0
+var visited_rooms: Array = [false, false, false, false, false, false, false, false, false,
+							false, false, false, false, false, false, false, false, false,
+							false, false, false, false, false, false]
 var secrets: Array = [false, false, false, false, false, false, false]
 var eggs: Array = [false, false, false, false, false]
 var tanks: Array = [false, false, false, false, false]
-
-
-# In case I do add a save file, this will be used to load up
-# the current data instead of initializing these values.
-#func _ready():
-#	hp = 5
-#	max_hp = 5
-#	current_checkpoint = 0
-#	secrets = [false, false, false, false, false, false]
-#	eggs = [false, false, false, false, false, false, false, false, false, false]
-#	tanks = [false, false, false, false, false]
 
 
 
