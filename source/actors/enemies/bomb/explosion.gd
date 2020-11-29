@@ -19,6 +19,9 @@ func hit(source):
 func destroy():
 	pass # Can't be stopped.
 
+func hit_a_wall():
+	pass
+
 
 
 func can_be_grabbed():
