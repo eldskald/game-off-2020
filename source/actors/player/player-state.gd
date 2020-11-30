@@ -15,6 +15,7 @@ onready var camera: Camera2D = player.get_node("Camera")
 
 onready var pity: Timer = player.get_node("PityTimer")
 onready var charge: Timer = player.get_node("ChargeTimer")
+onready var cooldown: Timer = player.get_node("ShotCooldown")
 
 
 

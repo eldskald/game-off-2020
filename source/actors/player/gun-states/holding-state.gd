@@ -65,7 +65,7 @@ func _physics_process(delta):
 					player.change_gun_state(Player.READY_STATE)
 				
 				if Input.is_action_just_pressed("shoot"):
-					player.change_gun_state(Player.SHOOTING_STATE, 0.2)
+					player.change_gun_state(Player.READY_STATE)
 					gun.spawn_muzzle_flash()
 					player.change_movement_state(Player.WALL_JUMPING_STATE)
 					player.velocity.y = -player.jump_force
@@ -88,11 +88,11 @@ func _physics_process(delta):
 				player.aiming = get_pressed_aim_dir()
 				
 			if Input.is_action_just_pressed("shoot"):
-				player.change_gun_state(Player.SHOOTING_STATE, 0.2)
+				player.change_gun_state(Player.READY_STATE)
 				holding_node.shoot(player.aiming)
 				player.apply_recoil_knockback(-player.aiming)
 			elif Input.is_action_just_pressed("absorb"):
-				player.change_gun_state(Player.SHOOTING_STATE, 0.2)
+				player.change_gun_state(Player.READY_STATE)
 				holding_node.shoot(player.aiming)
 				player.apply_recoil_knockback(-player.aiming)
 		

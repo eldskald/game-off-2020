@@ -7,14 +7,8 @@ func initialize(argument):
 	charge.start()
 	gun.charge_particles_timer.start()
 
-#func exit(next_state):
-#	if next_state == Player.SHOOTING_STATE:
-#		player.spawn_shot(player.light_shot)
-#		gun.spawn_muzzle_flash()
-#
-#		# Keeping the player afloat when shooting downwards.
-#		if player.aiming.y == 1 and player.get_movement_state() == Player.AIRBORNE_STATE:
-#			player.velocity.y = min(-player.jump_force/3, player.velocity.y)
+func exit(next_state):
+	cooldown.start()
 
 
 
@@ -31,7 +25,10 @@ func _physics_process(_delta):
 		
 		# Keeping the player afloat when shooting downwards.
 		if player.aiming.y == 1 and player.get_movement_state() == Player.AIRBORNE_STATE:
-			player.velocity.y = min(-player.jump_force/3, player.velocity.y)
+			if player.velocity.y > 0 and player.velocity.y <= player.jump_force/3:
+				player.velocity.y *= -0.5
+			elif player.velocity.y > player.jump_force/3:
+				player.velocity.y = -player.jump_force/3
 
 
 

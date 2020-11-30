@@ -2,11 +2,8 @@ extends PlayerState
 
 
 
-#func exit(next_state):
-#	if next_state == Player.SHOOTING_STATE:
-#		player.spawn_shot(player.heavy_shot)
-#		gun.spawn_muzzle_flash()
-#		player.apply_recoil_knockback(-player.aiming)
+func exit(next_state):
+	cooldown.start()
 
 
 

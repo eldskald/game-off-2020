@@ -472,6 +472,10 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
+[node name="ShotCooldown" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
 [node name="RightWallFinder" type="RayCast2D" parent="."]
 visible = false
 position = Vector2( 0, -12 )
