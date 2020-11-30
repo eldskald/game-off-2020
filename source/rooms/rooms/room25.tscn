@@ -29,6 +29,9 @@ tile_data = PoolIntArray( 2949125, 0, 0, 2949126, 1, 0, 2949127, 1, 0, 2949128, 
 [node name="0" type="Node2D" parent="Entrances" index="0"]
 position = Vector2( 256, 808 )
 
+[node name="1" type="Node2D" parent="Entrances" index="1"]
+position = Vector2( 112, 64 )
+
 [node name="Bomb" parent="." index="3" instance=ExtResource( 3 )]
 position = Vector2( 383, 253 )
 
@@ -87,7 +90,7 @@ shape = SubResource( 1 )
 
 [node name="Exit2" parent="." index="15" instance=ExtResource( 5 )]
 position = Vector2( 256, -48 )
-next_room = 25
+next_room = 26
 
 [node name="Shape" parent="Exit2" index="0"]
 shape = SubResource( 1 )
