@@ -61,7 +61,8 @@ func _on_transition_timer_timeout():
 	scene.call_deferred("add_child", room)
 	transition.open_screen()
 	can_pause = true
-	data.visited_rooms[room.room_id] = true
+	if room.room_id < 24:
+		data.visited_rooms[room.room_id] = true
 
 # This function calls the same last instance of change_room's last call.
 func reload_room():

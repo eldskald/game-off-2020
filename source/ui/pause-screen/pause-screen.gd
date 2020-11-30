@@ -43,7 +43,7 @@ func update_pause_screen():
 	$Map/Secret6.visible = not main.data.secrets[6]
 	
 	# Reveal visited rooms in the map.
-	for room in range(main.data.rooms.size()):
+	for room in range(main.data.visited_rooms.size()):
 		if main.data.visited_rooms[room] == true:
 			for cell in grid.room_cells[room]:
 				cell.texture.region = grid.TRANSPARENT

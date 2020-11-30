@@ -1,6 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/textures/bg-final-horizon.png" type="Texture" id=1]
+[ext_resource path="res://assets/textures/bg-final-sky.png" type="Texture" id=2]
+[ext_resource path="res://rooms/backgrounds/wave-2.tscn" type="PackedScene" id=3]
+[ext_resource path="res://rooms/backgrounds/wave-0.tscn" type="PackedScene" id=4]
+[ext_resource path="res://rooms/backgrounds/wave-1.tscn" type="PackedScene" id=5]
+[ext_resource path="res://rooms/backgrounds/follow-camera.gd" type="Script" id=6]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -19,3 +24,356 @@ shader_param/speed = 16.0
 [node name="Horizon" type="Sprite"]
 material = SubResource( 2 )
 texture = ExtResource( 1 )
+script = ExtResource( 6 )
+
+[node name="Sky" type="Sprite" parent="."]
+z_index = -1
+texture = ExtResource( 2 )
+
+[node name="Wave" parent="." instance=ExtResource( 4 )]
+position = Vector2( 98, 65 )
+
+[node name="Wave2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 39, 83 )
+
+[node name="Wave3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 25, 49 )
+
+[node name="Wave4" parent="." instance=ExtResource( 5 )]
+position = Vector2( -9, 76 )
+
+[node name="Wave5" parent="." instance=ExtResource( 4 )]
+position = Vector2( -7, 89 )
+
+[node name="Wave6" parent="." instance=ExtResource( 5 )]
+position = Vector2( -102, 62 )
+
+[node name="Wave7" parent="." instance=ExtResource( 4 )]
+position = Vector2( -46, 68 )
+
+[node name="Wave8" parent="." instance=ExtResource( 3 )]
+position = Vector2( -61, 107 )
+
+[node name="Wave9" parent="." instance=ExtResource( 5 )]
+position = Vector2( -25, 113 )
+
+[node name="Wave10" parent="." instance=ExtResource( 4 )]
+position = Vector2( -99, 84 )
+
+[node name="Wave11" parent="." instance=ExtResource( 3 )]
+position = Vector2( 32, 105 )
+
+[node name="Wave12" parent="." instance=ExtResource( 3 )]
+position = Vector2( 45, 58 )
+
+[node name="Wave13" parent="." instance=ExtResource( 5 )]
+position = Vector2( 19, 72 )
+
+[node name="Wave14" parent="." instance=ExtResource( 4 )]
+position = Vector2( 57, 94 )
+
+[node name="Wave15" parent="." instance=ExtResource( 5 )]
+position = Vector2( 0, 100 )
+
+[node name="Wave16" parent="." instance=ExtResource( 4 )]
+position = Vector2( 29, 121 )
+
+[node name="Wave17" parent="." instance=ExtResource( 5 )]
+position = Vector2( -57, 94 )
+
+[node name="Wave18" parent="." instance=ExtResource( 3 )]
+position = Vector2( -47, 81 )
+
+[node name="Wave19" parent="." instance=ExtResource( 3 )]
+position = Vector2( 5, 62 )
+
+[node name="Wave20" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0, 38 )
+
+[node name="Wave21" parent="." instance=ExtResource( 5 )]
+position = Vector2( -44, 9 )
+
+[node name="Wave22" parent="." instance=ExtResource( 5 )]
+position = Vector2( -22, 14 )
+
+[node name="Wave23" parent="." instance=ExtResource( 3 )]
+position = Vector2( 5, 8 )
+
+[node name="Wave24" parent="." instance=ExtResource( 5 )]
+position = Vector2( 12, 18 )
+
+[node name="Wave25" parent="." instance=ExtResource( 3 )]
+position = Vector2( -17, 25 )
+
+[node name="Wave26" parent="." instance=ExtResource( 4 )]
+position = Vector2( -56, 54 )
+
+[node name="Wave27" parent="." instance=ExtResource( 5 )]
+position = Vector2( -50, 21 )
+
+[node name="Wave28" parent="." instance=ExtResource( 4 )]
+position = Vector2( 90, 77 )
+
+[node name="Wave29" parent="." instance=ExtResource( 5 )]
+position = Vector2( 97, 88 )
+
+[node name="Wave30" parent="." instance=ExtResource( 3 )]
+position = Vector2( 60, 113 )
+
+[node name="Wave31" parent="." instance=ExtResource( 5 )]
+position = Vector2( 72, 104 )
+
+[node name="Wave32" parent="." instance=ExtResource( 3 )]
+position = Vector2( 55, 71 )
+
+[node name="Wave33" parent="." instance=ExtResource( 5 )]
+position = Vector2( -11, 51 )
+
+[node name="Wave34" parent="." instance=ExtResource( 4 )]
+position = Vector2( 74, 48 )
+
+[node name="Wave35" parent="." instance=ExtResource( 3 )]
+position = Vector2( 119, 39 )
+
+[node name="Wave36" parent="." instance=ExtResource( 5 )]
+position = Vector2( 44, 37 )
+
+[node name="Wave37" parent="." instance=ExtResource( 4 )]
+position = Vector2( 69, 23 )
+
+[node name="Wave38" parent="." instance=ExtResource( 5 )]
+position = Vector2( 47, 10 )
+
+[node name="Wave39" parent="." instance=ExtResource( 3 )]
+position = Vector2( 88, 14 )
+
+[node name="Wave40" parent="." instance=ExtResource( 3 )]
+position = Vector2( 124, 9 )
+
+[node name="Wave41" parent="." instance=ExtResource( 5 )]
+position = Vector2( 84, 35 )
+
+[node name="Wave42" parent="." instance=ExtResource( 5 )]
+position = Vector2( 119, 23 )
+
+[node name="Wave43" parent="." instance=ExtResource( 4 )]
+position = Vector2( 119, 112 )
+
+[node name="Wave44" parent="." instance=ExtResource( 5 )]
+position = Vector2( 85, 122 )
+
+[node name="Wave45" parent="." instance=ExtResource( 5 )]
+position = Vector2( 121, 127 )
+
+[node name="Wave46" parent="." instance=ExtResource( 3 )]
+position = Vector2( 121, 100 )
+
+[node name="Wave47" parent="." instance=ExtResource( 4 )]
+position = Vector2( -50, 130 )
+
+[node name="Wave48" parent="." instance=ExtResource( 3 )]
+position = Vector2( 49, 135 )
+
+[node name="Wave49" parent="." instance=ExtResource( 5 )]
+position = Vector2( -3, 134 )
+
+[node name="Wave50" parent="." instance=ExtResource( 5 )]
+position = Vector2( 135, 54 )
+
+[node name="Wave51" parent="." instance=ExtResource( 4 )]
+position = Vector2( 197, 87 )
+
+[node name="Wave52" parent="." instance=ExtResource( 5 )]
+position = Vector2( 143, 73 )
+
+[node name="Wave53" parent="." instance=ExtResource( 3 )]
+position = Vector2( 146, 90 )
+
+[node name="Wave54" parent="." instance=ExtResource( 3 )]
+position = Vector2( 161, 62 )
+
+[node name="Wave55" parent="." instance=ExtResource( 4 )]
+position = Vector2( 195, 49 )
+
+[node name="Wave56" parent="." instance=ExtResource( 5 )]
+position = Vector2( 186, 70 )
+
+[node name="Wave57" parent="." instance=ExtResource( 3 )]
+position = Vector2( 216, 63 )
+
+[node name="Wave58" parent="." instance=ExtResource( 3 )]
+position = Vector2( 234, 76 )
+
+[node name="Wave59" parent="." instance=ExtResource( 5 )]
+position = Vector2( 170, 100 )
+
+[node name="Wave60" parent="." instance=ExtResource( 3 )]
+position = Vector2( 227, 108 )
+
+[node name="Wave61" parent="." instance=ExtResource( 5 )]
+position = Vector2( 205, 117 )
+
+[node name="Wave62" parent="." instance=ExtResource( 3 )]
+position = Vector2( 187, 110 )
+
+[node name="Wave63" parent="." instance=ExtResource( 3 )]
+position = Vector2( 167, 126 )
+
+[node name="Wave64" parent="." instance=ExtResource( 4 )]
+position = Vector2( 214, 133 )
+
+[node name="Wave65" parent="." instance=ExtResource( 5 )]
+position = Vector2( 178, 32 )
+
+[node name="Wave66" parent="." instance=ExtResource( 3 )]
+position = Vector2( 154, 41 )
+
+[node name="Wave67" parent="." instance=ExtResource( 5 )]
+position = Vector2( 231, 40 )
+
+[node name="Wave68" parent="." instance=ExtResource( 3 )]
+position = Vector2( 216, 31 )
+
+[node name="Wave69" parent="." instance=ExtResource( 5 )]
+position = Vector2( 228, 20 )
+
+[node name="Wave70" parent="." instance=ExtResource( 3 )]
+position = Vector2( 193, 21 )
+
+[node name="Wave71" parent="." instance=ExtResource( 5 )]
+position = Vector2( 152, 26 )
+
+[node name="Wave72" parent="." instance=ExtResource( 3 )]
+position = Vector2( 172, 11 )
+
+[node name="Wave73" parent="." instance=ExtResource( 5 )]
+position = Vector2( 218, 10 )
+
+[node name="Wave74" parent="." instance=ExtResource( 3 )]
+position = Vector2( 239, 95 )
+
+[node name="Wave75" parent="." instance=ExtResource( 5 )]
+position = Vector2( 237, 123 )
+
+[node name="Wave76" parent="." instance=ExtResource( 5 )]
+position = Vector2( 239, 57 )
+
+[node name="Wave77" parent="." instance=ExtResource( 3 )]
+position = Vector2( -52, 41 )
+
+[node name="Wave78" parent="." instance=ExtResource( 3 )]
+position = Vector2( -92, 121 )
+
+[node name="Wave79" parent="." instance=ExtResource( 3 )]
+position = Vector2( -77, 14 )
+
+[node name="Wave80" parent="." instance=ExtResource( 4 )]
+position = Vector2( -152, 116 )
+
+[node name="Wave81" parent="." instance=ExtResource( 5 )]
+position = Vector2( -118, 103 )
+
+[node name="Wave82" parent="." instance=ExtResource( 4 )]
+position = Vector2( -215, 96 )
+
+[node name="Wave83" parent="." instance=ExtResource( 3 )]
+position = Vector2( -160, 97 )
+
+[node name="Wave84" parent="." instance=ExtResource( 5 )]
+position = Vector2( -119, 131 )
+
+[node name="Wave85" parent="." instance=ExtResource( 5 )]
+position = Vector2( -209, 112 )
+
+[node name="Wave86" parent="." instance=ExtResource( 4 )]
+position = Vector2( -193, 132 )
+
+[node name="Wave87" parent="." instance=ExtResource( 5 )]
+position = Vector2( -238, 124 )
+
+[node name="Wave88" parent="." instance=ExtResource( 3 )]
+position = Vector2( -237, 81 )
+
+[node name="Wave89" parent="." instance=ExtResource( 5 )]
+position = Vector2( -213, 72 )
+
+[node name="Wave90" parent="." instance=ExtResource( 4 )]
+position = Vector2( -221, 59 )
+
+[node name="Wave91" parent="." instance=ExtResource( 3 )]
+position = Vector2( -187, 84 )
+
+[node name="Wave92" parent="." instance=ExtResource( 5 )]
+position = Vector2( -153, 76 )
+
+[node name="Wave93" parent="." instance=ExtResource( 3 )]
+position = Vector2( -131, 91 )
+
+[node name="Wave94" parent="." instance=ExtResource( 3 )]
+position = Vector2( -87, 99 )
+
+[node name="Wave95" parent="." instance=ExtResource( 5 )]
+position = Vector2( -108, 75 )
+
+[node name="Wave96" parent="." instance=ExtResource( 3 )]
+position = Vector2( -131, 68 )
+
+[node name="Wave97" parent="." instance=ExtResource( 5 )]
+position = Vector2( -177, 68 )
+
+[node name="Wave98" parent="." instance=ExtResource( 4 )]
+position = Vector2( -142, 47 )
+
+[node name="Wave99" parent="." instance=ExtResource( 5 )]
+position = Vector2( -150, 57 )
+
+[node name="Wave100" parent="." instance=ExtResource( 3 )]
+position = Vector2( -93, 48 )
+
+[node name="Wave101" parent="." instance=ExtResource( 3 )]
+position = Vector2( -182, 53 )
+
+[node name="Wave102" parent="." instance=ExtResource( 5 )]
+position = Vector2( -112, 38 )
+
+[node name="Wave103" parent="." instance=ExtResource( 5 )]
+position = Vector2( -237, 49 )
+
+[node name="Wave104" parent="." instance=ExtResource( 3 )]
+position = Vector2( -202, 45 )
+
+[node name="Wave105" parent="." instance=ExtResource( 5 )]
+position = Vector2( -176, 39 )
+
+[node name="Wave106" parent="." instance=ExtResource( 5 )]
+position = Vector2( -176, 106 )
+
+[node name="Wave107" parent="." instance=ExtResource( 3 )]
+position = Vector2( -160, 87 )
+
+[node name="Wave108" parent="." instance=ExtResource( 4 )]
+position = Vector2( -218, 31 )
+
+[node name="Wave109" parent="." instance=ExtResource( 5 )]
+position = Vector2( -133, 26 )
+
+[node name="Wave110" parent="." instance=ExtResource( 3 )]
+position = Vector2( -86, 29 )
+
+[node name="Wave111" parent="." instance=ExtResource( 3 )]
+position = Vector2( -111, 16 )
+
+[node name="Wave112" parent="." instance=ExtResource( 5 )]
+position = Vector2( -167, 23 )
+
+[node name="Wave113" parent="." instance=ExtResource( 3 )]
+position = Vector2( -206, 18 )
+
+[node name="Wave114" parent="." instance=ExtResource( 3 )]
+position = Vector2( -156, 8 )
+
+[node name="Wave115" parent="." instance=ExtResource( 5 )]
+position = Vector2( -189, 8 )
+
+[node name="Wave116" parent="." instance=ExtResource( 5 )]
+position = Vector2( -240, 10 )

@@ -4,7 +4,7 @@
 [ext_resource path="res://rooms/backgrounds/wave.gd" type="Script" id=2]
 
 [sub_resource type="Animation" id=1]
-resource_name = "wave"
+resource_name = "waving"
 length = 0.7
 loop = true
 tracks/0/type = "value"
@@ -23,8 +23,7 @@ tracks/0/keys = {
 [node name="Wave" type="Sprite"]
 texture = ExtResource( 1 )
 vframes = 6
-frame = 2
 script = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/wave = SubResource( 1 )
+anims/waving = SubResource( 1 )
