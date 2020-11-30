@@ -8,6 +8,7 @@ var rocket_animation
 
 func initialize(argument):
 	camera.drag_margin_top = 0.7
+	player.set_collision_mask_bit(2, false)
 	
 	timer = Timer.new()
 	self.add_child(timer)
@@ -15,6 +16,7 @@ func initialize(argument):
 	
 	if argument == true:
 		rocket = muzzle.get_node("MegaRocket")
+		player.set_collision_mask_bit(1, false)
 		timer.start(29.6)
 	else:
 		rocket = muzzle.get_node("RocketLaser")
@@ -28,6 +30,8 @@ func initialize(argument):
 
 func exit(next_state):
 	rocket.deactivate_instantly()
+	player.set_collision_mask_bit(1, true)
+	player.set_collision_mask_bit(2, true)
 
 
 

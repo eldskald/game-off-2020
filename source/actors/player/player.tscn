@@ -310,6 +310,7 @@ z_index = -1
 z_as_relative = false
 
 [node name="MegaRocket" parent="Sprite/GunSprite/Muzzle" instance=ExtResource( 29 )]
+rotation = -1.5708
 
 [node name="SuckArea" type="Area2D" parent="Sprite/GunSprite/Muzzle"]
 visible = false
@@ -389,7 +390,7 @@ emission_shape = 1
 emission_sphere_radius = 128.0
 gravity = Vector2( 0, 0 )
 radial_accel = -800.0
-scale_amount = 4.0
+scale_amount = 2.0
 color = Color( 0.941176, 0.909804, 0.458824, 1 )
 
 [node name="DeathParticles1" type="CPUParticles2D" parent="Sprite"]

@@ -1,14 +1,65 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/textures/last-enemy-head-alt.png" type="Texture" id=1]
 [ext_resource path="res://assets/textures/last-enemy-core.png" type="Texture" id=2]
-[ext_resource path="res://rooms/backgrounds/waving.shader" type="Shader" id=3]
+[ext_resource path="res://actors/enemies/last-enemy/last-enemy.gd" type="Script" id=3]
 [ext_resource path="res://assets/textures/last-enemy-center-tentacles-alt.png" type="Texture" id=4]
 [ext_resource path="res://actors/enemies/last-enemy/tentacle.shader" type="Shader" id=5]
 [ext_resource path="res://assets/textures/last-enemy-border-tentacle.png" type="Texture" id=6]
+[ext_resource path="res://actors/enemies/last-enemy/head.shader" type="Shader" id=7]
+[ext_resource path="res://actors/enemies/last-enemy/hitbox.gd" type="Script" id=8]
+[ext_resource path="res://actors/shots/mega-shot.tscn" type="PackedScene" id=9]
+[ext_resource path="res://actors/shots/light-shot.tscn" type="PackedScene" id=10]
+[ext_resource path="res://actors/shots/heavy-shot.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Animation" id=1]
-resource_name = "squish"
+resource_name = "floating"
+length = 8.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Hitbox:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 2, 6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -32 ), Vector2( 0, 32 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Hurtbox:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 2, 6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -32 ), Vector2( 0, 32 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprites:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 2, 6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -32 ), Vector2( 0, 32 ) ]
+}
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 7 )
+shader_param/yellow = Color( 0.941176, 0.909804, 0.458824, 1 )
+shader_param/is_yellow = 0.0
+shader_param/time = null
+
+[sub_resource type="Animation" id=3]
 length = 4.0
 loop = true
 step = 0.2
@@ -26,80 +77,60 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("../BorderTentacle1:position")
-tracks/1/interp = 1
+tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1, 3, 4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 1, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( -43, 45 ), Vector2( -43, 47 ), Vector2( -43, 43 ), Vector2( -43, 45 ) ]
+"values": [ Vector2( -43, 47 ), Vector2( -43, 43 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("../BorderTentacle2:position")
-tracks/2/interp = 1
+tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1, 3, 4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 1, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( -19, 57 ), Vector2( -19, 60 ), Vector2( -19, 54 ), Vector2( -19, 57 ) ]
+"values": [ Vector2( -19, 60 ), Vector2( -19, 54 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("../BorderTentacle3:position")
-tracks/3/interp = 1
+tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 1, 3, 4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 1, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 21, 57 ), Vector2( 21, 60 ), Vector2( 21, 54 ), Vector2( 21, 57 ) ]
+"values": [ Vector2( 21, 60 ), Vector2( 21, 54 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("../BorderTentacle4:position")
-tracks/4/interp = 1
+tracks/4/interp = 2
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 1, 3, 4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 1, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 41, 53 ), Vector2( 41, 55 ), Vector2( 41, 51 ), Vector2( 41, 53 ) ]
+"values": [ Vector2( 41, 55 ), Vector2( 41, 51 ) ]
 }
 
-[sub_resource type="Shader" id=6]
-code = "shader_type canvas_item;
-
-uniform vec4 yellow: hint_color;
-
-// Using floats here instead of bools to make the code shorter and more efficient.
-uniform float flash_white: hint_range(0.0, 1.0) = 0.0;
-uniform float flash_yellow: hint_range(0.0, 1.0) = 0.0;
-uniform float flash_invisible: hint_range(0.0, 1.0) = 0.0;
-
-void fragment() {
-	vec4 color = texture(TEXTURE, UV);
-	color.rgb += (yellow.rgb - color.rgb)*flash_yellow;
-	
-	COLOR = color;
-}
-"
-
-[sub_resource type="ShaderMaterial" id=7]
-shader = SubResource( 6 )
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 7 )
 shader_param/yellow = Color( 0.941176, 0.909804, 0.458824, 1 )
-shader_param/flash_white = 0.0
-shader_param/flash_yellow = 0.0
-shader_param/flash_invisible = 0.0
+shader_param/is_yellow = 0.0
+shader_param/time = null
 
-[sub_resource type="Animation" id=2]
-resource_name = "twitch"
+[sub_resource type="Animation" id=5]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -115,60 +146,84 @@ tracks/0/keys = {
 "values": [ 0.0, 10.0, 0.0, 0.0, 10.0, 0.0, 0.0 ]
 }
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=6]
 resource_local_to_scene = true
 shader = ExtResource( 5 )
+shader_param/yellow = Color( 0.941176, 0.909804, 0.458824, 1 )
+shader_param/is_yellow = 0.0
+shader_param/time = 0.0
+shader_param/origin = 0.0
 shader_param/amplitude = 2.0
 shader_param/wavelength = 20.0
 shader_param/frequency = 17.0
 shader_param/phase = 0.0
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=7]
 resource_local_to_scene = true
 shader = ExtResource( 5 )
+shader_param/yellow = Color( 0.941176, 0.909804, 0.458824, 1 )
+shader_param/is_yellow = 0.0
+shader_param/time = null
+shader_param/origin = 0.0
 shader_param/amplitude = 2.0
 shader_param/wavelength = 20.0
 shader_param/frequency = 7.0
 shader_param/phase = 1.811
 
-[sub_resource type="ShaderMaterial" id=5]
+[sub_resource type="ShaderMaterial" id=8]
 resource_local_to_scene = true
 shader = ExtResource( 5 )
+shader_param/yellow = Color( 0.941176, 0.909804, 0.458824, 1 )
+shader_param/is_yellow = 0.0
+shader_param/time = null
+shader_param/origin = 0.0
 shader_param/amplitude = 2.0
 shader_param/wavelength = 20.0
 shader_param/frequency = 12.0
 shader_param/phase = 5.039
 
-[sub_resource type="ShaderMaterial" id=8]
+[sub_resource type="ShaderMaterial" id=9]
 resource_local_to_scene = true
-shader = ExtResource( 3 )
+shader = ExtResource( 5 )
+shader_param/yellow = Color( 0.941176, 0.909804, 0.458824, 1 )
+shader_param/is_yellow = 0.0
+shader_param/time = null
 shader_param/origin = 0.05
 shader_param/amplitude = 3.055
 shader_param/wavelength = 10.0
 shader_param/frequency = 3.0
 shader_param/phase = 0.0
 
-[sub_resource type="ShaderMaterial" id=9]
+[sub_resource type="ShaderMaterial" id=10]
 resource_local_to_scene = true
-shader = ExtResource( 3 )
+shader = ExtResource( 5 )
+shader_param/yellow = Color( 0.941176, 0.909804, 0.458824, 1 )
+shader_param/is_yellow = 0.0
+shader_param/time = null
 shader_param/origin = 0.05
 shader_param/amplitude = 3.055
 shader_param/wavelength = 10.0
 shader_param/frequency = 3.0
 shader_param/phase = 3.0
 
-[sub_resource type="ShaderMaterial" id=10]
+[sub_resource type="ShaderMaterial" id=11]
 resource_local_to_scene = true
-shader = ExtResource( 3 )
+shader = ExtResource( 5 )
+shader_param/yellow = Color( 0.941176, 0.909804, 0.458824, 1 )
+shader_param/is_yellow = 0.0
+shader_param/time = null
 shader_param/origin = 0.05
 shader_param/amplitude = 3.055
 shader_param/wavelength = 10.0
 shader_param/frequency = 3.0
 shader_param/phase = 6.0
 
-[sub_resource type="ShaderMaterial" id=11]
+[sub_resource type="ShaderMaterial" id=12]
 resource_local_to_scene = true
-shader = ExtResource( 3 )
+shader = ExtResource( 5 )
+shader_param/yellow = Color( 0.941176, 0.909804, 0.458824, 1 )
+shader_param/is_yellow = 0.0
+shader_param/time = null
 shader_param/origin = 0.05
 shader_param/amplitude = 3.055
 shader_param/wavelength = 10.0
@@ -176,70 +231,142 @@ shader_param/frequency = 3.0
 shader_param/phase = 9.701
 
 [node name="LastEnemy" type="Node2D"]
+script = ExtResource( 3 )
+light_shot = ExtResource( 10 )
+heavy_shot = ExtResource( 11 )
+mega_shot = ExtResource( 9 )
 
-[node name="Head" type="Sprite" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/floating = SubResource( 1 )
+
+[node name="Hitbox" type="StaticBody2D" parent="."]
+visible = false
+collision_layer = 10
+collision_mask = 0
+script = ExtResource( 8 )
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hitbox"]
+polygon = PoolVector2Array( 12, -26, 0, -28, -13, -25, -26, -12, -34, 0, -39, 13, -33, 18, -22, 23, -11, 26, -13, 116, -3, 122, 13, 112, 14, 27, 24, 26, 39, 21, 38, 14, 36, 7, 30, -6, 22, -20 )
+
+[node name="Hurtbox" type="Area2D" parent="."]
+visible = false
+collision_layer = 32
+collision_mask = 32
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hurtbox"]
+polygon = PoolVector2Array( 0, -31, -15, -27, -29, -13, -38, -1, -44, 13, -35, 21, -19, 28, -8, 30, 18, 30, 41, 23, 41, 14, 35, 0, 24, -21, 14, -27 )
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="Head" type="Sprite" parent="Sprites"]
+material = SubResource( 2 )
 texture = ExtResource( 1 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Head"]
-anims/squish = SubResource( 1 )
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites/Head"]
+anims/squish = SubResource( 3 )
 
-[node name="Core" type="Sprite" parent="."]
-material = SubResource( 7 )
+[node name="Core" type="Sprite" parent="Sprites"]
+material = SubResource( 4 )
 position = Vector2( 0, 6 )
 z_index = 1
 texture = ExtResource( 2 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Core"]
-anims/twitch = SubResource( 2 )
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites/Core"]
+anims/twitch = SubResource( 5 )
 
-[node name="CenterTentacle1" type="Sprite" parent="."]
-material = SubResource( 3 )
+[node name="CenterTentacle1" type="Sprite" parent="Sprites"]
+material = SubResource( 6 )
 position = Vector2( -7, 76 )
 z_index = -2
 texture = ExtResource( 4 )
 hframes = 3
 
-[node name="CenterTentacle2" type="Sprite" parent="."]
-material = SubResource( 4 )
+[node name="CenterTentacle2" type="Sprite" parent="Sprites"]
+material = SubResource( 7 )
 position = Vector2( -8, 78 )
-scale = Vector2( -1, 1 )
+rotation = 3.14159
+scale = Vector2( 1, -1 )
 z_index = -2
 texture = ExtResource( 4 )
 hframes = 3
 frame = 2
 
-[node name="CenterTentacle3" type="Sprite" parent="."]
-material = SubResource( 5 )
+[node name="CenterTentacle3" type="Sprite" parent="Sprites"]
+material = SubResource( 8 )
 position = Vector2( 10, 81 )
 z_index = -2
 texture = ExtResource( 4 )
 hframes = 3
 frame = 1
 
-[node name="BorderTentacle1" type="Sprite" parent="."]
-material = SubResource( 8 )
+[node name="BorderTentacle1" type="Sprite" parent="Sprites"]
+material = SubResource( 9 )
 position = Vector2( -43, 45 )
 z_index = -1
 texture = ExtResource( 6 )
 hframes = 2
 
-[node name="BorderTentacle2" type="Sprite" parent="."]
-material = SubResource( 9 )
+[node name="BorderTentacle2" type="Sprite" parent="Sprites"]
+material = SubResource( 10 )
 position = Vector2( -19, 57 )
 z_index = -1
 texture = ExtResource( 6 )
 hframes = 2
 
-[node name="BorderTentacle3" type="Sprite" parent="."]
-material = SubResource( 10 )
+[node name="BorderTentacle3" type="Sprite" parent="Sprites"]
+material = SubResource( 11 )
 position = Vector2( 21, 57 )
 z_index = -1
 texture = ExtResource( 6 )
 hframes = 2
 
-[node name="BorderTentacle4" type="Sprite" parent="."]
-material = SubResource( 11 )
+[node name="BorderTentacle4" type="Sprite" parent="Sprites"]
+material = SubResource( 12 )
 position = Vector2( 41, 53 )
 z_index = -1
 texture = ExtResource( 6 )
 hframes = 2
+
+[node name="HeavyParticles" type="CPUParticles2D" parent="Sprites"]
+position = Vector2( 0, 6 )
+z_index = 2
+emitting = false
+amount = 24
+lifetime = 0.7
+emission_shape = 1
+emission_sphere_radius = 48.0
+gravity = Vector2( 0, 0 )
+radial_accel = -100.0
+color = Color( 0.941176, 0.909804, 0.458824, 1 )
+
+[node name="MegaParticles1" type="CPUParticles2D" parent="Sprites"]
+position = Vector2( 0, 6 )
+z_index = 2
+emitting = false
+amount = 24
+lifetime = 0.7
+speed_scale = 2.0
+emission_shape = 1
+emission_sphere_radius = 72.0
+gravity = Vector2( 0, 0 )
+radial_accel = -100.0
+color = Color( 0.941176, 0.909804, 0.458824, 1 )
+
+[node name="MegaParticles2" type="CPUParticles2D" parent="Sprites"]
+position = Vector2( 0, 6 )
+z_index = 2
+emitting = false
+amount = 24
+lifetime = 0.7
+speed_scale = 2.0
+emission_shape = 1
+emission_sphere_radius = 48.0
+gravity = Vector2( 0, 0 )
+radial_accel = -100.0
+scale_amount = 2.0
+color = Color( 0.941176, 0.909804, 0.458824, 1 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+[connection signal="area_exited" from="Hurtbox" to="." method="_on_Hurtbox_area_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

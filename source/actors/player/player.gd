@@ -54,24 +54,6 @@ func change_gun_state(new_state: int, argument = null):
 
 func get_gun_state_node():
 	return gun_machine.get_state_node()
-
-func is_holding_shot_or_rocket() -> bool:
-	if get_gun_state() == HOLDING_STATE:
-		return get_gun_state_node().is_holding_shot_or_rocket()
-	else:
-		return false
-
-func is_holding_rocket() -> bool:
-	if get_gun_state() == HOLDING_STATE:
-		return get_gun_state_node().is_holding_rocket()
-	else:
-		return false
-
-func is_holding_mega_rocket() -> bool:
-	if get_gun_state() == HOLDING_STATE:
-		return get_gun_state_node().is_holding_mega_rocket()
-	else:
-		return false
 ##########################################################################
 
 
@@ -164,7 +146,7 @@ func hit(source):
 		match source.type:
 			"Light":
 				take_damage(1)
-			"Heavy", "Mega Heavy", "Explosion":
+			"Heavy", "Mega", "Explosion":
 				take_damage(2)
 
 func take_damage(damage: int, touched_spikes: bool = false):

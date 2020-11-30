@@ -4,6 +4,9 @@ var holding = ""
 var holding_node
 var wall_jump_let_go = false
 
+onready var rocket_particles = sprite.get_node("RocketChargeParticles")
+onready var mega_rocket_particles = sprite.get_node("MegaRocketChargeParticles")
+
 
 
 func initialize(argument):
@@ -18,6 +21,8 @@ func initialize(argument):
 				holding = "shot"
 			"Heavy":
 				holding = "rocket"
+			"Mega":
+				holding = "mega_rocket"
 
 
 
@@ -99,6 +104,9 @@ func _physics_process(delta):
 			else:
 				player.aiming = get_pressed_aim_dir()
 			
+			sprite.get_material().set_shader_param("flash_yellow", 1.0)
+			gun.get_material().set_shader_param("flash_yellow", 1.0)
+			
 			if Input.is_action_just_pressed("shoot") or Input.is_action_just_pressed("absorb"):
 				player.change_gun_state(Player.SHOOTING_STATE, 0.2)
 				player.spawn_shot(player.heavy_shot)
@@ -113,6 +121,10 @@ func _physics_process(delta):
 			else:
 				player.aiming = get_pressed_aim_dir()
 			
+			sprite.get_material().set_shader_param("flash_yellow", 1.0)
+			gun.get_material().set_shader_param("flash_yellow", 1.0)
+			rocket_particles.emitting = true
+			
 			if Input.is_action_just_pressed("shoot") or Input.is_action_just_pressed("absorb"):
 				player.change_gun_state(Player.SHOOTING_STATE, 3.0)
 				player.change_movement_state(Player.ROCKETING_STATE, false)
@@ -125,20 +137,16 @@ func _physics_process(delta):
 			else:
 				player.aiming = get_pressed_aim_dir()
 			
+			sprite.get_material().set_shader_param("flash_yellow", 1.0)
+			gun.get_material().set_shader_param("flash_yellow", 1.0)
+			mega_rocket_particles.emitting = true
+			
 			if Input.is_action_just_pressed("shoot") or Input.is_action_just_pressed("absorb"):
 				player.change_gun_state(Player.SHOOTING_STATE, 30.0)
 				player.change_movement_state(Player.ROCKETING_STATE, true)
 
 
 
-func is_holding_shot_or_rocket():
-	return holding == "shot" or holding == "rocket"
-
-func is_holding_rocket():
-	return holding == "rocket"
-
-func is_holding_mega_rocket():
-	return holding == "mega_rocket"
 
 
 

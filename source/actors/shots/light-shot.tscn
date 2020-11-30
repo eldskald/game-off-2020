@@ -40,13 +40,6 @@ texture = ExtResource( 1 )
 gravity = Vector2( 0, 0 )
 scale_amount_curve = SubResource( 2 )
 
-[node name="Grabbed" type="CPUParticles2D" parent="."]
-emitting = false
-amount = 64
-lifetime = 0.2
-local_coords = false
-gravity = Vector2( 0, 0 )
-
 [node name="Hitbox" type="Area2D" parent="." groups=[
 "shot",
 ]]

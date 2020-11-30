@@ -1,12 +1,13 @@
 extends KinematicBody2D
 
 export (float, 0, 1000) var speed
-export (String, "Light", "Heavy") var type
+export (String, "Light", "Heavy", "Mega") var type
 
 var direction: Vector2 = Vector2.ZERO
 var destroyed: bool = false
 var suckable: bool = true
 var caught: bool = false
+var breaks_on_walls: bool = true
 var player_muzzle = null
 var shooter = null
 
@@ -30,7 +31,6 @@ func destroy():
 	speed = 0.0
 	$Yellow.emitting = false
 	$White.emitting = false
-	$Grabbed.emitting = false
 	$Hitbox/CollisionShape2D.set_deferred("disabled", true)
 	var timer = Timer.new()
 	self.add_child(timer)
@@ -45,7 +45,8 @@ func _on_body_entered(body):
 
 func _on_area_entered(area):
 	if area.get_collision_layer_bit(5) == true: # Shots layer
-		area.get_parent().hit(self)
+		if area.get_parent() != shooter:
+			area.get_parent().hit(self)
 
 
 
@@ -56,16 +57,17 @@ func hit(source):
 		"Heavy":
 			if source.type != "Light":
 				destroy()
+		"Mega":
+			if source.type == "Mega":
+				destroy()
 
 func hit_a_wall():
-	destroy()
+	if breaks_on_walls:
+		destroy()
 
 
 
 func grabbed(player: Player):
-	$Yellow.emitting = false
-	$White.emitting = false
-	$Grabbed.emitting = true
 	$Hitbox/CollisionShape2D.disabled = true
 	player_muzzle = player.get_node("Sprite/GunSprite/Muzzle")
 	caught = true

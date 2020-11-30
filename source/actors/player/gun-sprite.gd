@@ -77,14 +77,6 @@ func _process(_delta):
 			charge_particles_timer.stop()
 			absorb_particles.restart()
 			absorb_particles.emitting = false
-			if player.is_holding_shot_or_rocket():
-				shader.set_shader_param("flash_yellow", 1.0)
-				player_shader.set_shader_param("flash_yellow", 1.0)
-				if player.is_holding_rocket():
-					rocket_charge.emitting = true
-				elif player.is_holding_mega_rocket():
-					mega_rocket.emitting = true
-
 		
 		Player.SHOOTING_STATE:
 			multi_aim_case(player.aiming, player.facing)
