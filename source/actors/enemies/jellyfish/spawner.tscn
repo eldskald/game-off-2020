@@ -8,3 +8,11 @@ script = ExtResource( 1 )
 jellyfish = ExtResource( 2 )
 moving_speed = 50.0
 despawn_distance = 550.0
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Delay" type="Timer" parent="."]
+one_shot = true
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Delay" to="." method="_on_Delay_timeout"]
