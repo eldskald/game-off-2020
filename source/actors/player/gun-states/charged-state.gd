@@ -2,11 +2,11 @@ extends PlayerState
 
 
 
-func exit(next_state):
-	if next_state == Player.SHOOTING_STATE:
-		player.spawn_shot(player.heavy_shot)
-		gun.spawn_muzzle_flash()
-		player.apply_recoil_knockback(-player.aiming)
+#func exit(next_state):
+#	if next_state == Player.SHOOTING_STATE:
+#		player.spawn_shot(player.heavy_shot)
+#		gun.spawn_muzzle_flash()
+#		player.apply_recoil_knockback(-player.aiming)
 
 
 
@@ -17,6 +17,9 @@ func _physics_process(_delta):
 		player.aiming = get_pressed_aim_dir()
 	
 	if not Input.is_action_pressed("shoot"):
-		player.change_gun_state(Player.SHOOTING_STATE, 0.2)
+		player.change_gun_state(Player.READY_STATE)
+		player.spawn_shot(player.heavy_shot)
+		gun.spawn_muzzle_flash()
+		player.apply_recoil_knockback(-player.aiming)
 
 

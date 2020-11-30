@@ -4,8 +4,8 @@ export (PackedScene) var jellyfish
 export (String, "Up", "Left", "Down", "Right") var moving = "Right"
 export (float, 0, 500) var moving_speed
 export (float, 0, 2000, 1) var despawn_distance
-export (float, 0, 10) var spawn_time
-export (float, 0, 10) var delay_time
+export (float, 0, 20) var spawn_time
+export (float, 0, 20) var delay_time
 
 onready var level = get_tree().get_nodes_in_group("level")[0]
 
