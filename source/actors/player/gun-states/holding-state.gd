@@ -27,6 +27,7 @@ func initialize(argument):
 
 
 func exit(next_state):
+	cooldown.start()
 	if next_state == Player.UNUSABLE_STATE and holding == "enemy":
 		holding_node.release(Vector2(player.facing, 0))
 
