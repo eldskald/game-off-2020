@@ -558,21 +558,19 @@ shape = SubResource( 14 )
 [node name="SoundEffects" type="Node" parent="."]
 script = ExtResource( 37 )
 
-[node name="Tween" type="Tween" parent="SoundEffects"]
-
 [node name="Jump" type="AudioStreamPlayer2D" parent="SoundEffects"]
 stream = ExtResource( 30 )
-volume_db = -6.0
+volume_db = -3.0
 bus = "SFX"
 
 [node name="Step" type="AudioStreamPlayer2D" parent="SoundEffects"]
 stream = ExtResource( 32 )
-volume_db = -6.0
+volume_db = -3.0
 bus = "SFX"
 
 [node name="Shot" type="AudioStreamPlayer2D" parent="SoundEffects"]
 stream = ExtResource( 33 )
-volume_db = -9.0
+volume_db = -3.0
 bus = "SFX"
 
 [node name="Absorb" type="AudioStreamPlayer2D" parent="SoundEffects"]
@@ -582,7 +580,6 @@ bus = "SFX"
 
 [node name="Charge" type="AudioStreamPlayer2D" parent="SoundEffects"]
 stream = ExtResource( 35 )
-volume_db = -3.0
 bus = "SFX"
 
 [node name="Rocket" type="AudioStreamPlayer2D" parent="SoundEffects"]
@@ -592,12 +589,12 @@ bus = "SFX"
 
 [node name="Damage" type="AudioStreamPlayer2D" parent="SoundEffects"]
 stream = ExtResource( 31 )
-volume_db = -6.0
+volume_db = -3.0
 bus = "SFX"
 
 [node name="Catch" type="AudioStreamPlayer2D" parent="SoundEffects"]
 stream = ExtResource( 38 )
-volume_db = -6.0
+volume_db = -3.0
 bus = "SFX"
 [connection signal="timeout" from="Sprite/GunSprite/Muzzle/ChargingParticles/Timer" to="Sprite/GunSprite" method="_charge_particles_timeout"]
 [connection signal="timeout" from="Sprite/GunSprite/Muzzle/MuzzleFlash/Timer" to="Sprite/GunSprite" method="_on_muzzle_flash_timeout"]

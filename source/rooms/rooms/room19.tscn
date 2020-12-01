@@ -68,6 +68,7 @@ extents = Vector2( 32, 10 )
 
 [node name="Room" instance=ExtResource( 1 )]
 room_id = 19
+bgm = 2
 
 [node name="Seaweed" parent="Background" index="0" instance=ExtResource( 4 )]
 position = Vector2( 289, 208.5 )

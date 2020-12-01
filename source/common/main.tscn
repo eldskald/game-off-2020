@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://common/main.gd" type="Script" id=1]
 [ext_resource path="res://rooms/rooms/room01.tscn" type="PackedScene" id=2]
@@ -37,6 +37,11 @@
 [ext_resource path="res://rooms/rooms/room26.tscn" type="PackedScene" id=35]
 [ext_resource path="res://rooms/rooms/room27.tscn" type="PackedScene" id=36]
 [ext_resource path="res://ui/end-screen/end-screen.tscn" type="PackedScene" id=37]
+[ext_resource path="res://assets/music/music2.wav" type="AudioStream" id=38]
+[ext_resource path="res://assets/music/music3.wav" type="AudioStream" id=39]
+[ext_resource path="res://assets/music/music1.wav" type="AudioStream" id=40]
+[ext_resource path="res://assets/music/music0.wav" type="AudioStream" id=41]
+[ext_resource path="res://common/bgm.gd" type="Script" id=42]
 
 [node name="Main" type="Node" groups=[
 "main",
@@ -63,3 +68,30 @@ pause_mode = 2
 visible = false
 
 [node name="Transition" parent="UI" instance=ExtResource( 5 )]
+
+[node name="Music" type="Node" parent="."]
+script = ExtResource( 42 )
+
+[node name="Music0" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource( 41 )
+volume_db = -6.0
+bus = "BGM"
+
+[node name="Music1" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource( 40 )
+volume_db = -6.0
+bus = "BGM"
+
+[node name="Music2" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource( 38 )
+volume_db = -6.0
+bus = "BGM"
+
+[node name="Music3" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource( 39 )
+volume_db = -6.0
+bus = "BGM"
+
+[node name="TransitionTimer" type="Timer" parent="Music"]
+one_shot = true
+[connection signal="timeout" from="Music/TransitionTimer" to="Music" method="_on_TransitionTimer_timeout"]

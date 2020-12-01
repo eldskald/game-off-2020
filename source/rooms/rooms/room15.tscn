@@ -94,6 +94,7 @@ extents = Vector2( 32, 10 )
 
 [node name="Room" instance=ExtResource( 1 )]
 room_id = 15
+bgm = -1
 
 [node name="BgJellyfish" parent="Background" index="0" instance=ExtResource( 5 )]
 material = SubResource( 2 )

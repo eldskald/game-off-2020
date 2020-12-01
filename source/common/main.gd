@@ -8,6 +8,7 @@ onready var hp_bar = $UI/HealthBar
 onready var data = $Data
 onready var scene = $Scene
 onready var transition = $UI/Transition
+onready var music = $Music
 
 var can_pause = false
 
@@ -21,6 +22,7 @@ func _ready():
 	transition.get_node("AnimationPlayer").connect("animation_finished",
 												   self, "_on_transition_finished")
 	scene.add_child(title_screen.instance())
+	music.play_0()
 
 func _process(_delta):
 	if is_using_keyboard():
@@ -65,6 +67,7 @@ func _on_transition_finished(anim_name: String):
 		if scene.get_children().size() > 0:
 			scene.get_children()[0].queue_free()
 		transition.end_timer.start()
+		music.stop()
 		hp_bar.visible = false
 
 func _on_transition_timer_timeout():

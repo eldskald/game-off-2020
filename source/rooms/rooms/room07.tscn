@@ -194,6 +194,7 @@ extents = Vector2( 10, 32 )
 room_id = 7
 height_in_screens = 4
 width_in_screens = 2
+bgm = 2
 
 [node name="BgJellyfish" parent="Background" index="0" instance=ExtResource( 4 )]
 material = SubResource( 2 )

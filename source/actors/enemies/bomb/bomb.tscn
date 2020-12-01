@@ -188,13 +188,11 @@ states = [ ExtResource( 7 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 
 [node name="Charge" type="AudioStreamPlayer2D" parent="SoundEffects"]
 stream = ExtResource( 14 )
 volume_db = -3.0
-max_distance = 1000.0
 bus = "SFX"
 
 [node name="Shot" type="AudioStreamPlayer2D" parent="SoundEffects"]
 stream = ExtResource( 15 )
 volume_db = -3.0
-max_distance = 1000.0
 bus = "SFX"
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="area_entered" from="ShotHitbox" to="." method="_on_ShotHitbox_area_entered"]

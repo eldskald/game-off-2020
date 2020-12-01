@@ -6,6 +6,8 @@ export (PackedScene) var light_shot
 export (PackedScene) var heavy_shot
 export (PackedScene) var mega_shot
 
+onready var sfx = $SoundEffects
+
 
 
 func _ready():
@@ -27,18 +29,21 @@ func hit(source):
 				reflecting_shot = light_shot
 				timer.start()
 				make_yellow()
+				sfx.get_node("Charge").play()
 				pause_animations()
 			"Heavy":
 				reflecting_shot = heavy_shot
 				heavy_particles.emitting = true
 				timer.start()
 				make_yellow()
+				sfx.get_node("Charge").play()
 				pause_animations()
 			"Rocket":
 				reflecting_shot = mega_shot
 				mega_particles_1.emitting = true
 				mega_particles_2.emitting = true
 				make_yellow()
+				sfx.get_node("Charge").play()
 				pause_animations()
 
 func spawn_shot(shot: PackedScene):
@@ -50,6 +55,8 @@ func spawn_shot(shot: PackedScene):
 	shot_node.direction = Vector2.LEFT
 	shot_node.speed = 100
 	level.add_child(shot_node)
+	sfx.get_node("Charge").stop()
+	sfx.get_node("Shot").play()
 
 func _on_Hurtbox_area_exited(area):
 	if area.get_collision_layer_bit(5) == true:

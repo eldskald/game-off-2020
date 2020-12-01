@@ -74,9 +74,10 @@ func update_pause_screen():
 		grid.get_node("39").texture.region = grid.TANK
 	
 	# Makes the room where the player currently is blinking.
-	for cell in grid.room_cells[current_room]:
-		cell.texture.region = grid.BLACK
-		cell.get_material().set_shader_param("flash_invisible", 1.0)
+	if current_room < 24:
+		for cell in grid.room_cells[current_room]:
+			cell.texture.region = grid.BLACK
+			cell.get_material().set_shader_param("flash_invisible", 1.0)
 
 
 
