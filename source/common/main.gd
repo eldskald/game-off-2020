@@ -2,6 +2,7 @@ extends Node
 class_name Main
 
 export (PackedScene) var title_screen
+export (PackedScene) var end_screen
 
 onready var hp_bar = $UI/HealthBar
 onready var data = $Data
@@ -16,6 +17,7 @@ func _ready():
 	OS.window_size = Vector2(1024,576)
 	OS.center_window()
 	transition.get_node("Timer").connect("timeout", self, "_on_transition_timer_timeout")
+	transition.get_node("EndTimer").connect("timeout", self, "_on_end_timer_timeout")
 	transition.get_node("AnimationPlayer").connect("animation_finished",
 												   self, "_on_transition_finished")
 	scene.add_child(title_screen.instance())
@@ -49,11 +51,21 @@ func change_room(room: PackedScene, entrance: int):
 		transition.close_screen()
 		can_pause = false
 
+func end_game():
+	if not transition.animation_player.is_playing() and transition.timer.is_stopped():
+		can_pause = false
+		transition.end_game_out()
+
 func _on_transition_finished(anim_name: String):
 	if anim_name == "out":
 		if scene.get_children().size() > 0:
 			scene.get_children()[0].queue_free()
 		transition.timer.start()
+	elif anim_name == "end_game_out":
+		if scene.get_children().size() > 0:
+			scene.get_children()[0].queue_free()
+		transition.end_timer.start()
+		hp_bar.visible = false
 
 func _on_transition_timer_timeout():
 	var room = next_room.instance()
@@ -63,6 +75,10 @@ func _on_transition_timer_timeout():
 	can_pause = true
 	if room.room_id < 24:
 		data.visited_rooms[room.room_id] = true
+
+func _on_end_timer_timeout():
+	scene.call_deferred("add_child", end_screen.instance())
+	transition.end_game_in()
 
 # This function calls the same last instance of change_room's last call.
 func reload_room():

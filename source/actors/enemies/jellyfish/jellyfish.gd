@@ -85,7 +85,7 @@ func activate_wall_collisions():
 ### COMBAT ###############################################################
 func hit(source):
 	self.destroy()
-	if source.type != "Heavy":
+	if not source.type in ["Heavy", "Mega"]:
 		source.destroy()
 
 func _on_hitbox_body_entered(body):

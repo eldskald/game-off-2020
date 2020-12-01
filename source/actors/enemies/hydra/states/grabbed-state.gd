@@ -44,8 +44,11 @@ func exit(next_state):
 
 
 func _physics_process(delta):
-	enemy.position = level.to_local(muzzle.global_position) + player.aiming.normalized()*12
-	enemy.rotation = player.aiming.angle()
+	if player.get_gun_state() == Player.HOLDING_STATE:
+		enemy.position = level.to_local(muzzle.global_position) + player.aiming.normalized()*12
+		enemy.rotation = player.aiming.angle()
+	else:
+		enemy.change_state(enemy.READY_STATE)
 
 
 
