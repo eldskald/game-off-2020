@@ -6,9 +6,12 @@ func initialize(argument):
 	charge.connect("timeout", self, "finish_charging")
 	charge.start()
 	gun.charge_particles_timer.start()
+	sfx.charge(true)
 
 func exit(next_state):
 	cooldown.start()
+	if next_state != Player.CHARGED_STATE:
+		sfx.charge(false)
 
 
 
@@ -22,6 +25,7 @@ func _physics_process(_delta):
 		player.change_gun_state(Player.READY_STATE)
 		player.spawn_shot(player.light_shot)
 		gun.spawn_muzzle_flash()
+		sfx.shot()
 		
 		# Keeping the player afloat when shooting downwards.
 		if player.aiming.y == 1 and player.get_movement_state() == Player.AIRBORNE_STATE:

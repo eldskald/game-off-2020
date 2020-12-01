@@ -18,6 +18,7 @@ func _ready():
 
 
 func _on_Hitbox_body_entered(body):
+	body.sfx.pickup()
 	main.data.tanks[tank_id] = true
 	main.data.increase_max_hp()
 	self.queue_free()

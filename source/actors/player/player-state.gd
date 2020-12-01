@@ -8,6 +8,7 @@ onready var machine = get_parent()
 
 onready var player: Player = get_parent().get_parent()
 onready var animation_player: AnimationPlayer = player.get_node("AnimationPlayer")
+onready var sfx: Node = player.get_node("SoundEffects")
 onready var sprite: Sprite = player.get_node("Sprite")
 onready var gun: Sprite = sprite.get_node("GunSprite")
 onready var muzzle: Node2D = gun.get_node("Muzzle")

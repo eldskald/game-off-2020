@@ -8,6 +8,7 @@ var rocket_animation
 
 func initialize(argument):
 	camera.drag_margin_top = 0.7
+	sfx.rocket(true)
 	player.set_collision_mask_bit(2, false)
 	
 	timer = Timer.new()
@@ -30,6 +31,7 @@ func initialize(argument):
 
 func exit(next_state):
 	rocket.deactivate_instantly()
+	sfx.rocket(false)
 	player.set_collision_mask_bit(1, true)
 	player.set_collision_mask_bit(2, true)
 

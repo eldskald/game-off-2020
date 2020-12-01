@@ -18,6 +18,7 @@ func _ready():
 
 
 func _on_Hitbox_body_entered(body):
+	body.sfx.pickup()
 	main.data.eggs[egg_id] = true
 	self.queue_free()
 

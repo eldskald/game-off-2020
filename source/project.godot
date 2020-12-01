@@ -44,6 +44,10 @@ config/icon="res://assets/textures/icon.png"
 config/macos_native_icon="res://assets/textures/icon.icns"
 config/windows_native_icon="res://assets/textures/icon.ico"
 
+[audio]
+
+default_bus_layout="res://common/default_bus_layout.tres"
+
 [debug]
 
 gdscript/warnings/unused_variable=false

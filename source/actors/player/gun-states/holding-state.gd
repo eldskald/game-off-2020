@@ -13,9 +13,12 @@ func initialize(argument):
 	holding_node = argument
 	if holding_node.get_collision_layer_bit(1) == true: # Solids layer
 		holding = "wall"
+		sfx.step()
 	elif holding_node.get_collision_layer_bit(4) == true: # Enemies layer
 		holding = "enemy"
+		sfx.step()
 	elif holding_node.get_collision_layer_bit(5) == true: # Shots layer
+		sfx.catch()
 		match holding_node.type:
 			"Light":
 				holding = "shot"
@@ -46,8 +49,9 @@ func _physics_process(delta):
 					player.change_gun_state(Player.READY_STATE)
 				elif Input.is_action_just_pressed("shoot"):
 					player.change_movement_state(Player.AIRBORNE_STATE)
-					player.change_gun_state(Player.SHOOTING_STATE, 0.2)
+					player.change_gun_state(Player.READY_STATE)
 					gun.spawn_muzzle_flash()
+					sfx.shot()
 					player.velocity.y = player.falling_speed
 			
 			# Dealing with walls
@@ -68,11 +72,9 @@ func _physics_process(delta):
 				if Input.is_action_just_pressed("shoot"):
 					player.change_gun_state(Player.READY_STATE)
 					gun.spawn_muzzle_flash()
+					sfx.shot()
 					player.change_movement_state(Player.WALL_JUMPING_STATE)
 					player.velocity.y = -player.jump_force
-					
-					# Hidden mechanic: if you press jump as you shoot to wall jump,
-					# you get more height.
 					if pity.is_stopped():
 						player.velocity.x = -player.facing*player.speed*2
 						pity.start()
@@ -88,14 +90,11 @@ func _physics_process(delta):
 			else:
 				player.aiming = get_pressed_aim_dir()
 				
-			if Input.is_action_just_pressed("shoot"):
+			if Input.is_action_just_pressed("shoot") or Input.is_action_just_pressed("absorb"):
 				player.change_gun_state(Player.READY_STATE)
 				holding_node.shoot(player.aiming)
 				player.apply_recoil_knockback(-player.aiming)
-			elif Input.is_action_just_pressed("absorb"):
-				player.change_gun_state(Player.READY_STATE)
-				holding_node.shoot(player.aiming)
-				player.apply_recoil_knockback(-player.aiming)
+				sfx.shot()
 		
 		
 		
@@ -113,6 +112,7 @@ func _physics_process(delta):
 				player.spawn_shot(player.heavy_shot)
 				gun.spawn_muzzle_flash()
 				player.apply_recoil_knockback(-player.aiming)
+				sfx.shot()
 		
 		
 		

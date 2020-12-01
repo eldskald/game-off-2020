@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://assets/textures/player-char.png" type="Texture" id=1]
 [ext_resource path="res://assets/textures/arm-gun.png" type="Texture" id=2]
@@ -29,6 +29,15 @@
 [ext_resource path="res://actors/shots/rocket.tscn" type="PackedScene" id=27]
 [ext_resource path="res://actors/player/movement-states/rocketing-state.gd" type="Script" id=28]
 [ext_resource path="res://actors/shots/mega-rocket.tscn" type="PackedScene" id=29]
+[ext_resource path="res://assets/sound-effects/jump.wav" type="AudioStream" id=30]
+[ext_resource path="res://assets/sound-effects/hit.wav" type="AudioStream" id=31]
+[ext_resource path="res://assets/sound-effects/step.wav" type="AudioStream" id=32]
+[ext_resource path="res://assets/sound-effects/shot.wav" type="AudioStream" id=33]
+[ext_resource path="res://assets/sound-effects/laser.wav" type="AudioStream" id=34]
+[ext_resource path="res://assets/sound-effects/charge.wav" type="AudioStream" id=35]
+[ext_resource path="res://assets/sound-effects/vacuum.wav" type="AudioStream" id=36]
+[ext_resource path="res://actors/player/sfx.gd" type="Script" id=37]
+[ext_resource path="res://assets/sound-effects/catch.wav" type="AudioStream" id=38]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 12 )
@@ -185,6 +194,23 @@ tracks/1/keys = {
 "update": 1,
 "values": [ Vector2( 1, -2 ), Vector2( 1, -3 ), Vector2( 1, -2 ), Vector2( 1, -3 ), Vector2( 1, -2 ) ]
 }
+tracks/2/type = "method"
+tracks/2/path = NodePath("SoundEffects")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "step"
+}, {
+"args": [  ],
+"method": "step"
+} ]
+}
 
 [sub_resource type="Animation" id=10]
 length = 0.5
@@ -282,6 +308,7 @@ position = Vector2( 0, -12 )
 texture = ExtResource( 1 )
 vframes = 4
 hframes = 4
+frame = 11
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_group_": true
@@ -289,7 +316,7 @@ __meta__ = {
 
 [node name="GunSprite" type="Sprite" parent="Sprite"]
 material = SubResource( 2 )
-position = Vector2( 0, -2 )
+position = Vector2( 1, -2 )
 texture = ExtResource( 2 )
 hframes = 3
 frame = 2
@@ -527,6 +554,51 @@ __meta__ = {
 
 [node name="Shape" type="CollisionShape2D" parent="RightSafety"]
 shape = SubResource( 14 )
+
+[node name="SoundEffects" type="Node" parent="."]
+script = ExtResource( 37 )
+
+[node name="Tween" type="Tween" parent="SoundEffects"]
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource( 30 )
+volume_db = -6.0
+bus = "SFX"
+
+[node name="Step" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource( 32 )
+volume_db = -6.0
+bus = "SFX"
+
+[node name="Shot" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource( 33 )
+volume_db = -9.0
+bus = "SFX"
+
+[node name="Absorb" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource( 36 )
+volume_db = -9.0
+bus = "SFX"
+
+[node name="Charge" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource( 35 )
+volume_db = -3.0
+bus = "SFX"
+
+[node name="Rocket" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource( 34 )
+volume_db = -3.0
+bus = "SFX"
+
+[node name="Damage" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource( 31 )
+volume_db = -6.0
+bus = "SFX"
+
+[node name="Catch" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource( 38 )
+volume_db = -6.0
+bus = "SFX"
 [connection signal="timeout" from="Sprite/GunSprite/Muzzle/ChargingParticles/Timer" to="Sprite/GunSprite" method="_charge_particles_timeout"]
 [connection signal="timeout" from="Sprite/GunSprite/Muzzle/MuzzleFlash/Timer" to="Sprite/GunSprite" method="_on_muzzle_flash_timeout"]
 [connection signal="body_entered" from="SpikeDetector" to="." method="_on_touched_spikes"]

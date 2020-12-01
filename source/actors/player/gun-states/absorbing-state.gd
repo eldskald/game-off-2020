@@ -12,12 +12,14 @@ onready var down_raycast: RayCast2D = player.get_node("DownWallFinder")
 func initialize(argument):
 	suck_area.get_node("Shape").disabled = false
 	held_area.get_node("Shape").disabled = false
+	sfx.absorb(true)
 
 
 
 func exit(next_state):
 	suck_area.get_node("Shape").disabled = true
 	held_area.get_node("Shape").disabled = true
+	sfx.absorb(false)
 
 
 

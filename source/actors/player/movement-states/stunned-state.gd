@@ -8,6 +8,7 @@ func initialize(argument):
 	touched_spikes = argument
 	player.velocity = Vector2(-player.facing, -1)*200
 	player.invincibility.start()
+	sfx.damage()
 
 
 
