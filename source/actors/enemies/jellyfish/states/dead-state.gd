@@ -10,6 +10,7 @@ func initialize(argument):
 	sprite.get_material().set_shader_param("flash_invisible", 1.0)
 	sprite.frame = 0
 	animation_player.stop()
+	sfx.get_node("Death").play()
 	enemy.get_node("Hurtbox").disabled = true
 	enemy.get_node("Hitbox/Shape").disabled = true
 	enemy.get_node("ShotHitbox/Shape").disabled = true

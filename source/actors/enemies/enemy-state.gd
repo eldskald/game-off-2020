@@ -7,6 +7,7 @@ onready var main: Main = get_tree().get_nodes_in_group("main")[0]
 onready var machine = get_parent()
 onready var enemy = machine.get_parent()
 onready var animation_player = enemy.get_node("AnimationPlayer")
+onready var sfx = enemy.get_node("SoundEffects")
 onready var sprite = enemy.get_node("Sprite")
 
 

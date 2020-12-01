@@ -14,6 +14,7 @@ export (String, "Up", "Down", "Left", "Right") var facing
 
 onready var sprite: Sprite = get_node("Sprite")
 onready var animation_player: AnimationPlayer = get_node("AnimationPlayer")
+onready var sfx = get_node("SoundEffects")
 onready var hitbox = get_node("Hitbox")
 onready var hurtbox = get_node("Hurtbox")
 onready var shot_hitbox = get_node("ShotHitbox")
@@ -76,6 +77,7 @@ func spawn_shot(direction: Vector2):
 	shot_node.direction = direction
 	shot_node.speed = 100
 	level.add_child(shot_node)
+	sfx.get_node("Shot").play()
 
 func get_shot_dir_vector():
 	match shot_direction:
@@ -94,6 +96,7 @@ func get_shot_dir_vector():
 func hit(source):
 	$FlashTimer.start()
 	sprite.get_material().set_shader_param("flash_white", 1.0)
+	sfx.get_node("Damage").play()
 	match source.type:
 		"Light":
 			source.destroy()

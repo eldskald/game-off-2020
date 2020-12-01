@@ -10,6 +10,7 @@ func initialize(argument):
 	sprite.get_material().set_shader_param("flash_yellow", 1.0)
 	sprite.get_node("ChargeParticles").emitting = true
 	animation_player.stop(false)
+	sfx.get_node("Charge").play()
 	enemy.velocity = Vector2.ZERO
 	
 	timer = Timer.new()
@@ -24,6 +25,7 @@ func exit(next_state):
 	sprite.get_material().set_shader_param("flash_yellow", 0.0)
 	sprite.get_node("ChargeParticles").restart()
 	sprite.get_node("ChargeParticles").emitting = false
+	sfx.get_node("Charge").stop()
 
 
 

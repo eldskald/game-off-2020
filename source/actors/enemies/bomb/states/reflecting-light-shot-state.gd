@@ -9,6 +9,7 @@ func initialize(argument):
 	direction = argument
 	sprite.get_material().set_shader_param("flash_yellow", 1.0)
 	sprite.get_node("ChargeParticles").emitting = true
+	sfx.get_node("Charge").play()
 	animation_player.stop(false)
 	enemy.velocity = Vector2.ZERO
 	
@@ -24,6 +25,7 @@ func exit(next_state):
 	sprite.get_material().set_shader_param("flash_yellow", 0.0)
 	sprite.get_node("ChargeParticles").restart()
 	sprite.get_node("ChargeParticles").emitting = false
+	sfx.get_node("Charge").stop()
 
 
 

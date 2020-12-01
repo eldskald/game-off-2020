@@ -21,6 +21,7 @@ func _on_Detector_body_entered(body):
 	if body.is_in_group("player") and $Ready.is_stopped():
 		main.data.heal_to_full()
 		animation_player.play("activating")
+		body.sfx.pickup()
 
 
 

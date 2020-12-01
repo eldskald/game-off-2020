@@ -14,6 +14,7 @@ func initialize(argument):
 	timer.start(0.5)
 	
 	# Get the animation right.
+	sfx.get_node("Charge").play()
 	charge_particles.emitting = true
 	charge_ball.visible = false
 	if animation_player.current_animation != "ready":
@@ -26,6 +27,7 @@ func exit(next_state):
 	charge_particles.restart()
 	charge_particles.emitting = false
 	charge_ball.visible = false
+	sfx.get_node("Charge").stop()
 
 
 

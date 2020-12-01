@@ -31,5 +31,6 @@ func can_be_grabbed():
 
 func _ready():
 	$AnimationPlayer.play("explode")
+	$SFX.play()
 
 

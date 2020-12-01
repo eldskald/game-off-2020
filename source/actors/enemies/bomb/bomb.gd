@@ -12,6 +12,7 @@ export (float, -1, 10, 0.1) var starting_animation_frame
 
 onready var sprite: Sprite = get_node("Sprite")
 onready var animation_player: AnimationPlayer = get_node("AnimationPlayer")
+onready var sfx = get_node("SoundEffects")
 onready var hitbox = get_node("Hitbox")
 onready var hurtbox = get_node("Hurtbox")
 onready var shot_hitbox = get_node("ShotHitbox")
@@ -64,6 +65,7 @@ func spawn_shot(shot: PackedScene, direction: Vector2):
 	shot_node.direction = direction
 	shot_node.speed = 100
 	level.add_child(shot_node)
+	sfx.get_node("Shot").play()
 
 func hit(source):
 	match source.type:

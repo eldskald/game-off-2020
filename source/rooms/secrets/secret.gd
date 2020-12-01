@@ -34,6 +34,7 @@ func hit(shot):
 func destroy():
 	shader.set_shader_param("flash_invisible", 1.0)
 	$DestroyedTimer.start()
+	$SFX.play()
 	main.data.secrets[secret_id] = true
 	set_collision_layer_bit(1, false)
 	set_collision_mask_bit(1, false)
