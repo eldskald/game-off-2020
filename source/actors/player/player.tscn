@@ -558,41 +558,41 @@ shape = SubResource( 14 )
 [node name="SoundEffects" type="Node" parent="."]
 script = ExtResource( 37 )
 
-[node name="Jump" type="AudioStreamPlayer2D" parent="SoundEffects"]
+[node name="Jump" type="AudioStreamPlayer" parent="SoundEffects"]
 stream = ExtResource( 30 )
 volume_db = -3.0
 bus = "SFX"
 
-[node name="Step" type="AudioStreamPlayer2D" parent="SoundEffects"]
+[node name="Step" type="AudioStreamPlayer" parent="SoundEffects"]
 stream = ExtResource( 32 )
 volume_db = -3.0
 bus = "SFX"
 
-[node name="Shot" type="AudioStreamPlayer2D" parent="SoundEffects"]
+[node name="Shot" type="AudioStreamPlayer" parent="SoundEffects"]
 stream = ExtResource( 33 )
 volume_db = -3.0
 bus = "SFX"
 
-[node name="Absorb" type="AudioStreamPlayer2D" parent="SoundEffects"]
+[node name="Absorb" type="AudioStreamPlayer" parent="SoundEffects"]
 stream = ExtResource( 36 )
 volume_db = -9.0
 bus = "SFX"
 
-[node name="Charge" type="AudioStreamPlayer2D" parent="SoundEffects"]
+[node name="Charge" type="AudioStreamPlayer" parent="SoundEffects"]
 stream = ExtResource( 35 )
 bus = "SFX"
 
-[node name="Rocket" type="AudioStreamPlayer2D" parent="SoundEffects"]
+[node name="Rocket" type="AudioStreamPlayer" parent="SoundEffects"]
 stream = ExtResource( 34 )
 volume_db = -3.0
 bus = "SFX"
 
-[node name="Damage" type="AudioStreamPlayer2D" parent="SoundEffects"]
+[node name="Damage" type="AudioStreamPlayer" parent="SoundEffects"]
 stream = ExtResource( 31 )
 volume_db = -3.0
 bus = "SFX"
 
-[node name="Catch" type="AudioStreamPlayer2D" parent="SoundEffects"]
+[node name="Catch" type="AudioStreamPlayer" parent="SoundEffects"]
 stream = ExtResource( 38 )
 volume_db = -3.0
 bus = "SFX"

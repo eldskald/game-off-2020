@@ -20,5 +20,7 @@ func _physics_process(delta):
 		enemy.vacuum_suck(delta)
 	else:
 		enemy.apply_friction(delta)
+	
+	
 
 

@@ -143,12 +143,19 @@ shape = SubResource( 7 )
 script = ExtResource( 3 )
 states = [ ExtResource( 8 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 6 ) ]
 
-[node name="SoundEffects" type="Node" parent="."]
+[node name="SoundEffects" type="Node2D" parent="."]
 
 [node name="Death" type="AudioStreamPlayer2D" parent="SoundEffects"]
 stream = ExtResource( 9 )
 volume_db = -3.0
 bus = "SFX"
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[node name="Timer" type="Timer" parent="VisibilityNotifier2D"]
+wait_time = 15.0
+one_shot = true
+autostart = true
 [connection signal="area_entered" from="ShotHitbox" to="." method="_on_ShotHitbox_area_entered"]
 [connection signal="body_entered" from="ShotHitbox" to="." method="_on_ShotHitbox_body_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

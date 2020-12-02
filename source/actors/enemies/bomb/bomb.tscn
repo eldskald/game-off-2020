@@ -183,7 +183,7 @@ disabled = true
 script = ExtResource( 2 )
 states = [ ExtResource( 7 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 10 ) ]
 
-[node name="SoundEffects" type="Node" parent="."]
+[node name="SoundEffects" type="Node2D" parent="."]
 
 [node name="Charge" type="AudioStreamPlayer2D" parent="SoundEffects"]
 stream = ExtResource( 14 )

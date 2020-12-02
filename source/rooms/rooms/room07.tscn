@@ -370,111 +370,85 @@ tile_data = PoolIntArray( -65533, 0, 196608, -65532, 0, 196609, -65531, 0, 19660
 secret_id = 1
 
 [node name="JellyfishSpawner" parent="." index="5" instance=ExtResource( 7 )]
-position = Vector2( -42, 1060 )
-despawn_distance = 1100.0
+position = Vector2( -35, 1071 )
+spawn_time = 7.0
 
 [node name="JellyfishSpawner2" parent="." index="6" instance=ExtResource( 7 )]
-position = Vector2( -114, 990 )
-despawn_distance = 1100.0
+position = Vector2( -43, 1007 )
+spawn_time = 7.0
+delay_time = 3.0
 
 [node name="JellyfishSpawner3" parent="." index="7" instance=ExtResource( 7 )]
-position = Vector2( -77, 914 )
-despawn_distance = 1100.0
+position = Vector2( -43, 956 )
+spawn_time = 7.0
 
 [node name="JellyfishSpawner4" parent="." index="8" instance=ExtResource( 7 )]
-position = Vector2( -144, 886 )
-despawn_distance = 1100.0
+position = Vector2( -35, 904 )
+spawn_time = 7.0
+delay_time = 2.0
 
 [node name="JellyfishSpawner5" parent="." index="9" instance=ExtResource( 7 )]
-position = Vector2( -65, 812 )
-despawn_distance = 1100.0
+position = Vector2( -35, 862 )
+spawn_time = 7.0
+delay_time = 5.0
 
-[node name="JellyfishSpawner6" parent="." index="10" instance=ExtResource( 7 )]
-position = Vector2( -101, 775 )
-despawn_distance = 1100.0
+[node name="JellyfishSpawner7" parent="." index="10" instance=ExtResource( 7 )]
+position = Vector2( -35, 792 )
+spawn_time = 7.0
 
-[node name="JellyfishSpawner7" parent="." index="11" instance=ExtResource( 7 )]
-position = Vector2( -28, 738 )
-despawn_distance = 1100.0
+[node name="JellyfishSpawner13" parent="." index="11" instance=ExtResource( 7 )]
+position = Vector2( -35, 589 )
+spawn_time = 7.0
+delay_time = 2.0
 
-[node name="JellyfishSpawner8" parent="." index="12" instance=ExtResource( 7 )]
-position = Vector2( -77, 683 )
-despawn_distance = 1100.0
+[node name="JellyfishSpawner9" parent="." index="12" instance=ExtResource( 7 )]
+position = Vector2( -35, 723 )
+spawn_time = 7.0
 
-[node name="JellyfishSpawner9" parent="." index="13" instance=ExtResource( 7 )]
-position = Vector2( -129, 643 )
-despawn_distance = 1100.0
+[node name="JellyfishSpawner11" parent="." index="13" instance=ExtResource( 7 )]
+position = Vector2( -35, 659 )
+spawn_time = 7.0
 
-[node name="JellyfishSpawner10" parent="." index="14" instance=ExtResource( 7 )]
-position = Vector2( -51, 574 )
-despawn_distance = 1100.0
+[node name="JellyfishSpawner15" parent="." index="14" instance=ExtResource( 7 )]
+position = Vector2( -35, 512 )
+spawn_time = 7.0
 
-[node name="JellyfishSpawner11" parent="." index="15" instance=ExtResource( 7 )]
-position = Vector2( -114, 525 )
-despawn_distance = 1100.0
+[node name="JellyfishSpawner16" parent="." index="15" instance=ExtResource( 7 )]
+position = Vector2( -35, 439 )
+spawn_time = 7.0
+delay_time = 3.0
 
-[node name="JellyfishSpawner12" parent="." index="16" instance=ExtResource( 7 )]
-position = Vector2( -264, 949 )
-despawn_distance = 1500.0
+[node name="JellyfishSpawner17" parent="." index="16" instance=ExtResource( 7 )]
+position = Vector2( -43, 331 )
+spawn_time = 7.0
+delay_time = 5.0
 
-[node name="JellyfishSpawner13" parent="." index="17" instance=ExtResource( 7 )]
-position = Vector2( -383, 830 )
-despawn_distance = 1500.0
+[node name="JellyfishSpawner18" parent="." index="17" instance=ExtResource( 7 )]
+position = Vector2( -43, 258 )
+spawn_time = 7.0
 
-[node name="JellyfishSpawner14" parent="." index="18" instance=ExtResource( 7 )]
-position = Vector2( -295, 723 )
-despawn_distance = 1500.0
-
-[node name="JellyfishSpawner15" parent="." index="19" instance=ExtResource( 7 )]
-position = Vector2( -360, 605 )
-despawn_distance = 1500.0
-
-[node name="JellyfishSpawner16" parent="." index="20" instance=ExtResource( 7 )]
-position = Vector2( -444, 926 )
-despawn_distance = 1500.0
-
-[node name="JellyfishSpawner17" parent="." index="21" instance=ExtResource( 7 )]
-position = Vector2( -398, 683 )
-despawn_distance = 1500.0
-
-[node name="JellyfishSpawner18" parent="." index="22" instance=ExtResource( 7 )]
-position = Vector2( -236, 830 )
-despawn_distance = 1500.0
-
-[node name="JellyfishSpawner19" parent="." index="23" instance=ExtResource( 7 )]
-position = Vector2( -174, 723 )
-despawn_distance = 1500.0
-
-[node name="JellyfishSpawner20" parent="." index="24" instance=ExtResource( 7 )]
-position = Vector2( -194, 589 )
-despawn_distance = 1500.0
-
-[node name="JellyfishSpawner21" parent="." index="25" instance=ExtResource( 7 )]
-position = Vector2( -333, 1038 )
-despawn_distance = 1500.0
-
-[node name="Exit2" parent="." index="26" instance=ExtResource( 2 )]
+[node name="Exit2" parent="." index="18" instance=ExtResource( 2 )]
 position = Vector2( 192, 1175 )
 next_room = 8
 
 [node name="Shape" parent="Exit2" index="0"]
 shape = SubResource( 21 )
 
-[node name="Exit3" parent="." index="27" instance=ExtResource( 2 )]
+[node name="Exit3" parent="." index="19" instance=ExtResource( 2 )]
 position = Vector2( -27, 352 )
 next_room = 9
 
 [node name="Shape" parent="Exit3" index="0"]
 shape = SubResource( 22 )
 
-[node name="Exit4" parent="." index="28" instance=ExtResource( 2 )]
+[node name="Exit4" parent="." index="20" instance=ExtResource( 2 )]
 position = Vector2( 1044, 136 )
 next_room = 14
 
 [node name="Shape" parent="Exit4" index="0"]
 shape = SubResource( 23 )
 
-[node name="Exit5" parent="." index="29" instance=ExtResource( 2 )]
+[node name="Exit5" parent="." index="21" instance=ExtResource( 2 )]
 position = Vector2( 1050, 1072 )
 next_room = 16
 

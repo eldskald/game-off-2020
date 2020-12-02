@@ -1,5 +1,7 @@
 extends EnemyState
 
+onready var visibility_notifier: VisibilityNotifier2D = enemy.get_node("VisibilityNotifier2D")
+onready var visibility_timer: Timer = enemy.get_node("VisibilityNotifier2D/Timer")
 
 
 func initialize(argument):
@@ -15,7 +17,6 @@ func initialize(argument):
 
 
 func _physics_process(delta):
-	
 	if enemy.is_being_sucked():
 		enemy.vacuum_suck(delta)
 	else:
@@ -26,5 +27,9 @@ func _physics_process(delta):
 		if enemy.moving == "Static":
 			if enemy.velocity.y >= 0:
 				enemy.acceleration = Vector2(0, 32/9)
+		
+		# Despawning it after it went offscreen after sometime if it's not static.
+		elif not visibility_notifier.is_on_screen() and visibility_timer.is_stopped():
+			enemy.queue_free()
 
 

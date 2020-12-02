@@ -198,7 +198,7 @@ states = [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 11 ), ExtResource( 1
 wait_time = 0.2
 one_shot = true
 
-[node name="SoundEffects" type="Node" parent="."]
+[node name="SoundEffects" type="Node2D" parent="."]
 
 [node name="Charge" type="AudioStreamPlayer2D" parent="SoundEffects"]
 stream = ExtResource( 8 )
